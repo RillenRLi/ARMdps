@@ -59,6 +59,7 @@
     
 </div>
 <div id="example">
+    @Html.PartialAsync("~/Views/Partial/_Table")
 </div>
 
 
@@ -67,21 +68,21 @@
 {
 <script type="text/javascript">
     $(document).ready(function () {
-        @*$.ajax('@Url.Action("GetTable")', )*@
+        @*$.ajax('@Url.Action("GetTable")', "#example")*@
         $.ajax({
             type: "POST",
             url: '@Url.Action("GetTable")',
-            success: function (data) {
-                updateTable(data);
+            success: function (partialView) {
+                $('#example').html(partialView)
+                $('#example').show();
             },
             error: function () {
                 alert('Error occured');
-            }
         });
     });
-    function updateTable(tableHtml) {
-        $('#example').html(tableHtml);
-        }
+    @*function updateTable("_Table") {
+        $('#example').html("_Table");
+        }*@
    $(document).ready(function(){
        $('#dTable').DataTable();
    })
