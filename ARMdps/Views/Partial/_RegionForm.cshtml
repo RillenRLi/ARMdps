@@ -1,0 +1,10 @@
+﻿@model ARMdps.Models.RegionModel;
+@{
+}
+<form>
+    <div>
+        <label>Код региона (4 знака):</label><input type="text" value=@Model.RegionCode/><br />
+        <label>Код региона (2 знака):</label><input type="text" value=@Model.Code2Digits /><br />
+        <label>Название региона:</label><input type="text" value=@Model.Name /><br />
+    </div>
+</form>

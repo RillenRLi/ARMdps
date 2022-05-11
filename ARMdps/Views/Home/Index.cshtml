@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div id="main_menu" style="display:flex; justify-content:space-around; padding: 1% 2% 5% 5%;">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toogle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Системные справочники
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" onclick="clickRegionBtn(1)">Клиенты</button>
+                <button class="dropdown-item" href="#">Версии ПО</button>
+                <button class="dropdown-item" href="#">Автоматическая выгрузка в ФИС-М</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toogle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Региональные справочники
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" href="#">Дороги региона</button>
+                <button class="dropdown-item" href="#">Приборы измерения</button>
+                <button class="dropdown-item" href="#">КоАП и фабулы нарушения</button>
+                <button class="dropdown-item" href="#">Пункты ПДД для КоАП</button>
+                <button class="dropdown-item" href="#">КБК для статей КоАП</button>
+                <button class="dropdown-item" href="#">Шаблоны печатных форм</button>
+                <button class="dropdown-item" href="#">Районы населенных пунктов</button>
+                <button class="dropdown-item" href="#">Специализированные стоянки</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toogle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Доступ и пользователи
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" href="#">Подразделения</button>
+                <button class="dropdown-item" href="#">Пользователи</button>
+                <button class="dropdown-item" href="#">Рабочие места</button>
+                <button class="dropdown-item" href="#">Номера материалов</button>
+                <button class="dropdown-item" href="#">Лицензии и сопровождение</button>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toogle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Материалы
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" href="#">Составленные материалы</button>
+                <button class="dropdown-item" href="#">Выгрузка материалов (файл)</button>
+                <button class="dropdown-item" href="#">Выгрузка материалов (архив)</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="www" style="display:flex;flex-direction:column;">
+</div>
+<div id="regionForm">
+    
+</div>
+<div id="example">
+</div>
+
+
+
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        @*$.ajax('@Url.Action("GetTable")', )*@
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetTable")',
+            success: function (data) {
+                updateTable(data);
+            },
+            error: function () {
+                alert('Error occured');
+            }
+        });
+    });
+    function updateTable(tableHtml) {
+        $('#example').html(tableHtml);
+        }
+   $(document).ready(function(){
+       $('#dTable').DataTable();
+   })
+    function clickRegionBtn(regionId) {
+            console.log(regionId);
+            $.ajax({
+                type: "POST",
+                data: ({ id: regionId }),
+                url: '@Url.Action("GetRegionForm")',
+            success: function (data) {
+                updateForm(data);
+            },
+            error: function () {
+                alert('Error occured');
+            }
+        });
+        }
+    function updateForm(formHtml){
+        $('#example').html(formHtml);
+    }
+</script>
+}

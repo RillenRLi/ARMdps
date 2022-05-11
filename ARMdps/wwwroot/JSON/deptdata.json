@@ -1,0 +1,16 @@
+{
+  "department": [
+    {
+      "id": 1,
+      "name": "Тестовое подразделение",
+      "departmentcode": "123456",
+      "emailaddress": "test@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Подразделение",
+      "departmentcode": "555555",
+      "emailaddress": "t@gmail.com"
+    }
+  ]
+}
