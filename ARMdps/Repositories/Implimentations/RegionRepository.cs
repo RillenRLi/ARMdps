@@ -14,13 +14,10 @@ namespace ARMdps.Repositories.Implimentations
         public RegionModel RegionGet(int Id)
         {
             string rpath = "wwwroot/JSON/region.json";
-            using (StreamReader rsr = new StreamReader(rpath))
-            {
-                string str = rsr.ReadToEnd();
-                var rreg = JsonSerializer.Deserialize<List<RegionModel>>(str);
-                RegionModel region = rreg.SingleOrDefault(r => r.Id == Id);
-                return region;
-            }
+            var regionJsonFile = File.ReadAllText(rpath);
+            List<RegionModel> regions = JsonSerializer.Deserialize<List<RegionModel>>(regionJsonFile);
+            var region = regions.SingleOrDefault(r => r.Id == Id);
+            return region;
         }
         public void RegionUpdate(RegionModel regionModel)
         {

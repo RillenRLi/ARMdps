@@ -12,12 +12,9 @@ namespace ARMdps.Repositories.Implimentations
         public List<DepartmentModel> DepartmentsGet()
         {
             string path = "wwwroot/JSON/department.json";
-            using (StreamReader sr = new StreamReader(path))
-            {
-                string str = sr.ReadToEnd();
-                var reg = JsonSerializer.Deserialize<List<DepartmentModel>>(str);
-                return reg;
-            }
+            var departmentJsonFile = File.ReadAllText(path);
+            var dep = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
+            return dep;
         }
         public DepartmentModel DepartmentGet(int id)
         {
