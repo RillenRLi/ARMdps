@@ -25,16 +25,19 @@ namespace ARMdps.Repositories.Implimentations
         public void RegionUpdate(RegionModel regionModel)
         {
             string rupath = "wwwroot/JSON/region.json";
-            using (StreamReader rusr = new StreamReader(rupath))
+            var rj = File.ReadAllText(rupath);
+            List<RegionModel> regions = JsonSerializer.Deserialize<List<RegionModel>>(rj);
+            var r = regions.SingleOrDefault(r => r.Id == regionModel.Id);
+            if (r != null)
             {
-                string str = rusr.ReadToEnd();
-                List<RegionModel> regions = JsonSerializer.Deserialize<List<RegionModel>>(str);
-                regions.Insert(regionModel.Id, regionModel);
-                using (StreamWriter sw = new StreamWriter(rupath))
-                {
-                    JsonSerializer.Serialize<List<RegionModel>>(regions);
-                }
+                int index = regions.IndexOf(r);
+                regions.RemoveAt(index);
+                regions.Insert(index, regionModel);
             }
+            else regions.Add(regionModel);
+            var res = JsonSerializer.Serialize<List<RegionModel>>(regions);
+            File.WriteAllText(rupath, res);
         }
     }
 }
+

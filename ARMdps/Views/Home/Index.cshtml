@@ -68,7 +68,7 @@
 
 @section Scripts
 {
-<script type="text/javascript">
+    <script type="text/javascript">
 
     function clickUpdateTableBtn() {
         $.ajax({
@@ -132,5 +132,11 @@
     function updateForm(formHtml) {
     $('#example').html(formHtml);
     }
-</script>
+
+
+    //Скрипт для выпадающего списка(чтобы всегда отображался)
+    $(document).ready(function () {
+    $(".dropdown-toggle").dropdown();
+    });
+    </script>
 }

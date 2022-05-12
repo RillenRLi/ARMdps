@@ -6,5 +6,6 @@ namespace ARMdps.Repositories.Interfaces
     public interface IDepartmentRepository
     {
         public List<DepartmentModel> DepartmentsGet();
+        public DepartmentModel DepartmentGet(int id);
     }
 }

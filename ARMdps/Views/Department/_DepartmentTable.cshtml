@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="~/ru.json" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+<div id="modalDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
 <div>
-    <button class="blue-button" onclick="loadNewVersion">Новое подразделение</button>
+    <button class="blue-button" onclick="addNewDepartment">Новое подразделение</button>
 </div>
 <table id="dTable" class="cell-border" style="width:100%">
     <thead style="background-color:#75BCFF;">
@@ -20,10 +23,13 @@
     <tbody>
         @foreach (var d in Model)
         {
-        <tr>
-            <td>@d.DepartmentCode</td>
-            <td>@d.DepartmentName</td>
-        </tr>
+            <tr ondblclick="clickDepartmentEditBtn(@d.Id)">
+                <td>
+                    @Html.HiddenFor(i => d.Id)
+                    @d.DepartmentCode
+                </td>
+                <td>@d.DepartmentName</td>
+            </tr>
         }
     </tbody>
 </table>
@@ -32,6 +38,23 @@
 <script src="~/js/jquery.dataTables.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
+
+    function clickDepartmentEditBtn(deparmentId) {
+        //alert(deparmentId);
+        $.ajax({
+            type: "POST",
+            data: ({ id: deparmentId }),
+            url: '@Url.Action("GetDepartmenEditForm", "Department")',
+            success: function (data) {
+                $("#dialogContent").html(data);
+                $("#modalDialog").modal("show");
+            },
+            error: function () {
+                alert('Error occured');
+            }
+        });
+    }
+
     $(document).ready(function () {
     $('#dTable').DataTable();
     })

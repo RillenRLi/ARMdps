@@ -1,0 +1,29 @@
+﻿@model ARMdps.Models.DepartmentModel
+@{
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h3>Редактирование подразделения</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+    </div>
+    <div class="modal-body">
+        <form id="departmentForm">
+            <table>
+                <tr>
+                    <td>Код подразделения</td>
+                    <td><input name="@Html.NameFor(m=>Model.DepartmentCode)" type="text" value="@Model.DepartmentCode" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Наименование подразделения
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.DepartmentName)" type="text" value="@Model.DepartmentName" />
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="OK" />
+            <input type="reset" value="Clear" />
+        </form>
+    </div>
+</div>

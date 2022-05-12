@@ -1,6 +1,6 @@
 ﻿[
   {
-    "id": 1,
+    "Id": 1,
     "DepartmentCode": "123456",
     "ShortName": "Тест",
     "DepartmentName": "Тестовое подразделение",
@@ -20,7 +20,7 @@
     "IsDelete": false
   },
   {
-    "id": 2,
+    "Id": 2,
     "DepartmentCode": "555555",
     "ShortName": "Тест",
     "DepartmentName": "Подразделение",
