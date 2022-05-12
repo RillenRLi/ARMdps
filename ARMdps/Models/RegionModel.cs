@@ -17,5 +17,6 @@
         public string FTPLogin { get; set; }
         public string FTPPassword { get; set; }
         public string FTPUploadDir { get; set; }
+        public bool ArchiveIsEnabled { get; set; }
     }
 }

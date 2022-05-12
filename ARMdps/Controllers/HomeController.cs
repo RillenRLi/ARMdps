@@ -9,7 +9,6 @@ using System.IO;
 using System.Text.Json;
 using System.Linq;
 using System.Threading.Tasks;
-using ARMdps.Controllers.API;
 using ARMdps.Repositories.Implimentations;
 using ARMdps.Repositories.Interfaces;
 
@@ -29,16 +28,11 @@ namespace ARMdps.Controllers
         {
             return View();
         }
+        [HttpPost]
         public IActionResult GetTable()
         {
-            return PartialView("~Views/Partial/_Table");
+            return PartialView("_Table");
         }
-        public IActionResult GetRegionForm(int id)
-        {
-            IRegionRepository repository = new RegionRepository();
-            return PartialView("~/Views/Partial/_RegionForm", repository.RegionGet(id));
-        }
-
         public IActionResult Privacy()
         {
             return View();

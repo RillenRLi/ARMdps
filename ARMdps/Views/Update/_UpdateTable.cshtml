@@ -1,0 +1,41 @@
+﻿@model List<ARMdps.Models.UpdateModel>
+@{
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<div>
+    <button class="blue-button" onclick="loadNewVersion">Загрузить новую версию ПО</button>
+</div>
+<table id="uTable" class="cell-border" style="width:100%">
+    <thead style="background-color:#75BCFF;">
+        <tr>
+            <th>Файл(версия)</th>
+            <th>Весия SDK (min)</th>
+            <th>Весия SDK (max)</th>
+            <th>Дата выпуска</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+        <tr>
+            <td>@u.FileName (@u.Version)</td>
+            <td>@u.minSdkVersion</td>
+            <td>@u.maxSdkVersion</td>
+            <td>@u.BuildDate</td>
+        </tr>
+        }
+    </tbody>
+</table>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('#uTable').DataTable();
+    })
+</script>

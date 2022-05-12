@@ -1,9 +1,20 @@
-[
+﻿[
   {
     "Id": 1,
-    "Code2Digits": "",
-    "Name": "Test",
-    "RegionCode": "",
-    "UseSuperUser": true
+    "Code2Digits": "57",
+    "Name": "Тест",
+    "RegionCode": "9999",
+    "UseSuperUser": true,
+    "FISMIsEnabled": false,
+    "User_Id": "",
+    "SSLConfigName": "",
+    "LicenseType": 0,
+    "LicenseFileName": "",
+    "WSUserName": "",
+    "FTPIp": "192.168.2.15",
+    "FTPLogin": "mobile",
+    "FTPPassword": "",
+    "FTPUploadDir": "ftp",
+    "ArchiveIsEnabled": false
   }
 ]

@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Id": 1,
+    "LoginName": "sys",
+    "Family": "Семенов",
+    "FirstName": "Иван",
+    "Patronymic": "Александрович",
+    "Rank": "майор полиции",
+    "UserPosition": "инспектор ГИБДД",
+    "UserCode": "11108-0077",
+    "IsEnabled": true,
+    "Password": "",
+    "IsDeleted": false,
+    "Department_Id": 1,
+    "Region_Id": 1,
+    "Roles": ""
+  }
+]

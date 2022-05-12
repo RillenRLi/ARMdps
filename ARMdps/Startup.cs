@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ARMdps.Repositories.Implimentations;
+using ARMdps.Repositories.Interfaces;
 
 namespace ARMdps
 {
@@ -23,6 +25,10 @@ namespace ARMdps
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRegionRepository, RegionRepository>();
+            services.AddScoped<IUpdateRepository, UpdateRepository>();
+            services.AddScoped<IDepartmentRepository,DepartmentRepository>();
+            services.AddScoped<IARMUserRepository,ARMUserRepository>();
             services.AddControllersWithViews();
         }
 

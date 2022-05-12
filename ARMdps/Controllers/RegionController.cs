@@ -1,49 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using ARMdps.Repositories.Interfaces;
 using ARMdps.Repositories.Implimentations;
+using ARMdps.Repositories.Interfaces;
 using ARMdps.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ARMdps.Controllers.API
+namespace ARMdps.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class RegionController : ControllerBase
+    public class RegionController : Controller
     {
-        // GET: api/<RegionController>
-        private IRegionRepository _regionRepository = new RegionRepository();
-
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IRegionRepository _repository;
+        public RegionController(IRegionRepository regionRepository)
         {
-            return new string[] { "value1", "value2" };
+            _repository=regionRepository;
         }
-
-        // GET api/<RegionController>/5
-        [HttpGet("{id}")]
-        public RegionModel GetRegion(int id)
-        {
-            return _regionRepository.RegionGet(id);
-        }
-
-        // POST api/<RegionController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult GetRegionForm(int id)
         {
+            return PartialView("_RegionForm", _repository.RegionGet(id));
         }
-
-        // PUT api/<RegionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        public void UpdateRegion(RegionModel model)
         {
-        }
-
-        // DELETE api/<RegionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            _repository.RegionUpdate(model);
         }
     }
 }

@@ -1,0 +1,57 @@
+[
+  {
+    "Id": 1,
+    "CheckSum": "123",
+    "Content": "any content",
+    "FileName": "adps_3.1.apk",
+    "FileSize": "15 mb",
+    "Version": "3.1",
+    "BuildDate": "02.02.2022",
+    "maxSdkVersion": "25",
+    "minSdkVersion": "22"
+  },
+  {
+    "Id": 2,
+    "CheckSum": "123",
+    "Content": "any content",
+    "FileName": "adps_3.0.apk",
+    "FileSize": "15 mb",
+    "Version": "3.0",
+    "BuildDate": "02.02.2022",
+    "maxSdkVersion": "25",
+    "minSdkVersion": "22"
+  },
+  {
+    "Id": 3,
+    "CheckSum": "123",
+    "Content": "any content",
+    "FileName": "adps_2.9.apk",
+    "FileSize": "15 mb",
+    "Version": "2.9",
+    "BuildDate": "02.02.2022",
+    "maxSdkVersion": "25",
+    "minSdkVersion": "22"
+  },
+  {
+    "Id": 4,
+    "CheckSum": "123",
+    "Content": "any content",
+    "FileName": "adps_2.8.apk",
+    "FileSize": "15 mb",
+    "Version": "2.8",
+    "BuildDate": "02.02.2022",
+    "maxSdkVersion": "25",
+    "minSdkVersion": "22"
+  },
+  {
+    "Id": 5,
+    "CheckSum": "123",
+    "Content": "any content",
+    "FileName": "adps_2.5.apk",
+    "FileSize": "15 mb",
+    "Version": "2.5",
+    "BuildDate": "02.02.2022",
+    "maxSdkVersion": "25",
+    "minSdkVersion": "22"
+  }
+]

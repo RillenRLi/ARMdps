@@ -5,20 +5,35 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ARMdps.Repositories.Implimentations
 {
-    public class RegionRepository:IRegionRepository
+    public class RegionRepository : IRegionRepository
     {
         public RegionModel RegionGet(int Id)
         {
-            string path = "wwwroot/JSON/region.json";
-            using (StreamReader sr = new StreamReader(path))
+            string rpath = "wwwroot/JSON/region.json";
+            using (StreamReader rsr = new StreamReader(rpath))
             {
-                string str = sr.ReadToEnd();
-                var reg = JsonSerializer.Deserialize<List<RegionModel>>(str);
-                RegionModel region = reg.Find(i => i.Id == Id);
+                string str = rsr.ReadToEnd();
+                var rreg = JsonSerializer.Deserialize<List<RegionModel>>(str);
+                RegionModel region = rreg.SingleOrDefault(r => r.Id == Id);
                 return region;
+            }
+        }
+        public void RegionUpdate(RegionModel regionModel)
+        {
+            string rupath = "wwwroot/JSON/region.json";
+            using (StreamReader rusr = new StreamReader(rupath))
+            {
+                string str = rusr.ReadToEnd();
+                List<RegionModel> regions = JsonSerializer.Deserialize<List<RegionModel>>(str);
+                regions.Insert(regionModel.Id, regionModel);
+                using (StreamWriter sw = new StreamWriter(rupath))
+                {
+                    JsonSerializer.Serialize<List<RegionModel>>(regions);
+                }
             }
         }
     }
