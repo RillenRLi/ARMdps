@@ -1,29 +1,172 @@
-﻿@model ARMdps.Models.DepartmentModel
+﻿const { data } = require("jquery");
+
+@model ARMdps.Models.DepartmentModel
 @{
 }
-<div class="modal-content">
-    <div class="modal-header">
-        <h3>Редактирование подразделения</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/ru.json" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<div id="depModal" class="modal-content">
+    <div class="modal-header blue-header">
+        <h5 style="margin: 2% 2% 2% 2%;">Редактирование подразделения</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
     </div>
     <div class="modal-body">
         <form id="departmentForm">
             <table>
                 <tr>
-                    <td>Код подразделения</td>
+                    <td>@Html.HiddenFor(m=>Model.Id)Код подразделения:</td>
                     <td><input name="@Html.NameFor(m=>Model.DepartmentCode)" type="text" value="@Model.DepartmentCode" /></td>
                 </tr>
                 <tr>
                     <td>
-                        Наименование подразделения
+                        Краткое наименование:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.ShortName)" type="text" value="@Model.ShortName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Полное наименование:
                     </td>
                     <td>
                         <input name="@Html.NameFor(m=>Model.DepartmentName)" type="text" value="@Model.DepartmentName" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        Телефон:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.Phones)" type="text" value="@Model.Phones" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Адрес электронной почтыЖ
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.EmailAddress)" type="text" value="@Model.EmailAddress" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Адрес:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.Address)" type="text" value="@Model.Address" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        БАНКОВСКИЕ РЕКВИЗИТЫ
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        КПП:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.KPP)" type="text" value="@Model.KPP" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ИНН:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.INN)" type="text" value="@Model.INN" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ОКТМО:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.OKTMO)" type="text" value="@Model.OKTMO" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Наименование банка получателя:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.BankName)" type="text" value="@Model.BankName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Наименование получателя:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.PaymentName)" type="text" value="@Model.PaymentName"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        БИК:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.BIK)" type="text" value="@Model.BIK"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        КБК:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.KBK)" type="text" value="@Model.KBK"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Расчетный счет:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.RReceipt)" type="text" value="@Model.RReceipt"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Кор. счет:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>Model.KReceipt)" type="text" value="@Model.KReceipt"/>
+                    </td>
+                </tr>
             </table>
-            <input type="submit" value="OK" />
-            <input type="reset" value="Clear" />
+            <button type="button" onclick="saveDepartmentChanges()">Сохранить</button>
         </form>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script type="text/javascript">
+    
+    function updateTable(tableHtml) {
+        $('#example').html(tableHtml);
+    }
+    
+    function saveSuccess(){
+        $('#modalDialog').modal('hide');
+        sendAjaxTable('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
+    }
+
+    function saveError(){
+        alert("Error occured");
+    }
+
+    function saveDepartmentChanges(){
+        let jDepartmentModel=$("#departmentForm").serialize();
+        console.log(jDepartmentModel.ShortName);
+        saveAjaxChanges(jDepartmentModel,'@Url.Action("UpdateDepartment","Department")',saveSuccess,saveError,"POST");
+    }
+
+    
+</script>

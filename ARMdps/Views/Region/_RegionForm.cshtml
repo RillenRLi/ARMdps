@@ -8,146 +8,151 @@
 </head>
 <form id="regForm">
     <div>
-        <div class="blue-header">
-            <span style="font-size:20px;">Редактирование учетных данных</span>
-        </div>
+        
         <table>
-            <tr>
-                <td>
-                    @Html.HiddenFor(m => m.Id)
-                    Код региона (4 знака):
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.RegionCode)" type="text" value=@Model.RegionCode />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Код региона (2 знака):
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.Code2Digits)" type="text" value=@Model.Code2Digits />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Название региона:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.Name)" type="text" value=@Model.Name />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Функция "Главный администратор"
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.UseSuperUser)" type="checkbox" value=@Model.UseSuperUser />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Пользователь:
-                </td>
-                <td>
-                    <select>
-                        <option name="@Html.NameFor(m=>m.User_Id)" value=@Model.User_Id>
-                            Имя пользователя
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF;">
-                    Лицензирование
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Тип лицензирования:
-                </td>
-                <td>
-                    <select>
-                        <option name="@Html.NameFor(m=>m.LicenseType)" value=@Model.LicenseType>
-                            На пользователя
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Имя файла лицензии:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.LicenseFileName)" type="text" value=@Model.LicenseFileName />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF">
-                    Федеральные учеты
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Имя пользователяя для доступа:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.WSUserName)" type="text" value=@Model.WSUserName />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF">
-                    Выгрузка материалов в ФИС-М
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Включить процесс автоматической выгрузки:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FISMIsEnabled)" type="checkbox" value=@Model.FISMIsEnabled />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    IP-адрес FTP-сервера
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPIp)" type="text" value=@Model.FTPIp />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Логин доступа к FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPLogin)" type="text" value=@Model.FTPLogin />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Пароль доступа к FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPPassword)" type="text" value=@Model.FTPPassword />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Директория выгрузки на FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPUploadDir)" type="text" value=@Model.FTPUploadDir />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Архивировать файл выгрузки
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.ArchiveIsEnabled)" type="checkbox" value=@Model.ArchiveIsEnabled />
-                </td>
-            </tr>
+            <thead class="blue-header">
+                <tr>
+                    <th colspan="2">Редактирование учетных данных</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.HiddenFor(m => m.Id)
+                        Код региона (4 знака):
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.RegionCode)" type="text" value=@Model.RegionCode />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Код региона (2 знака):
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.Code2Digits)" type="text" value=@Model.Code2Digits />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Название региона:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.Name)" type="text" value=@Model.Name />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Функция "Главный администратор"
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.UseSuperUser)" type="checkbox" value=@Model.UseSuperUser />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пользователь:
+                    </td>
+                    <td>
+                        <select>
+                            <option name="@Html.NameFor(m=>m.User_Id)" value=@Model.User_Id>
+                                Имя пользователя
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color:#75BCFF;">
+                        Лицензирование
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Тип лицензирования:
+                    </td>
+                    <td>
+                        <select>
+                            <option name="@Html.NameFor(m=>m.LicenseType)" value=@Model.LicenseType>
+                                На пользователя
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя файла лицензии:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.LicenseFileName)" type="text" value=@Model.LicenseFileName />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color:#75BCFF">
+                        Федеральные учеты
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Имя пользователяя для доступа:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.WSUserName)" type="text" value=@Model.WSUserName />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color:#75BCFF">
+                        Выгрузка материалов в ФИС-М
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Включить процесс автоматической выгрузки:
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.FISMIsEnabled)" type="checkbox" value=@Model.FISMIsEnabled />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        IP-адрес FTP-сервера
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.FTPIp)" type="text" value=@Model.FTPIp />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Логин доступа к FTP
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.FTPLogin)" type="text" value=@Model.FTPLogin />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пароль доступа к FTP
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.FTPPassword)" type="text" value=@Model.FTPPassword />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Директория выгрузки на FTP
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.FTPUploadDir)" type="text" value=@Model.FTPUploadDir />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Архивировать файл выгрузки
+                    </td>
+                    <td>
+                        <input name="@Html.NameFor(m=>m.ArchiveIsEnabled)" type="checkbox" value=@Model.ArchiveIsEnabled />
+                    </td>
+                </tr>
+            </tbody>
         </table>
         <button type="button" class="blue-button" onclick="saveRegionChanges()">Сохранить</button><button type="reset" class="blue-button">Сброс</button>
     </div>
@@ -158,26 +163,25 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-        $(document).ready(function () {
-        $('#rTable').DataTable();
-        })
-        function saveRegionChanges()
-        {
-            let jRegionModel = $("#regForm").serialize();
-            console.log(jRegionModel.Name)
-            $.ajax
-            ({
-                type: "POST",
-                data: jRegionModel,
-                url: '@Url.Action("UpdateRegion", "Region")',
-            success: function ()
-            {
-                alert('OK');
-            },
-            error: function ()
-            {
-                alert('Error occured');
-            }
-            });
-        }
+    $(document).ready(function () {
+    $('#rTable').DataTable();
+    })
+    
+    
+
+    function saveSuccess(){
+        alert("OK");
+        updateForm(data);
+    }
+
+    function saveError(){
+        alert("Error occured");
+    }
+
+    function saveRegionChanges()
+    {
+        let jRegionModel = $("#regForm").serialize();
+        console.log(jRegionModel.Name);
+        saveAjaxChanges(jRegionModel, '@Url.Action("UpdateRegion", "Region")', saveSuccess, saveError, "POST");
+    }
 </script>
