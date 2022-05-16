@@ -14,11 +14,12 @@ function sendAjaxData(data, url, onsucess, onerror, type = "POST") {
 function sendAjaxNotData(url, onsuccess, onerror, type = "POST") {
     $.ajax({
         url: url,
-        success: onsuccess,
+        success: function (result) { onsuccess(result) },
         error: onerror,
         type: type
     })
 }
+
 
 //Функция сохранения данных формы
 function saveAjaxChanges(data, url, onsuccess, onerror, type = "POST") {
@@ -29,12 +30,4 @@ function saveAjaxChanges(data, url, onsuccess, onerror, type = "POST") {
         error: onerror,
         type: type
     });
-}
-
-function tableSuccess(data) {
-    updateTable(data);
-}
-
-function tableError() {
-    alert("Error occured");
 }

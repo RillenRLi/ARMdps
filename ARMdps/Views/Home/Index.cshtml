@@ -78,8 +78,7 @@
 
 @section Scripts
 {
-<script type="text/javascript">
-
+    <script type="text/javascript">
 
         //Таблицы
 
@@ -97,81 +96,65 @@
         }
         //Подразделения
         function clickDepartmentTableBtn() {
-            
-            sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");            
+
+            sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
         }
         //Пользователи
         function clickARMUsersTableBtn() {
             sendAjaxNotData('@Url.Action("GetARMUserTable", "ARMUser")', tableSuccess, tableError, "POST")
         }
 
-        function formSuccess() {
-        updateForm();
+        function formSuccess(data) {
+            updateForm(data);
+            getRegion(1);
         }
 
         function formError() {
         alert("Error occured");
-        }        
-        
-        
+        }
+
         //Редактирование учетных данных
         function clickRegionBtn() {
-        console.log();
-        sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError, "GET");
+            //console.log(1);
+            sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
+            //console.log(2);
         }
-        
-        @*function getRegion(regionId){
-            const response=fetch("/api/regionapi"+regionId,{
-                method:"GET",
-                headers:{"Accept":"application/json"}
-            });
-            if(response.ok===true)
-            {
-                const region=response.json();
-                const form=document.forms["userForm"];
-                form.elements["id"].value=region.Id;
-                form.elements["RegionCode"].value=region.RegionCode;
-                form.elements["Code2Digits"].value=region.Code2Digits;
-            }
 
-                $.ajax({
-                type:"GET",
-                url:url,
-                data:({id: regionId}),
-                dataType:'json',
-                success:function(response){
-                try{
-                    $(#RegionCode).val(response.RegionCode);
-                    $(#Code2Digits).val(response.Code2Digits);
-                    $(#Name).val(response.Name);
-                    $(#UseSuperUser).prop('checked',response.UseSuperUser);
-                    $(#User_Id).val(response.User_Id);
-                    $(#LicenseType).val(response.LicenseType);
-                    $(#LicenseFileName).val(response.LicenseFileName);
-                    $(#WSUserName).val(response.WSUserName);
-                    $(#FISMIsEnabled).prop('checked', response.FISMIsEnabled);
-                    $(#FTPIp).val(response.FTPIp);
-                    $(#FTPLogin).val(response.FTPLogin);
-                    $(#FTPPassword).val(response.FTPPassword);
-                    $(#FTPUploadDir).val(response.FTPUploadDir);
-                    $(#ArchiveIsEnabled).prop('checked',ArchiveIsEnabled);
-                }
-                catch{
-                   alert('Ошибка загрузки данных');
-                }
-            }
-            error:function(error){
-                alert(error);
-            }
-            });
+        function getRegion(regionId){
+            const response = fetch("/api/regionapi/" + regionId, {
+                method: "GET",
+                headers: { "Accept": "application/json" }
+                }).then(response => response.json())
+                .then(data => getRegionRes(data));
         }
-    }*@
-        
 
+        function getRegionRes(resp) {
+            //console.log(resp);
+            let response = resp;
+            try {
+                $('#RegionCode').val(response.regionCode);
+                $('#Code2Digits').val(response.code2Digits);
+                $('#Name').val(response.name);
+                $('#UseSuperUser').prop('checked', response.useSuperUser);
+                $('#User_Id').val(response.user_Id);
+                $('#LicenseType').val(response.licenseType);
+                $('#LicenseFileName').val(response.licenseFileName);
+                $('#WSUserName').val(response.wSUserName);
+                $('#FISMIsEnabled').prop('checked', response.fISMIsEnabled);
+                $('#FTPIp').val(response.fTPIp);
+                $('#FTPLogin').val(response.fTPLogin);
+                $('#FTPPassword').val(response.fTPPassword);
+                $('#FTPUploadDir').val(response.fTPUploadDir);
+                $('#ArchiveIsEnabled').prop('checked', archiveIsEnabled);
+            }
+            catch {
+                alert('Ошибка загрузки данных');
+            }
+        }
 
         //Скрипт для выпадающего списка(чтобы всегда отображался)
         $(document).ready(function () {
         $(".dropdown-toggle").dropdown();
         });
-</script>
+    </script>
 }

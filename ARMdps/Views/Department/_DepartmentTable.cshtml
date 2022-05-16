@@ -19,15 +19,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var d in Model)
+        @for (int i=0; i<Model.Count; i++)
         {
-            <tr ondblclick="clickDepartmentEditBtn(@d.Id)" data-toggle="modal" data-target="#depModal">
-                <td>
-                    @Html.HiddenFor(i => d.Id)
-                    @d.DepartmentCode
-                </td>
-                <td>@d.DepartmentName</td>
-            </tr>
+        <tr ondblclick="clickDepartmentEditBtn(@Model[i].Id)" data-toggle="modal" data-target="#depModal">
+            @Html.HiddenFor(e => Model[i].Id)
+            <td id="_@Html.IdFor(e => Model[i].Id)">
+                @Model[i].DepartmentCode
+            </td>
+            <td>@Model[i].DepartmentName</td>
+        </tr>
         }
     </tbody>
 </table>
