@@ -1,4 +1,40 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+//Функция вызова форм редактирования
+function sendAjaxData(data, url, onsucess, onerror, type = "POST") {
+    $.ajax({
+        data: data,
+        url: url,
+        success: onsucess,
+        error: onerror,
+        type: type
+    });
+}
 
-// Write your JavaScript code.
+//Функция вызова таблиц
+function sendAjaxNotData(url, onsuccess, onerror, type = "POST") {
+    $.ajax({
+        url: url,
+        success: onsuccess,
+        error: onerror,
+        type: type
+    })
+}
+
+//Функция сохранения данных формы
+function saveAjaxChanges(data, url, onsuccess, onerror, type = "POST") {
+    $.ajax({
+        data: data,
+        url: url,
+        success: onsuccess,
+        error: onerror,
+        type: type
+    });
+}
+
+function tableSuccess(data) {
+    updateTable(data);
+}
+
+function tableError() {
+    alert("Error occured");
+}

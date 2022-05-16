@@ -28,11 +28,11 @@ namespace ARMdps.Controllers
         {
             return View();
         }
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult GetTable()
         {
             return PartialView("_Table");
-        }
+        }*/
         public IActionResult Privacy()
         {
             return View();

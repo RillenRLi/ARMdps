@@ -1,5 +1,6 @@
-﻿@model ARMdps.Models.RegionModel;
+﻿
 @{
+
 }
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -8,146 +9,104 @@
 </head>
 <form id="regForm">
     <div>
-        <div class="blue-header">
-            <span style="font-size:20px;">Редактирование учетных данных</span>
-        </div>
+        
         <table>
-            <tr>
-                <td>
-                    @Html.HiddenFor(m => m.Id)
-                    Код региона (4 знака):
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.RegionCode)" type="text" value=@Model.RegionCode />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Код региона (2 знака):
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.Code2Digits)" type="text" value=@Model.Code2Digits />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Название региона:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.Name)" type="text" value=@Model.Name />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Функция "Главный администратор"
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.UseSuperUser)" type="checkbox" value=@Model.UseSuperUser />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Пользователь:
-                </td>
-                <td>
-                    <select>
-                        <option name="@Html.NameFor(m=>m.User_Id)" value=@Model.User_Id>
-                            Имя пользователя
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF;">
-                    Лицензирование
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Тип лицензирования:
-                </td>
-                <td>
-                    <select>
-                        <option name="@Html.NameFor(m=>m.LicenseType)" value=@Model.LicenseType>
-                            На пользователя
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Имя файла лицензии:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.LicenseFileName)" type="text" value=@Model.LicenseFileName />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF">
-                    Федеральные учеты
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Имя пользователяя для доступа:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.WSUserName)" type="text" value=@Model.WSUserName />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="background-color:#75BCFF">
-                    Выгрузка материалов в ФИС-М
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Включить процесс автоматической выгрузки:
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FISMIsEnabled)" type="checkbox" value=@Model.FISMIsEnabled />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    IP-адрес FTP-сервера
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPIp)" type="text" value=@Model.FTPIp />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Логин доступа к FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPLogin)" type="text" value=@Model.FTPLogin />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Пароль доступа к FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPPassword)" type="text" value=@Model.FTPPassword />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Директория выгрузки на FTP
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.FTPUploadDir)" type="text" value=@Model.FTPUploadDir />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Архивировать файл выгрузки
-                </td>
-                <td>
-                    <input name="@Html.NameFor(m=>m.ArchiveIsEnabled)" type="checkbox" value=@Model.ArchiveIsEnabled />
-                </td>
-            </tr>
+            <thead class="blue-header">
+                <tr>
+                    <th colspan="2" class="blue-header">Данные о регионе</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="border-bottom">Заполните параметры региона</th>
+                </tr>
+                <tr>
+                    <td>
+                        Код региона РФ (4 знака):
+                    </td>
+                    <td>
+                        <input id="RegionCode" type="text" value="RegionCode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Код региона, применяемый на ГРЗ ТС (2 знака):
+                    </td>
+                    <td>
+                        <input id="Code2Digits" type="text" value="Code2Digits" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Наименование региона:
+                    </td>
+                    <td>
+                        <input id="Name" type="text" value="Name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Разграничение доступа к данным между администраторами подразделения и главным региональным администратором
+                    </td>
+                    <td>
+                        <input id="UseSuperUser" type="checkbox" value="UseSuperUser" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="background-color:#75BCFF">
+                        Заполните параметры выгрузки материалов в ФИС-М
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Автоматическая выгрузка в ФИС-М
+                    </td>
+                    <td>
+                        <input id="FISMIsEnabled" type="checkbox" value="FISMIsEnabled" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        Архивировать файл выгрузки
+                    </td>
+                    <td>
+                        <input id="ArchiveIsEnabled" type="checkbox" value="ArchiveIsEnabled" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        IP-адрес FTP-сервера
+                    </td>
+                    <td>
+                        <input id="FTPIp" type="text" value= "FTPIp" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Каталог FTP сервера
+                    </td>
+                    <td>
+                        <input id="FTPUploadDir" type="text" value="FTPUploadDir" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Логин доступа к FTP
+                    </td>
+                    <td>
+                        <input id="FTPLogin" type="text" value="FTPLogin" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пароль доступа к FTP
+                    </td>
+                    <td>
+                        <input id="FTPPassword" type="text" value="FTPPassword" />
+                    </td>
+                </tr>
+                
+            </tbody>
         </table>
         <button type="button" class="blue-button" onclick="saveRegionChanges()">Сохранить</button><button type="reset" class="blue-button">Сброс</button>
     </div>
@@ -158,26 +117,63 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-        $(document).ready(function () {
-        $('#rTable').DataTable();
-        })
-        function saveRegionChanges()
-        {
-            let jRegionModel = $("#regForm").serialize();
-            console.log(jRegionModel.Name)
-            $.ajax
-            ({
-                type: "POST",
-                data: jRegionModel,
-                url: '@Url.Action("UpdateRegion", "Region")',
-            success: function ()
-            {
-                alert('OK');
-            },
-            error: function ()
-            {
-                alert('Error occured');
+    $(document).ready(function () {
+    $('#rTable').DataTable();
+    })
+    
+    
+    @*$(document).ready(getRegion(id));
+
+    function getRegion(Id){
+        const url='@Url.Action("GetRegionForm","Region")'
+        $.ajax({
+            type:"GET",
+            data:({Id:regionId})
+            url:url,
+            dataType:'json',
+            success:function(response){
+                try{
+                    let region=JSON.parse(response);
+                    $(#RegionCode).val(response.RegionCode);
+                    $(#Code2Digits).val(response.Code2Digits);
+                    $(#Name).val(response.Name);
+                    $(#UseSuperUser).prop('checked',response.UseSuperUser);
+                    $(#User_Id).val(response.User_Id);
+                    $(#LicenseType).val(response.LicenseType);
+                    $(#LicenseFileName).val(response.LicenseFileName);
+                    $(#WSUserName).val(response.WSUserName);
+                    $(#FISMIsEnabled).prop('checked', response.FISMIsEnabled);
+                    $(#FTPIp).val(response.FTPIp);
+                    $(#FTPLogin).val(response.FTPLogin);
+                    $(#FTPPassword).val(response.FTPPassword);
+                    $(#FTPUploadDir).val(response.FTPUploadDir);
+                    $(#ArchiveIsEnabled).prop('checked',ArchiveIsEnabled);
+                }
+                catch{
+                   alert('Ошибка загрузки данных');
+                }
             }
-            });
-        }
+            error:function(error){
+                alert(error);
+            }
+        });
+    }*@
+    
+    
+
+    function saveSuccess(){
+        alert("OK");
+        updateForm(data);
+    }
+
+    function saveError(){
+        alert("Error occured");
+    }
+
+    function saveRegionChanges()
+    {
+        let jRegionModel = $("#regForm").serialize();
+        console.log(jRegionModel.Name);
+        saveAjaxChanges(jRegionModel, '@Url.Action("UpdateRegion", "Region")', saveSuccess, saveError, "POST");
+    }
 </script>

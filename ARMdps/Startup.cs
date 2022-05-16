@@ -48,7 +48,7 @@ namespace ARMdps
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseDefaultFiles();
-
+            //app.MapGet("/api/values", () => values);
             app.UseRouting();
 
             app.UseAuthorization();

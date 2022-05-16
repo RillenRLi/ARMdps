@@ -7,11 +7,9 @@
     <link rel="stylesheet" href="~/ru.json" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<div id="modalDialog" class="modal fade">
-    <div id="dialogContent" class="modal-dialog"></div>
-</div>
+
 <div>
-    <button class="blue-button" onclick="addNewDepartment">Новое подразделение</button>
+    <button class="blue-button" onclick="clickDepartmentAddBtn()">Новое подразделение</button>
 </div>
 <table id="dTable" class="cell-border" style="width:100%">
     <thead style="background-color:#75BCFF;">
@@ -23,7 +21,7 @@
     <tbody>
         @foreach (var d in Model)
         {
-            <tr ondblclick="clickDepartmentEditBtn(@d.Id)">
+            <tr ondblclick="clickDepartmentEditBtn(@d.Id)" data-toggle="modal" data-target="#depModal">
                 <td>
                     @Html.HiddenFor(i => d.Id)
                     @d.DepartmentCode
@@ -33,28 +31,36 @@
         }
     </tbody>
 </table>
+<div id="modalDialog" class="modal fade">
+    <div id="dialogContent" class="modal-dialog"></div>
+</div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/jquery.dataTables.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-    function clickDepartmentEditBtn(deparmentId) {
-        //alert(deparmentId);
-        $.ajax({
-            type: "POST",
-            data: ({ id: deparmentId }),
-            url: '@Url.Action("GetDepartmenEditForm", "Department")',
-            success: function (data) {
-                $("#dialogContent").html(data);
-                $("#modalDialog").modal("show");
-            },
-            error: function () {
-                alert('Error occured');
+        
+    function editSuccess(data) {
+             $("#dialogContent").html(data);
+             $("#modalDialog").modal("show");
             }
-        });
+
+    function editError() {
+             alert('Error occured');
+            }
+    
+    function clickDepartmentEditBtn(departmentId) {
+        if (departmentId)
+        {
+        sendAjaxData(({id:departmentId}), '@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
+        }
+        else {
+        sendAjaxNotData('@Url.Action("GetDepartmenAddForm", "Department")', editSuccess, editError, "POST");
+        }
     }
 
+   
     $(document).ready(function () {
     $('#dTable').DataTable();
     })
