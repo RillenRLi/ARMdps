@@ -105,8 +105,8 @@
             sendAjaxNotData('@Url.Action("GetARMUserTable", "ARMUser")', tableSuccess, tableError, "POST")
         }
 
-        function formSuccess(data) {
-        updateForm(data);
+        function formSuccess() {
+        updateForm();
         }
 
         function formError() {
@@ -115,9 +115,9 @@
         
         
         //Редактирование учетных данных
-        function clickRegionBtn(regionId) {
-        console.log(regionId);
-        sendAjaxData(({Id:regionId}), '@Url.Action("GetRegionForm","Region")', formSuccess, formError, "GET");
+        function clickRegionBtn() {
+        console.log();
+        sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError, "GET");
         }
         
         @*function getRegion(regionId){

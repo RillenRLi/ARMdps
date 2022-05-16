@@ -13,13 +13,16 @@
         <table>
             <thead class="blue-header">
                 <tr>
-                    <th colspan="2">Редактирование учетных данных</th>
+                    <th colspan="2" class="blue-header">Данные о регионе</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <th colspan="2" class="border-bottom">Заполните параметры региона</th>
+                </tr>
+                <tr>
                     <td>
-                        Код региона (4 знака):
+                        Код региона РФ (4 знака):
                     </td>
                     <td>
                         <input id="RegionCode" type="text" value="RegionCode" />
@@ -27,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Код региона (2 знака):
+                        Код региона, применяемый на ГРЗ ТС (2 знака):
                     </td>
                     <td>
                         <input id="Code2Digits" type="text" value="Code2Digits" />
@@ -35,7 +38,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Название региона:
+                        Наименование региона:
                     </td>
                     <td>
                         <input id="Name" type="text" value="Name" />
@@ -43,73 +46,31 @@
                 </tr>
                 <tr>
                     <td>
-                        Функция "Главный администратор"
+                        Разграничение доступа к данным между администраторами подразделения и главным региональным администратором
                     </td>
                     <td>
                         <input id="UseSuperUser" type="checkbox" value="UseSuperUser" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Пользователь:
-                    </td>
-                    <td>
-                        <select>
-                            <option id="User_Id" value="User_Id">
-                                Имя пользователя
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="background-color:#75BCFF;">
-                        Лицензирование
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Тип лицензирования:
-                    </td>
-                    <td>
-                        <select>
-                            <option id="LicenseType" value="LicenseType">
-                                На пользователя
-                            </option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Имя файла лицензии:
-                    </td>
-                    <td>
-                        <input id="LicenseFileName" type="text" value="LicenseFileName" />
-                    </td>
-                </tr>
-                <tr>
                     <td colspan="2" style="background-color:#75BCFF">
-                        Федеральные учеты
+                        Заполните параметры выгрузки материалов в ФИС-М
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Имя пользователяя для доступа:
-                    </td>
-                    <td>
-                        <input id="WSUserName" type="text" value="WSUserName" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="background-color:#75BCFF">
-                        Выгрузка материалов в ФИС-М
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Включить процесс автоматической выгрузки:
+                        Автоматическая выгрузка в ФИС-М
                     </td>
                     <td>
                         <input id="FISMIsEnabled" type="checkbox" value="FISMIsEnabled" />
+                    </td>
+                </tr>
+                 <tr>
+                    <td>
+                        Архивировать файл выгрузки
+                    </td>
+                    <td>
+                        <input id="ArchiveIsEnabled" type="checkbox" value="ArchiveIsEnabled" />
                     </td>
                 </tr>
                 <tr>
@@ -118,6 +79,14 @@
                     </td>
                     <td>
                         <input id="FTPIp" type="text" value= "FTPIp" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Каталог FTP сервера
+                    </td>
+                    <td>
+                        <input id="FTPUploadDir" type="text" value="FTPUploadDir" />
                     </td>
                 </tr>
                 <tr>
@@ -136,22 +105,7 @@
                         <input id="FTPPassword" type="text" value="FTPPassword" />
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        Директория выгрузки на FTP
-                    </td>
-                    <td>
-                        <input id="FTPUploadDir" type="text" value="FTPUploadDir" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Архивировать файл выгрузки
-                    </td>
-                    <td>
-                        <input id="ArchiveIsEnabled" type="checkbox" value="ArchiveIsEnabled" />
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
         <button type="button" class="blue-button" onclick="saveRegionChanges()">Сохранить</button><button type="reset" class="blue-button">Сброс</button>
@@ -168,7 +122,7 @@
     })
     
     
-    $(document).ready(getRegion(id));
+    @*$(document).ready(getRegion(id));
 
     function getRegion(Id){
         const url='@Url.Action("GetRegionForm","Region")'
@@ -203,7 +157,7 @@
                 alert(error);
             }
         });
-    }
+    }*@
     
     
 

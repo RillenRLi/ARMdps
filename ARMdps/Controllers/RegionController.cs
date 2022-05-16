@@ -13,9 +13,9 @@ namespace ARMdps.Controllers
             _repository=regionRepository;
         }
         [HttpPost]
-        public IActionResult GetRegionForm(int Id)
+        public IActionResult GetRegionForm()
         {
-            return PartialView("_RegionForm", _repository.JSRegionGet(Id));
+            return PartialView("_RegionForm");
         }
         [HttpPost]
         public void UpdateRegion(RegionModel model)
