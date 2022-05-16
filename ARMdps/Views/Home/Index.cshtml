@@ -2,14 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 <div>
-    <div id="main_menu" style="display:flex; justify-content:space-around; padding: 1% 5% 1% 5%; border-bottom:solid 1px ; border-bottom-color: #086F99">
+    <div id="main_menu" style="display:flex; justify-content:space-around; padding: 1% 5% 1% 5%; border-bottom:solid 1px ; border-bottom-color: #086F99; border-radius: 0px 0px 12px 12px">
         <div style="display:flex">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Системные справочники
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" onclick="clickRegionBtn(1)">Редактирование учетных данных</button>
+                    <button class="dropdown-item" onclick="clickRegionBtn(1)">Настройка системы</button>
                     <button class="dropdown-item" onclick="clickUpdateTableBtn()">Версии ПО</button>
                     <button class="dropdown-item" href="#">Автоматическая выгрузка в ФИС-М</button>
                 </div>
@@ -113,12 +113,59 @@
         alert("Error occured");
         }        
         
+        
         //Редактирование учетных данных
         function clickRegionBtn(regionId) {
         console.log(regionId);
-        sendAjaxData(({ id: regionId }), '@Url.Action("GetRegionForm", "Region")', formSuccess, formError, "POST");
+        sendAjaxData(({Id:regionId}), '@Url.Action("GetRegionForm","Region")', formSuccess, formError, "GET");
         }
+        
+        @*function getRegion(regionId){
+            const response=fetch("/api/regionapi"+regionId,{
+                method:"GET",
+                headers:{"Accept":"application/json"}
+            });
+            if(response.ok===true)
+            {
+                const region=response.json();
+                const form=document.forms["userForm"];
+                form.elements["id"].value=region.Id;
+                form.elements["RegionCode"].value=region.RegionCode;
+                form.elements["Code2Digits"].value=region.Code2Digits;
+            }
 
+                $.ajax({
+                type:"GET",
+                url:url,
+                data:({id: regionId}),
+                dataType:'json',
+                success:function(response){
+                try{
+                    $(#RegionCode).val(response.RegionCode);
+                    $(#Code2Digits).val(response.Code2Digits);
+                    $(#Name).val(response.Name);
+                    $(#UseSuperUser).prop('checked',response.UseSuperUser);
+                    $(#User_Id).val(response.User_Id);
+                    $(#LicenseType).val(response.LicenseType);
+                    $(#LicenseFileName).val(response.LicenseFileName);
+                    $(#WSUserName).val(response.WSUserName);
+                    $(#FISMIsEnabled).prop('checked', response.FISMIsEnabled);
+                    $(#FTPIp).val(response.FTPIp);
+                    $(#FTPLogin).val(response.FTPLogin);
+                    $(#FTPPassword).val(response.FTPPassword);
+                    $(#FTPUploadDir).val(response.FTPUploadDir);
+                    $(#ArchiveIsEnabled).prop('checked',ArchiveIsEnabled);
+                }
+                catch{
+                   alert('Ошибка загрузки данных');
+                }
+            }
+            error:function(error){
+                alert(error);
+            }
+            });
+        }
+    }*@
         
 
 

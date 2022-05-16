@@ -1,5 +1,6 @@
-﻿@model ARMdps.Models.RegionModel;
+﻿
 @{
+
 }
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -18,11 +19,10 @@
             <tbody>
                 <tr>
                     <td>
-                        @Html.HiddenFor(m => m.Id)
                         Код региона (4 знака):
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.RegionCode)" type="text" value=@Model.RegionCode />
+                        <input id="RegionCode" type="text" value="RegionCode" />
                     </td>
                 </tr>
                 <tr>
@@ -30,7 +30,7 @@
                         Код региона (2 знака):
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.Code2Digits)" type="text" value=@Model.Code2Digits />
+                        <input id="Code2Digits" type="text" value="Code2Digits" />
                     </td>
                 </tr>
                 <tr>
@@ -38,7 +38,7 @@
                         Название региона:
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.Name)" type="text" value=@Model.Name />
+                        <input id="Name" type="text" value="Name" />
                     </td>
                 </tr>
                 <tr>
@@ -46,7 +46,7 @@
                         Функция "Главный администратор"
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.UseSuperUser)" type="checkbox" value=@Model.UseSuperUser />
+                        <input id="UseSuperUser" type="checkbox" value="UseSuperUser" />
                     </td>
                 </tr>
                 <tr>
@@ -55,7 +55,7 @@
                     </td>
                     <td>
                         <select>
-                            <option name="@Html.NameFor(m=>m.User_Id)" value=@Model.User_Id>
+                            <option id="User_Id" value="User_Id">
                                 Имя пользователя
                             </option>
                         </select>
@@ -72,7 +72,7 @@
                     </td>
                     <td>
                         <select>
-                            <option name="@Html.NameFor(m=>m.LicenseType)" value=@Model.LicenseType>
+                            <option id="LicenseType" value="LicenseType">
                                 На пользователя
                             </option>
                         </select>
@@ -83,7 +83,7 @@
                         Имя файла лицензии:
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.LicenseFileName)" type="text" value=@Model.LicenseFileName />
+                        <input id="LicenseFileName" type="text" value="LicenseFileName" />
                     </td>
                 </tr>
                 <tr>
@@ -96,7 +96,7 @@
                         Имя пользователяя для доступа:
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.WSUserName)" type="text" value=@Model.WSUserName />
+                        <input id="WSUserName" type="text" value="WSUserName" />
                     </td>
                 </tr>
                 <tr>
@@ -109,7 +109,7 @@
                         Включить процесс автоматической выгрузки:
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.FISMIsEnabled)" type="checkbox" value=@Model.FISMIsEnabled />
+                        <input id="FISMIsEnabled" type="checkbox" value="FISMIsEnabled" />
                     </td>
                 </tr>
                 <tr>
@@ -117,7 +117,7 @@
                         IP-адрес FTP-сервера
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.FTPIp)" type="text" value=@Model.FTPIp />
+                        <input id="FTPIp" type="text" value= "FTPIp" />
                     </td>
                 </tr>
                 <tr>
@@ -125,7 +125,7 @@
                         Логин доступа к FTP
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.FTPLogin)" type="text" value=@Model.FTPLogin />
+                        <input id="FTPLogin" type="text" value="FTPLogin" />
                     </td>
                 </tr>
                 <tr>
@@ -133,7 +133,7 @@
                         Пароль доступа к FTP
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.FTPPassword)" type="text" value=@Model.FTPPassword />
+                        <input id="FTPPassword" type="text" value="FTPPassword" />
                     </td>
                 </tr>
                 <tr>
@@ -141,7 +141,7 @@
                         Директория выгрузки на FTP
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.FTPUploadDir)" type="text" value=@Model.FTPUploadDir />
+                        <input id="FTPUploadDir" type="text" value="FTPUploadDir" />
                     </td>
                 </tr>
                 <tr>
@@ -149,7 +149,7 @@
                         Архивировать файл выгрузки
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>m.ArchiveIsEnabled)" type="checkbox" value=@Model.ArchiveIsEnabled />
+                        <input id="ArchiveIsEnabled" type="checkbox" value="ArchiveIsEnabled" />
                     </td>
                 </tr>
             </tbody>
@@ -166,6 +166,44 @@
     $(document).ready(function () {
     $('#rTable').DataTable();
     })
+    
+    
+    $(document).ready(getRegion(id));
+
+    function getRegion(Id){
+        const url='@Url.Action("GetRegionForm","Region")'
+        $.ajax({
+            type:"GET",
+            data:({Id:regionId})
+            url:url,
+            dataType:'json',
+            success:function(response){
+                try{
+                    let region=JSON.parse(response);
+                    $(#RegionCode).val(response.RegionCode);
+                    $(#Code2Digits).val(response.Code2Digits);
+                    $(#Name).val(response.Name);
+                    $(#UseSuperUser).prop('checked',response.UseSuperUser);
+                    $(#User_Id).val(response.User_Id);
+                    $(#LicenseType).val(response.LicenseType);
+                    $(#LicenseFileName).val(response.LicenseFileName);
+                    $(#WSUserName).val(response.WSUserName);
+                    $(#FISMIsEnabled).prop('checked', response.FISMIsEnabled);
+                    $(#FTPIp).val(response.FTPIp);
+                    $(#FTPLogin).val(response.FTPLogin);
+                    $(#FTPPassword).val(response.FTPPassword);
+                    $(#FTPUploadDir).val(response.FTPUploadDir);
+                    $(#ArchiveIsEnabled).prop('checked',ArchiveIsEnabled);
+                }
+                catch{
+                   alert('Ошибка загрузки данных');
+                }
+            }
+            error:function(error){
+                alert(error);
+            }
+        });
+    }
     
     
 

@@ -28,8 +28,8 @@ namespace ARMdps.Controllers
         {
             return View();
         }
-        [HttpPost]
-        /*public IActionResult GetTable()
+        /*[HttpPost]
+        public IActionResult GetTable()
         {
             return PartialView("_Table");
         }*/

@@ -22,6 +22,17 @@ namespace ARMdps.Repositories.Implimentations
                 return region;
             }
         }
+
+        public string JSRegionGet(int Id)
+        {
+            string rupath = "wwwroot/JSON/region.json";
+            var rj = File.ReadAllText(rupath);
+            List<RegionModel> regions = JsonSerializer.Deserialize<List<RegionModel>>(rj);
+            var region = regions.SingleOrDefault(r => r.Id == Id);
+            string res = JsonSerializer.Serialize(region);
+            return res;
+        }
+
         public void RegionUpdate(RegionModel regionModel)
         {
             string rupath = "wwwroot/JSON/region.json";
