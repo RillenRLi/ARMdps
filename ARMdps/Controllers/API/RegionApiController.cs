@@ -29,8 +29,8 @@ namespace ARMdps.Controllers.API
         {
             return _regionRepository.RegionGet(id);
         }
-        [HttpGet]
-        public void GetRegions(RegionModel region)
+        [HttpPost]
+        public void UpdateRegion(RegionModel region)
         {
             _regionRepository.RegionUpdate(region);
         }

@@ -77,29 +77,91 @@ body {
     background-color: #086F99;
     color: #FFFFFF;
 }
-.blue-button {
-    border-top: hidden;
-    border-left:hidden;
-    border-right:hidden;
-    border-bottom-color: #F8FAFC;
+.main-button {
+    background-color:#FFFFFF;
+    border: 1px groove;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
-    text-align: center;
-    background-color: #FFFFFF;
-    color: #086F99;
+    text-align: left;
+    border-radius: 6px;
+    color: #044C6A;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-radius: 6px;
+    margin: 2% 2% 2% 2%;
+    padding: 2% 2% 2% 2%;
 }
 button:focus,
 button:active{
     background-color: white;
-    border-bottom:2px solid red;
+}
+.main_container {
+    display: flex;
+    margin: 2% 2% 2% 2%;
+    padding: 1% 2% 1% 2%
 }
 .main_menus {
     display: flex;
+    width:30%;
+    flex-direction: column;
     justify-content: space-around;
     padding: 1% 5% 1% 5%;
-    border-bottom: solid 1px;
-    border-bottom-color: #086F99
+}
+.button_div{
+    width:100%;
+    padding:2% 2% 2% 2%;
+}
+.drop_button{
+    width:95%;
+    border-radius: 6px;
+}
+.region_head {
+    background-color: #75BCFF;
+    border-radius: 6px 6px 0px 0px;
+    color: #FFFFFF;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 10px 10px 3px 10px;
+}
+.region_div {
+    background: #FFFFFF;
+    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    width:90%;
+}
+.region_table {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 17px;
+    color: #044C6A;
+    width:95%;
+}
+.region_h {
+    border-bottom: 1px solid #75BCFF;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 17px;
+    color: #75BCFF;
+}
+.form_button {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 17px;
+    color: #FFFFFF;
+    border-radius: 6px;
+    border: hidden;
 }

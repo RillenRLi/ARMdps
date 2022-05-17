@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
 
 }
 <head>
@@ -7,33 +6,35 @@
     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<form id="regForm">
-    <div>
-        
-        <table>
-            <thead class="blue-header">
-                <tr>
-                    <th colspan="2" class="blue-header">Данные о регионе</th>
-                </tr>
-            </thead>
+<div class="region_div">
+    <form id="regForm">
+        <div class="region_head">
+            <p style="margin: 0px 0px 0px 0px">
+                Данные о регионе
+            </p>
+        </div>
+        <table id = "regTable" class="region_table">
             <tbody>
                 <tr>
-                    <th colspan="2" class="border-bottom">Заполните параметры региона</th>
+                    <th colspan="2" class="region_h">
+                        <input type="hidden" id="Region_Id" name="Region_Id" />
+                        Заполните параметры региона
+                    </th>
                 </tr>
                 <tr>
                     <td>
                         Код региона РФ (4 знака):
                     </td>
                     <td>
-                        <input id="RegionCode" type="text" value="RegionCode" />
+                        <input id="RegionCode" name="RegionCode" type="text"/>
                     </td>
                 </tr>
-                <tr>
+                <tr >
                     <td>
                         Код региона, применяемый на ГРЗ ТС (2 знака):
                     </td>
                     <td>
-                        <input id="Code2Digits" type="text" value="Code2Digits" />
+                        <input id="Code2Digits" name="Code2Digits" type="text" />
                     </td>
                 </tr>
                 <tr>
@@ -41,19 +42,19 @@
                         Наименование региона:
                     </td>
                     <td>
-                        <input id="Name" type="text" value="Name" />
+                        <input id="RegionName" name="RegionName" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Разграничение доступа к данным между администраторами подразделения и главным региональным администратором
+                        Разграничение доступа к данным между администраторами <br /> подразделения и главным региональным администратором
                     </td>
                     <td>
-                        <input id="UseSuperUser" type="checkbox" value="UseSuperUser" />
+                        <input id="UseSuperUser" name="UseSuperUser" type="checkbox"/>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" style="background-color:#75BCFF">
+                    <td colspan="2" class="region_h">
                         Заполните параметры выгрузки материалов в ФИС-М
                     </td>
                 </tr>
@@ -62,15 +63,15 @@
                         Автоматическая выгрузка в ФИС-М
                     </td>
                     <td>
-                        <input id="FISMIsEnabled" type="checkbox" value="FISMIsEnabled" />
+                        <input id="FISMIsEnabled" name="FISMIsEnabled" type="checkbox"/>
                     </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>
                         Архивировать файл выгрузки
                     </td>
                     <td>
-                        <input id="ArchiveIsEnabled" type="checkbox" value="ArchiveIsEnabled" />
+                        <input id="ArchiveIsEnabled" name="ArchiveIsEnabled" type="checkbox"/>
                     </td>
                 </tr>
                 <tr>
@@ -78,7 +79,7 @@
                         IP-адрес FTP-сервера
                     </td>
                     <td>
-                        <input id="FTPIp" type="text" value= "FTPIp" />
+                        <input id="FTPIp" name="FTPIp" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -86,7 +87,7 @@
                         Каталог FTP сервера
                     </td>
                     <td>
-                        <input id="FTPUploadDir" type="text" value="FTPUploadDir" />
+                        <input id="FTPUploadDir" name="FTPUploadDir" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +95,7 @@
                         Логин доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPLogin" type="text" value="FTPLogin" />
+                        <input id="FTPLogin" name="FTPLogin" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -102,64 +103,26 @@
                         Пароль доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPPassword" type="text" value="FTPPassword" />
+                        <input id="FTPPassword" name="FTPPassword" type="text"/>
                     </td>
                 </tr>
-                
             </tbody>
         </table>
-        <button type="button" class="blue-button" onclick="saveRegionChanges()">Сохранить</button><button type="reset" class="blue-button">Сброс</button>
-    </div>
-</form>
+        <div>
+        <button type="reset" class="form_button" style="background-color:#75BCFF" onclick="resetRegionButton()">Отменить</button>
+        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges()">Сохранить</button>
+        </div>
+    </form>
+</div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/jquery.dataTables.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-    $(document).ready(function () {
-    $('#rTable').DataTable();
-    })
-    
-    
-    @*$(document).ready(getRegion(id));
-
-    function getRegion(Id){
-        const url='@Url.Action("GetRegionForm","Region")'
-        $.ajax({
-            type:"GET",
-            data:({Id:regionId})
-            url:url,
-            dataType:'json',
-            success:function(response){
-                try{
-                    let region=JSON.parse(response);
-                    $(#RegionCode).val(response.RegionCode);
-                    $(#Code2Digits).val(response.Code2Digits);
-                    $(#Name).val(response.Name);
-                    $(#UseSuperUser).prop('checked',response.UseSuperUser);
-                    $(#User_Id).val(response.User_Id);
-                    $(#LicenseType).val(response.LicenseType);
-                    $(#LicenseFileName).val(response.LicenseFileName);
-                    $(#WSUserName).val(response.WSUserName);
-                    $(#FISMIsEnabled).prop('checked', response.FISMIsEnabled);
-                    $(#FTPIp).val(response.FTPIp);
-                    $(#FTPLogin).val(response.FTPLogin);
-                    $(#FTPPassword).val(response.FTPPassword);
-                    $(#FTPUploadDir).val(response.FTPUploadDir);
-                    $(#ArchiveIsEnabled).prop('checked',ArchiveIsEnabled);
-                }
-                catch{
-                   alert('Ошибка загрузки данных');
-                }
-            }
-            error:function(error){
-                alert(error);
-            }
-        });
-    }*@
-    
-    
+    $(document).ready(){
+        $("#regTable").DataTable();
+    }
 
     function saveSuccess(){
         alert("OK");
@@ -170,10 +133,59 @@
         alert("Error occured");
     }
 
+    function resetRegionButton(){
+        getRegion(1);
+    }
+
     function saveRegionChanges()
     {
-        let jRegionModel = $("#regForm").serialize();
-        console.log(jRegionModel.Name);
-        saveAjaxChanges(jRegionModel, '@Url.Action("UpdateRegion", "Region")', saveSuccess, saveError, "POST");
-    }
+        $('#regForm').submit(function(e){
+            e.preventDefault();
+            //let formData=$('#regForm').serializeArray();
+            let jsonData=JSON.stringify({
+                $('#Region_Id').val(response.Region_Id);
+                $('#RegionCode').val(response.RegionCode);
+                $('#Code2Digits').val(response.Code2Digits);
+                $('#RegionName').val(response.RegionName);
+                $('#UseSuperUser').prop('checked', response.UseSuperUser);
+                //$('#User_Id').val(response.user_Id);
+                //$('#LicenseType').val(response.licenseType);
+                //$('#LicenseFileName').val(response.licenseFileName);
+                $('#FISMIsEnabled').prop('checked', response.FISMIsEnabled);
+                $('#ArchiveIsEnabled').prop('checked', response.ArchiveIsEnabled);
+                $('#FTPIp').val(response.FTPIp);
+                $('#FTPUploadDir').val(response.FTPUploadDir);
+                $('#FTPLogin').val(response.FTPLogin);
+                $('#FTPPassword').val(response.FTPPassword);
+            });
+            console.log(jsonData);
+            $.ajax({
+                url:'/api/regionapi/updateregion',
+                data:jsonData,
+                processData:false,
+                contentType:'appliction/json',
+                type:'POST',
+                dataType:'JSON',
+                success:function(response){
+                    console.log(response);
+                },
+                error:function(){
+                    alert("Error");
+                }
+            });
+        })
+        //$('saveButton').css("background-color:#2A9964");
+        //let response = fetch('/api/regionapi/',{
+        //    method: 'POST',
+        //    body: new FormData(#regForm)
+        //}).then(response=>response.json());        
+
+        //let result=jRegionModel.json();
+        
+        //$("#regForm").serialize();
+
+        //console.log(jRegionModel);
+        //console.log(jRegionModel.Name);
+        //saveAjaxChanges(jRegionModel, @*'@Url.Action("UpdateRegion", "Region")'*@, saveSuccess, saveError, "POST");
+    
 </script>

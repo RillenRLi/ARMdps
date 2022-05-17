@@ -2,9 +2,9 @@
 {
     public class RegionModel
     {
-        public int Id { get; set; }
+        public int Region_Id { get; set; }
         public string Code2Digits { get; set; }
-        public string Name { get; set; }
+        public string RegionName { get; set; }
         public string RegionCode { get; set; }
         public bool UseSuperUser { get; set; }
         public bool FISMIsEnabled { get; set; }

@@ -1,41 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div>
-    <div id="main_menu" style="display:flex; justify-content:space-around; padding: 1% 5% 1% 5%; border-bottom:solid 1px ; border-bottom-color: #086F99; border-radius: 0px 0px 12px 12px">
-        <div style="display:flex">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Системные справочники
+<div class="main_container">
+    <div class="main_menus">
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Системa
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" onclick="clickRegionBtn(1)">Настройка системы</button>
-                    <button class="dropdown-item" onclick="clickUpdateTableBtn()">Версии ПО</button>
-                    <button class="dropdown-item" href="#">Автоматическая выгрузка в ФИС-М</button>
+                <div class="drop_button dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="drop_button dropdown-item" onclick="clickRegionBtn()">Настройка системы</button>
+                    <button class="drop_button dropdown-item" onclick="clickUpdateTableBtn()">Версии ПО</button>
+                    <button class="drop_button dropdown-item" href="#">Автоматическая выгрузка в ФИС-М</button>
                 </div>
             </div>
         </div>
-        <div style="display:flex">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Региональные справочники
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Справочники
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" href="#">Дороги региона</button>
-                    <button class="dropdown-item" href="#">Приборы измерения</button>
-                    <button class="dropdown-item" href="#">КоАП и фабулы нарушения</button>
-                    <button class="dropdown-item" href="#">Пункты ПДД для КоАП</button>
-                    <button class="dropdown-item" href="#">КБК для статей КоАП</button>
-                    <button class="dropdown-item" href="#">Шаблоны печатных форм</button>
-                    <button class="dropdown-item" href="#">Районы населенных пунктов</button>
-                    <button class="dropdown-item" href="#">Специализированные стоянки</button>
+                <div class="drop_button dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="drop_button dropdown-item" href="#">Дороги региона</button>
+                    <button class="drop_button dropdown-item" href="#">Приборы измерения</button>
+                    <button class="drop_button dropdown-item" href="#">КоАП и фабулы нарушения</button>
+                    <button class="drop_button dropdown-item" href="#">Пункты ПДД для КоАП</button>
+                    <button class="drop_button dropdown-item" href="#">КБК для статей КоАП</button>
+                    <button class="drop_button dropdown-item" href="#">Шаблоны печатных форм</button>
+                    <button class="drop_button dropdown-item" href="#">Районы населенных пунктов</button>
+                    <button class="drop_button dropdown-item" href="#">Специализированные стоянки</button>
                 </div>
             </div>
         </div>
-        <div style="display:flex">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Доступ и пользователи
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Шаблоны печатных форм
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <button class="dropdown-item" onclick="clickDepartmentTableBtn()">Подразделения</button>
@@ -46,10 +46,24 @@
                 </div>
             </div>
         </div>
-        <div style="display:flex">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Материалы
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Настройки доступа
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="dropdown-item" onclick="clickDepartmentTableBtn()">Подразделения</button>
+                    <button class="dropdown-item" onclick="clickARMUsersTableBtn()">Пользователи</button>
+                    <button class="dropdown-item" href="#">Рабочие места</button>
+                    <button class="dropdown-item" href="#">Номера материалов</button>
+                    <button class="dropdown-item" href="#">Лицензии и сопровождение</button>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Формирование отчётов
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <button class="dropdown-item" href="#">Составленные материалы</button>
@@ -58,10 +72,10 @@
                 </div>
             </div>
         </div>
-        <div style="display:flex">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle blue-button" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Отчетность
+        <div style="display:flex; flex-direction:column;">
+            <div class="button_div dropdown">
+                <button class="main-button dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Настройки пула материалов
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <button class="dropdown-item" href="#">Материалы за период</button>
@@ -70,91 +84,101 @@
             </div>
         </div>
     </div>
+    <div id="example" class="container" style="display:flex; flex-direction:row; margin-top:1%">
+    </div>
 </div>
-<div id="example" class="container" style="margin-top:1%">
-</div>
+
 
 
 
 @section Scripts
 {
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        //Таблицы
+    //Таблицы
 
-        function updateTable(tableHtml) {
-        $('#example').html(tableHtml);
-        }
+    function updateTable(tableHtml) {
+    $('#example').html(tableHtml);
+    }
 
-        function updateForm(formHtml) {
-        $('#example').html(formHtml);
-        }
+    function updateForm(formHtml) {
+    $('#example').html(formHtml);
+    }
 
-        //Версии ПО
-        function clickUpdateTableBtn(){
-            sendAjaxNotData('@Url.Action("GetUpdateTable", "Update")',tableSuccess, tableError,"POST");
-        }
-        //Подразделения
-        function clickDepartmentTableBtn() {
+    function tableSuccess(data) {
+    updateTable(data);
+    }
 
-            sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
-        }
-        //Пользователи
-        function clickARMUsersTableBtn() {
-            sendAjaxNotData('@Url.Action("GetARMUserTable", "ARMUser")', tableSuccess, tableError, "POST")
-        }
+    function tableError() {
+    alert("Error occured");
+    }
 
-        function formSuccess(data) {
-            updateForm(data);
-            getRegion(1);
-        }
+    //Версии ПО
+    function clickUpdateTableBtn(){
+        sendAjaxNotData('@Url.Action("GetUpdateTable", "Update")',tableSuccess, tableError,"POST");
+    }
+    //Подразделения
+    function clickDepartmentTableBtn() {
 
-        function formError() {
-        alert("Error occured");
-        }
+        sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
+    }
+    //Пользователи
+    function clickARMUsersTableBtn() {
+        sendAjaxNotData('@Url.Action("GetARMUserTable", "ARMUser")', tableSuccess, tableError, "POST")
+    }
 
-        //Редактирование учетных данных
-        function clickRegionBtn() {
-            //console.log(1);
-            sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
-            //console.log(2);
-        }
 
-        function getRegion(regionId){
-            const response = fetch("/api/regionapi/" + regionId, {
-                method: "GET",
-                headers: { "Accept": "application/json" }
-                }).then(response => response.json())
-                .then(data => getRegionRes(data));
-        }
+    function formSuccess(data) {
+        updateForm(data);
+        getRegion(1);
+    }
 
-        function getRegionRes(resp) {
-            //console.log(resp);
-            let response = resp;
-            try {
-                $('#RegionCode').val(response.regionCode);
-                $('#Code2Digits').val(response.code2Digits);
-                $('#Name').val(response.name);
-                $('#UseSuperUser').prop('checked', response.useSuperUser);
-                $('#User_Id').val(response.user_Id);
-                $('#LicenseType').val(response.licenseType);
-                $('#LicenseFileName').val(response.licenseFileName);
-                $('#WSUserName').val(response.wSUserName);
-                $('#FISMIsEnabled').prop('checked', response.fISMIsEnabled);
-                $('#FTPIp').val(response.fTPIp);
-                $('#FTPLogin').val(response.fTPLogin);
-                $('#FTPPassword').val(response.fTPPassword);
-                $('#FTPUploadDir').val(response.fTPUploadDir);
-                $('#ArchiveIsEnabled').prop('checked', archiveIsEnabled);
-            }
-            catch {
-                alert('Ошибка загрузки данных');
-            }
-        }
+    function formError() {
+    alert("Error occured");
+    }
 
-        //Скрипт для выпадающего списка(чтобы всегда отображался)
-        $(document).ready(function () {
-        $(".dropdown-toggle").dropdown();
-        });
-    </script>
+    //Редактирование учетных данных
+    function clickRegionBtn() {
+        //console.log(1);
+        sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
+        //console.log(2);
+    }
+
+    //function getRegion(regionId){
+    //    const response = fetch("/api/regionapi/" + regionId, {
+    //        method: "GET",
+    //        headers: { "Accept": "application/json" }
+    //        }).then(response => response.json())
+    //        .then(data => getRegionRes(data));
+    //}
+
+    //function getRegionRes(resp) {
+    //    console.log(resp);
+    //    let response = resp;
+    //    try {
+    //        $('#Region_Id').val(response.region_Id);
+    //        $('#RegionCode').val(response.regionCode);
+    //        $('#Code2Digits').val(response.code2Digits);
+    //        $('#RegionName').val(response.regionName);
+    //        $('#UseSuperUser').prop('checked', response.useSuperUser);
+    //        //$('#User_Id').val(response.user_Id);
+    //        //$('#LicenseType').val(response.licenseType);
+    //        //$('#LicenseFileName').val(response.licenseFileName);
+    //        $('#FISMIsEnabled').prop('checked', response.fismIsEnabled);
+    //        $('#ArchiveIsEnabled').prop('checked', response.archiveIsEnabled);
+    //        $('#FTPIp').val(response.ftpIp);
+    //        $('#FTPUploadDir').val(response.ftpUploadDir);
+    //        $('#FTPLogin').val(response.ftpLogin);
+    //        $('#FTPPassword').val(response.ftpPassword);
+    //    }
+    //    catch {
+    //        alert('Ошибка загрузки данных');
+    //    }
+    //}
+
+    //Скрипт для выпадающего списка(чтобы всегда отображался)
+    $(document).ready(function () {
+    $(".dropdown-toggle").dropdown();
+    });
+</script>
 }
