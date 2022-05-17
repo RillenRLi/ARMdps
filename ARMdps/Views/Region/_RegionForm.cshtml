@@ -110,7 +110,7 @@
         </table>
         <div>
         <button type="reset" class="form_button" style="background-color:#75BCFF" onclick="resetRegionButton()">Отменить</button>
-        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges()">Сохранить</button>
+        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges(event)">Сохранить</button>
         </div>
     </form>
 </div>
@@ -120,10 +120,10 @@
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-    $(document).ready(){
+    $(document).ready(function () {
         $("#regTable").DataTable();
-    }
-
+    });
+   
     function saveSuccess(){
         alert("OK");
         updateForm(data);
@@ -137,55 +137,42 @@
         getRegion(1);
     }
 
-    function saveRegionChanges()
-    {
-        $('#regForm').submit(function(e){
-            e.preventDefault();
-            //let formData=$('#regForm').serializeArray();
-            let jsonData=JSON.stringify({
-                $('#Region_Id').val(response.Region_Id);
-                $('#RegionCode').val(response.RegionCode);
-                $('#Code2Digits').val(response.Code2Digits);
-                $('#RegionName').val(response.RegionName);
-                $('#UseSuperUser').prop('checked', response.UseSuperUser);
-                //$('#User_Id').val(response.user_Id);
-                //$('#LicenseType').val(response.licenseType);
-                //$('#LicenseFileName').val(response.licenseFileName);
-                $('#FISMIsEnabled').prop('checked', response.FISMIsEnabled);
-                $('#ArchiveIsEnabled').prop('checked', response.ArchiveIsEnabled);
-                $('#FTPIp').val(response.FTPIp);
-                $('#FTPUploadDir').val(response.FTPUploadDir);
-                $('#FTPLogin').val(response.FTPLogin);
-                $('#FTPPassword').val(response.FTPPassword);
-            });
-            console.log(jsonData);
-            $.ajax({
-                url:'/api/regionapi/updateregion',
-                data:jsonData,
-                processData:false,
-                contentType:'appliction/json',
-                type:'POST',
-                dataType:'JSON',
-                success:function(response){
+
+
+
+
+    function saveRegionChanges(ev) {
+        ev.preventDefault();
+
+        let jsonData = JSON.stringify({
+            Region_Id: $('#Region_Id').val(),
+            RegionCode: $('#RegionCode').val(),
+            Code2Digits: $('#Code2Digits').val(),
+            RegionName: $('#RegionName').val(),
+            UseSuperUser: $('#UseSuperUser').prop('checked'),
+            //$('#User_Id').val(response.user_Id);
+            //$('#LicenseType').val(response.licenseType);
+            //$('#LicenseFileName').val(response.licenseFileName);
+            FISMIsEnabled: $('#FISMIsEnabled').prop('checked'),
+            ArchiveIsEnabled: $('#ArchiveIsEnabled').prop('checked'),
+            FTPIp: $('#FTPIp').val(),
+            FTPUploadDir: $('#FTPUploadDir').val(),
+            FTPLogin: $('#FTPLogin').val(),
+            FTPPassword: $('#FTPPassword').val()
+        });
+
+        $.ajax({
+                url: '/api/regionapi/update',
+                data: jsonData,
+                type: 'POST',
+                contentType: "application/json",
+                success: function (response) {
                     console.log(response);
                 },
-                error:function(){
+                error: function () {
                     alert("Error");
                 }
             });
-        })
-        //$('saveButton').css("background-color:#2A9964");
-        //let response = fetch('/api/regionapi/',{
-        //    method: 'POST',
-        //    body: new FormData(#regForm)
-        //}).then(response=>response.json());        
-
-        //let result=jRegionModel.json();
-        
-        //$("#regForm").serialize();
-
-        //console.log(jRegionModel);
-        //console.log(jRegionModel.Name);
-        //saveAjaxChanges(jRegionModel, @*'@Url.Action("UpdateRegion", "Region")'*@, saveSuccess, saveError, "POST");
-    
+     }
+           
 </script>

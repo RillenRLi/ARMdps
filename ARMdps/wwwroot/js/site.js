@@ -17,7 +17,7 @@ function sendAjaxNotData(url, onsuccess, onerror, type = "POST") {
         success: function (result) { onsuccess(result) },
         error: onerror,
         type: type
-    })
+    });
 }
 
 
@@ -41,7 +41,6 @@ function getRegion(regionId) {
 }
 
 function getRegionRes(resp) {
-    console.log(resp);
     let response = resp;
     try {
         $('#Region_Id').val(response.region_Id);

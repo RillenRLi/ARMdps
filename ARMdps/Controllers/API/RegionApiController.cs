@@ -6,7 +6,7 @@ using ARMdps.Models;
 using System.Text.Json;
 using System.Linq;
 using ARMdps.Repositories.Interfaces;
-
+using Newtonsoft.Json.Linq;
 
 namespace ARMdps.Controllers.API
 {
@@ -29,8 +29,8 @@ namespace ARMdps.Controllers.API
         {
             return _regionRepository.RegionGet(id);
         }
-        [HttpPost]
-        public void UpdateRegion(RegionModel region)
+        [HttpPost("Update")]
+        public void UpdateRegion([FromBody] RegionModel region)
         {
             _regionRepository.RegionUpdate(region);
         }
