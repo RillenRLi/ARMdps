@@ -76,6 +76,7 @@ body {
     line-height: 14px;
     background-color: #086F99;
     color: #FFFFFF;
+    width:100%;
 }
 .main-button {
     background-color:#FFFFFF;
@@ -89,7 +90,7 @@ body {
     border-radius: 6px;
     color: #044C6A;
     height: 100%;
-    width: 100%;
+    width: inherit;
     left: 0px;
     top: 0px;
     border-radius: 6px;
@@ -99,11 +100,13 @@ body {
 button:focus,
 button:active{
     background-color: white;
+    border:hidden;
 }
 .main_container {
     display: flex;
     margin: 2% 2% 2% 2%;
-    padding: 1% 2% 1% 2%
+    padding: 1% 2% 1% 2%;
+    width:95%;
 }
 .main_menus {
     display: flex;
@@ -164,4 +167,16 @@ button:active{
     color: #FFFFFF;
     border-radius: 6px;
     border: hidden;
+}
+.button:active {
+    background-color: white;
+    border: hidden;
+}
+.input_border {
+    border-radius: 6px;
+    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
+    width:90%;
+}
+.input_border:invalid{
+    border:1px solid red;
 }

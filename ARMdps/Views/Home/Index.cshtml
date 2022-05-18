@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div id="example" class="container" style="display:flex; flex-direction:row; margin-top:1%">
+    <div id="example" class="main_container" style="display:flex; flex-direction:row; justify-content:center; margin-top:1%">
     </div>
 </div>
 
@@ -137,45 +137,13 @@
     alert("Error occured");
     }
 
-    //Редактирование учетных данных
+    //Вызов формы редактирования учетных данных
     function clickRegionBtn() {
         //console.log(1);
         sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
         //console.log(2);
     }
-
-    //function getRegion(regionId){
-    //    const response = fetch("/api/regionapi/" + regionId, {
-    //        method: "GET",
-    //        headers: { "Accept": "application/json" }
-    //        }).then(response => response.json())
-    //        .then(data => getRegionRes(data));
-    //}
-
-    //function getRegionRes(resp) {
-    //    console.log(resp);
-    //    let response = resp;
-    //    try {
-    //        $('#Region_Id').val(response.region_Id);
-    //        $('#RegionCode').val(response.regionCode);
-    //        $('#Code2Digits').val(response.code2Digits);
-    //        $('#RegionName').val(response.regionName);
-    //        $('#UseSuperUser').prop('checked', response.useSuperUser);
-    //        //$('#User_Id').val(response.user_Id);
-    //        //$('#LicenseType').val(response.licenseType);
-    //        //$('#LicenseFileName').val(response.licenseFileName);
-    //        $('#FISMIsEnabled').prop('checked', response.fismIsEnabled);
-    //        $('#ArchiveIsEnabled').prop('checked', response.archiveIsEnabled);
-    //        $('#FTPIp').val(response.ftpIp);
-    //        $('#FTPUploadDir').val(response.ftpUploadDir);
-    //        $('#FTPLogin').val(response.ftpLogin);
-    //        $('#FTPPassword').val(response.ftpPassword);
-    //    }
-    //    catch {
-    //        alert('Ошибка загрузки данных');
-    //    }
-    //}
-
+    
     //Скрипт для выпадающего списка(чтобы всегда отображался)
     $(document).ready(function () {
     $(".dropdown-toggle").dropdown();

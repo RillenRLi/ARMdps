@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/toastr.min.css" />
 </head>
 <div class="region_div">
     <form id="regForm">
@@ -13,36 +14,42 @@
                 Данные о регионе
             </p>
         </div>
-        <table id = "regTable" class="region_table">
+        <table id="regTable" class="region_table">
             <tbody>
                 <tr>
                     <th colspan="2" class="region_h">
                         <input type="hidden" id="Region_Id" name="Region_Id" />
                         Заполните параметры региона
+                        <span style="color:#FF3E3E; font-size:12px;">*</span>
+                        <span style="font-size:12px"> - Обязательное для заполнения поле</span>
                     </th>
                 </tr>
                 <tr>
                     <td>
-                        Код региона РФ (4 знака):
+                        <span style="color:#FF3E3E;">*</span>
+                        <label for="RegionCode">Код региона РФ (4 знака):</label>
                     </td>
                     <td>
-                        <input id="RegionCode" name="RegionCode" type="text"/>
-                    </td>
-                </tr>
-                <tr >
-                    <td>
-                        Код региона, применяемый на ГРЗ ТС (2 знака):
-                    </td>
-                    <td>
-                        <input id="Code2Digits" name="Code2Digits" type="text" />
+                        <input id="RegionCode" class="input_border" name="RegionCode" type="text" required digit="true" minlength ="4" maxlength="4"/>
+
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <span style="color:#FF3E3E;">*</span>
+                        Код региона, применяемый на ГРЗ ТС (2 знака):
+                    </td>
+                    <td>
+                        <input id="Code2Digits" class="input_border" name="Code2Digits" type="text" required digit="true" minlength ="2" maxlength="2"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:#FF3E3E;">*</span>
                         Наименование региона:
                     </td>
                     <td>
-                        <input id="RegionName" name="RegionName" type="text"/>
+                        <input id="RegionName" class="input_border" name="RegionName" type="text" required minlength ="3"/>
                     </td>
                 </tr>
                 <tr>
@@ -50,7 +57,7 @@
                         Разграничение доступа к данным между администраторами <br /> подразделения и главным региональным администратором
                     </td>
                     <td>
-                        <input id="UseSuperUser" name="UseSuperUser" type="checkbox"/>
+                        <input id="UseSuperUser" class="input_border" name="UseSuperUser" type="checkbox" style="box-shadow:none; align-content:flex-start; " />
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +70,7 @@
                         Автоматическая выгрузка в ФИС-М
                     </td>
                     <td>
-                        <input id="FISMIsEnabled" name="FISMIsEnabled" type="checkbox"/>
+                        <input id="FISMIsEnabled" class="input_border" name="FISMIsEnabled" type="checkbox" style="box-shadow:none; align-content:flex-start;" />
                     </td>
                 </tr>
                 <tr>
@@ -71,108 +78,168 @@
                         Архивировать файл выгрузки
                     </td>
                     <td>
-                        <input id="ArchiveIsEnabled" name="ArchiveIsEnabled" type="checkbox"/>
+                        <input id="ArchiveIsEnabled" class="input_border" name="ArchiveIsEnabled" type="checkbox" style="box-shadow:none; align-content:start;" />
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <span style="color:#FF3E3E;">*</span>
                         IP-адрес FTP-сервера
                     </td>
                     <td>
-                        <input id="FTPIp" name="FTPIp" type="text"/>
+                        <input id="FTPIp" class="input_border" name="FTPIp" type="text" required />
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <span style="color:#FF3E3E;">*</span>
                         Каталог FTP сервера
                     </td>
                     <td>
-                        <input id="FTPUploadDir" name="FTPUploadDir" type="text"/>
+                        <input id="FTPUploadDir" class="input_border" name="FTPUploadDir" type="text" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <span style="color:#FF3E3E;">*</span>
                         Логин доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPLogin" name="FTPLogin" type="text"/>
+                        <input id="FTPLogin" class="input_border" name="FTPLogin" type="text" required/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <span style="color:#FF3E3E;">*</span>
                         Пароль доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPPassword" name="FTPPassword" type="text"/>
+                        <input id="FTPPassword" class="input_border" name="FTPPassword" type="text" required/>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div>
-        <button type="reset" class="form_button" style="background-color:#75BCFF" onclick="resetRegionButton()">Отменить</button>
-        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges(event)">Сохранить</button>
+        <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px);">
+            <button type="reset" class="form_button" style="background-color:#75BCFF" onclick="resetRegionButton()">Отменить</button>
+            <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges(event)">Сохранить</button>
         </div>
     </form>
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/toastr.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
-
-    $(document).ready(function () {
-        $("#regTable").DataTable();
-    });
+        
+        
    
-    function saveSuccess(){
-        alert("OK");
-        updateForm(data);
-    }
-
-    function saveError(){
-        alert("Error occured");
-    }
-
-    function resetRegionButton(){
-        getRegion(1);
-    }
-
-
-
-
-
-    function saveRegionChanges(ev) {
-        ev.preventDefault();
-
-        let jsonData = JSON.stringify({
-            Region_Id: $('#Region_Id').val(),
-            RegionCode: $('#RegionCode').val(),
-            Code2Digits: $('#Code2Digits').val(),
-            RegionName: $('#RegionName').val(),
-            UseSuperUser: $('#UseSuperUser').prop('checked'),
-            //$('#User_Id').val(response.user_Id);
-            //$('#LicenseType').val(response.licenseType);
-            //$('#LicenseFileName').val(response.licenseFileName);
-            FISMIsEnabled: $('#FISMIsEnabled').prop('checked'),
-            ArchiveIsEnabled: $('#ArchiveIsEnabled').prop('checked'),
-            FTPIp: $('#FTPIp').val(),
-            FTPUploadDir: $('#FTPUploadDir').val(),
-            FTPLogin: $('#FTPLogin').val(),
-            FTPPassword: $('#FTPPassword').val()
+        $(document).ready(function () {
+            $("#regTable").DataTable();
         });
 
-        $.ajax({
-                url: '/api/regionapi/update',
-                data: jsonData,
-                type: 'POST',
-                contentType: "application/json",
-                success: function (response) {
-                    console.log(response);
+        $(document).ready(function(){
+            $('#regForm').validate({
+                rules:{
+                    RegionCode:{
+                        required: true,
+                        digits:true,
+                        minlength:4,
+                        maxlength:4                        
+                    }
                 },
-                error: function () {
-                    alert("Error");
+                messages:{
+                    RegionCode:{
+                        required: "Обязательное для заполнения поле",
+                        digits:"Только цифры",
+                        minlength: "Код региона 4 символа",
+                        maxlength: "Код региона 4 символа"                        
+                    }
                 }
             });
-     }
-           
+        });
+
+        function saveSuccess(){
+            alert("OK");
+            updateForm(data);
+        }
+
+        function saveError(){
+            alert("Error occured");
+        }
+
+        function resetRegionButton(){
+            getRegion(1);
+        }
+
+        function toasterOptions() {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "show",
+            "hideMethod": "hide"
+        };
+    };
+
+        function saveRegionChanges(ev) {
+            if(this.validate){
+            ev.preventDefault();
+
+            let jsonData = JSON.stringify({
+                Region_Id: $('#Region_Id').val(),
+                RegionCode: $('#RegionCode').val(),
+                Code2Digits: $('#Code2Digits').val(),
+                RegionName: $('#RegionName').val(),
+                UseSuperUser: $('#UseSuperUser').prop('checked'),
+                //$('#User_Id').val(response.user_Id);
+                //$('#LicenseType').val(response.licenseType);
+                //$('#LicenseFileName').val(response.licenseFileName);
+                FISMIsEnabled: $('#FISMIsEnabled').prop('checked'),
+                ArchiveIsEnabled: $('#ArchiveIsEnabled').prop('checked'),
+                FTPIp: $('#FTPIp').val(),
+                FTPUploadDir: $('#FTPUploadDir').val(),
+                FTPLogin: $('#FTPLogin').val(),
+                FTPPassword: $('#FTPPassword').val()
+            });
+
+            $.ajax({
+                    url: '/api/regionapi/update',
+                    data: jsonData,
+                    type: 'POST',
+                    contentType: "application/json",
+                    success: function () {
+                        toasterOptions();
+                        //toastr.options.timeOut=3000;
+                        //toastr.options.closeButton=true;
+                        //toastr.options.positionClass=toast-top-center;
+                        toastr.success('Сохранение успешно');
+                    },
+                    error: function () {
+                        toasterOptions();
+                        toastr.error('Ошибка сохранения данных');
+                    }
+                });
+            $('#saveButton').css("background-color", "#2A9964")
+            }
+         }
+
+         function resetRegionButton(){
+             getRegion(1);
+             toasterOptions();
+             toastr.warning('Данные сброшены');
+         }
+
 </script>

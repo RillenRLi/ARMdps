@@ -32,6 +32,8 @@ function saveAjaxChanges(data, url, onsuccess, onerror, type = "POST") {
     });
 }
 
+//Функция для передачи данных в форму редактирования учетных данных
+
 function getRegion(regionId) {
     const response = fetch("/api/regionapi/" + regionId, {
         method: "GET",

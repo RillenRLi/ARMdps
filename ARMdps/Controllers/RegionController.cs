@@ -17,10 +17,5 @@ namespace ARMdps.Controllers
         {
             return PartialView("_RegionForm");
         }
-        /*[HttpPost]
-        public void UpdateRegion(RegionModel model)
-        {
-            _repository.RegionUpdate(model);
-        }*/
     }
 }
