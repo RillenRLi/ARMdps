@@ -30,8 +30,9 @@
                         <label for="RegionCode">Код региона РФ (4 знака):</label>
                     </td>
                     <td>
-                        <input id="RegionCode" class="input_border" name="RegionCode" type="text" required digit="true" minlength ="4" maxlength="4"/>
-
+                        <input id="RegionCode" class="input_border" name="RegionCode" type="text" title="AWASADDD" />
+                        <label id="RegionCodeSpan" class="input_span" size="2"></label>
+                        <span id="RegionCodeMsg" class="validMsg"></span>
                     </td>
                 </tr>
                 <tr>
@@ -40,7 +41,7 @@
                         Код региона, применяемый на ГРЗ ТС (2 знака):
                     </td>
                     <td>
-                        <input id="Code2Digits" class="input_border" name="Code2Digits" type="text" required digit="true" minlength ="2" maxlength="2"/>
+                        <input id="Code2Digits" class="input_border" name="Code2Digits" type="text" required digit="true" minlength="2" maxlength="2" />
                     </td>
                 </tr>
                 <tr>
@@ -49,7 +50,7 @@
                         Наименование региона:
                     </td>
                     <td>
-                        <input id="RegionName" class="input_border" name="RegionName" type="text" required minlength ="3"/>
+                        <input id="RegionName" class="input_border" name="RegionName" type="text" required minlength="3" />
                     </td>
                 </tr>
                 <tr>
@@ -96,7 +97,7 @@
                         Каталог FTP сервера
                     </td>
                     <td>
-                        <input id="FTPUploadDir" class="input_border" name="FTPUploadDir" type="text" required/>
+                        <input id="FTPUploadDir" class="input_border" name="FTPUploadDir" type="text" required />
                     </td>
                 </tr>
                 <tr>
@@ -105,7 +106,7 @@
                         Логин доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPLogin" class="input_border" name="FTPLogin" type="text" required/>
+                        <input id="FTPLogin" class="input_border" name="FTPLogin" type="text" required />
                     </td>
                 </tr>
                 <tr>
@@ -114,7 +115,7 @@
                         Пароль доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPPassword" class="input_border" name="FTPPassword" type="text" required/>
+                        <input id="FTPPassword" class="input_border" name="FTPPassword" type="text" required />
                     </td>
                 </tr>
             </tbody>
@@ -133,48 +134,48 @@
 <script src="~/js/toastr.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
+
+
+
+
+    $(document).ready(function () {
+
+        $("#regTable").DataTable();
         
-        
-   
-        $(document).ready(function () {
-            $("#regTable").DataTable();
-        });
+        //$('#regForm').validate({
+        //    rules:{
+        //        RegionCode:{
+        //            required: true,
+        //            digits:true,
+        //            minlength:4,
+        //            maxlength:4
+        //        }
+        //    },
+        //    messages:{
+        //        RegionCode:{
+        //            required: "Обязательное для заполнения поле",
+        //            digits:"Только цифры",
+        //            minlength: "Код региона 4 символа",
+        //            maxlength: "Код региона 4 символа"
+        //        }
+        //    }
+        //});
+    });
 
-        $(document).ready(function(){
-            $('#regForm').validate({
-                rules:{
-                    RegionCode:{
-                        required: true,
-                        digits:true,
-                        minlength:4,
-                        maxlength:4                        
-                    }
-                },
-                messages:{
-                    RegionCode:{
-                        required: "Обязательное для заполнения поле",
-                        digits:"Только цифры",
-                        minlength: "Код региона 4 символа",
-                        maxlength: "Код региона 4 символа"                        
-                    }
-                }
-            });
-        });
+    function saveSuccess() {
+        alert("OK");
+        updateForm(data);
+    }
 
-        function saveSuccess(){
-            alert("OK");
-            updateForm(data);
-        }
+    function saveError() {
+        alert("Error occured");
+    }
 
-        function saveError(){
-            alert("Error occured");
-        }
+    function resetRegionButton() {
+        getRegion(1);
+    }
 
-        function resetRegionButton(){
-            getRegion(1);
-        }
-
-        function toasterOptions() {
+    function toasterOptions() {
         toastr.options = {
             "closeButton": true,
             "debug": false,
@@ -194,52 +195,96 @@
         };
     };
 
-        function saveRegionChanges(ev) {
-            if(this.validate){
-            ev.preventDefault();
+    function setInputValidationFail(inputId, spanId, msgSpanId, errorMsg) {
+        $('#' + inputId).addClass('validFail');
+        $('#' + spanId).addClass('validSpanFail');
+        $('#' + spanId).text('!');
+        $('#' + msgSpanId).addClass('validMsgFail');
+        $('#' + msgSpanId).text(errorMsg);
+    }
 
-            let jsonData = JSON.stringify({
-                Region_Id: $('#Region_Id').val(),
-                RegionCode: $('#RegionCode').val(),
-                Code2Digits: $('#Code2Digits').val(),
-                RegionName: $('#RegionName').val(),
-                UseSuperUser: $('#UseSuperUser').prop('checked'),
-                //$('#User_Id').val(response.user_Id);
-                //$('#LicenseType').val(response.licenseType);
-                //$('#LicenseFileName').val(response.licenseFileName);
-                FISMIsEnabled: $('#FISMIsEnabled').prop('checked'),
-                ArchiveIsEnabled: $('#ArchiveIsEnabled').prop('checked'),
-                FTPIp: $('#FTPIp').val(),
-                FTPUploadDir: $('#FTPUploadDir').val(),
-                FTPLogin: $('#FTPLogin').val(),
-                FTPPassword: $('#FTPPassword').val()
-            });
+    function validateRegionCode(regionCode) {
+        const msg = "Введите код региона (4 знака)";
+        if (!regionCode) {
+            setInputValidationFail('RegionCode', 'RegionCodeSpan', 'RegionCodeMsg', msg);
+            return false;
+        }
+        if (regionCode.length != 4)
+        {
+            setInputValidationFail('RegionCode', 'RegionCodeSpan', 'RegionCodeMsg', msg);
+            return false;
+        }
+        if (+regionCode != regionCode) {
+            setInputValidationFail('RegionCode', 'RegionCodeSpan', 'RegionCodeMsg', msg);
+            return false;
+        }
+        return true;
+    }
 
-            $.ajax({
-                    url: '/api/regionapi/update',
-                    data: jsonData,
-                    type: 'POST',
-                    contentType: "application/json",
-                    success: function () {
-                        toasterOptions();
-                        //toastr.options.timeOut=3000;
-                        //toastr.options.closeButton=true;
-                        //toastr.options.positionClass=toast-top-center;
-                        toastr.success('Сохранение успешно');
-                    },
-                    error: function () {
-                        toasterOptions();
-                        toastr.error('Ошибка сохранения данных');
-                    }
-                });
-            $('#saveButton').css("background-color", "#2A9964")
+    function validateRegionForm(jsonData) {
+        let retv = true;
+        let res = validateRegionCode(jsonData.RegionCode);
+        if (retv) retv = res;
+        return retv;
+    }
+
+    function saveRegionChanges(ev) {
+
+
+        ev.preventDefault();
+
+        let jsonData = {
+            Region_Id: $('#Region_Id').val(),
+            RegionCode: $('#RegionCode').val(),
+            Code2Digits: $('#Code2Digits').val(),
+            RegionName: $('#RegionName').val(),
+            UseSuperUser: $('#UseSuperUser').prop('checked'),
+            //$('#User_Id').val(response.user_Id);
+            //$('#LicenseType').val(response.licenseType);
+            //$('#LicenseFileName').val(response.licenseFileName);
+            FISMIsEnabled: $('#FISMIsEnabled').prop('checked'),
+            ArchiveIsEnabled: $('#ArchiveIsEnabled').prop('checked'),
+            FTPIp: $('#FTPIp').val(),
+            FTPUploadDir: $('#FTPUploadDir').val(),
+            FTPLogin: $('#FTPLogin').val(),
+            FTPPassword: $('#FTPPassword').val()
+        };
+        console.log(jsonData.RegionCode);
+
+        let valResult = validateRegionForm(jsonData);
+
+        if (!valResult) {
+            toasterOptions();
+            toastr.error('Ошибка валидации');
+            return;
+        }
+
+        $.ajax({
+            url: '/api/regionapi/update',
+            data: JSON.stringify(jsonData),
+            type: 'POST',
+            contentType: "application/json",
+            success: function () {
+                toasterOptions();
+                //toastr.options.timeOut=3000;
+                //toastr.options.closeButton=true;
+                //toastr.options.positionClass=toast-top-center;
+                toastr.success('Сохранение успешно');
+                $('#saveButton').css("background-color", "#2A9964");
+            },
+            error: function () {
+                toasterOptions();
+                toastr.error('Ошибка сохранения данных');
             }
-         }
+        });
 
-         function resetRegionButton(){
-             getRegion(1);
-             toasterOptions();
-             toastr.warning('Данные сброшены');
-         }
+
+    }
+
+    function resetRegionButton() {
+        getRegion(1);
+        toasterOptions();
+        toastr.warning('Данные сброшены');
+    }
 
 </script>

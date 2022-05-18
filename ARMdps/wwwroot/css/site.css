@@ -173,10 +173,40 @@ button:active{
     border: hidden;
 }
 .input_border {
-    border-radius: 6px;
+    border-radius:6px 0px 0px 6px; 
+    border-right:none;
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
+    padding-right:0px;
+    margin-right:0px;
     width:90%;
 }
-.input_border:invalid{
-    border:1px solid red;
+
+.input_span {
+    border-radius: 0px 6px 6px 0px;
+    border-left:none;
+    border-color:black;
+    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
+    padding:1px 0px 1px 2px;
+    margin:0px;
+    width: 10px;
+}
+
+
+.validFail {
+    border: 1px solid red;
+    border-right:none;
+}
+
+.validSpanFail {
+    border: 1px solid red;
+    border-left:none;
+}
+.validMsg{
+    display:none;
+}
+.validMsgFail {
+    display: block;
+    background-color: orangered;
+    width: 90%;
+    border-radius: 6px 0px 0px 6px;
 }
