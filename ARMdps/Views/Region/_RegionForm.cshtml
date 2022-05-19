@@ -4,8 +4,8 @@
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <div class="region_div">
     <form id="regForm">
@@ -20,37 +20,41 @@
                     <th colspan="2" class="region_h">
                         <input type="hidden" id="Region_Id" name="Region_Id" />
                         Заполните параметры региона
-                        <span style="color:#FF3E3E; font-size:12px;">*</span>
-                        <span style="font-size:12px"> - Обязательное для заполнения поле</span>
+                        <span style="color:#FF3E3E; font-size:10px;">*</span>
+                        <span style="color:#A3B1C6; font-size:12px;"> - Обязательное для заполнения поле</span>
                     </th>
                 </tr>
                 <tr>
                     <td>
                         <span style="color:#FF3E3E;">*</span>
-                        <label for="RegionCode">Код региона РФ (4 знака):</label>
+                        <label for="RegionCode">Код региона РФ (4 знака)</label>
                     </td>
                     <td>
-                        <input id="RegionCode" class="input_border" name="RegionCode" type="text" title="AWASADDD" />
-                        <label id="RegionCodeSpan" class="input_span" size="2"></label>
-                        <span id="RegionCodeMsg" class="validMsg"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span style="color:#FF3E3E;">*</span>
-                        Код региона, применяемый на ГРЗ ТС (2 знака):
-                    </td>
-                    <td>
-                        <input id="Code2Digits" class="input_border" name="Code2Digits" type="text" required digit="true" minlength="2" maxlength="2" />
+                        <input id="RegionCode" class="error_input input_border" name="RegionCode" type="text" maxlength="4" />
+                        <span id="RegionCodeSpan" class="error_span input_span" size="2"></span>
+                        <span id="RegionCodeMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <span style="color:#FF3E3E;">*</span>
-                        Наименование региона:
+                        <label for="Code2Digits"> Код региона, применяемый на ГРЗ ТС (2 знака)</label>
                     </td>
                     <td>
-                        <input id="RegionName" class="input_border" name="RegionName" type="text" required minlength="3" />
+                        <input id="Code2Digits" class="error_input input_border" name="Code2Digits" type="text" maxlength="2" />
+                        <span id="Code2DigitsSpan" class="error_span input_span" size="2"></span>
+                        <span id="Code2DigitsMsg" class="error_msg validMsg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color:#FF3E3E;">*</span>
+                        <label for="RegionName">Наименование региона</label>
+                    </td>
+                    <td>
+                        <input id="RegionName" class="error_input input_border" name="RegionName" type="text" />
+                        <span id="RegionNameSpan" class="error_span input_span" size="2"></span>
+                        <span id="RegionNameMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
@@ -85,10 +89,12 @@
                 <tr>
                     <td>
                         <span style="color:#FF3E3E;">*</span>
-                        IP-адрес FTP-сервера
+                        <label for="FTPIp">IP-адрес FTP-сервера</label>
                     </td>
                     <td>
-                        <input id="FTPIp" class="input_border" name="FTPIp" type="text" required />
+                        <input id="FTPIp" class="error_input input_border" name="FTPIp" type="text" />
+                        <span id="FTPIpSpan" class="error_span input_span" size="2"></span>
+                        <span id="FTPIpMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
@@ -97,7 +103,9 @@
                         Каталог FTP сервера
                     </td>
                     <td>
-                        <input id="FTPUploadDir" class="input_border" name="FTPUploadDir" type="text" required />
+                        <input id="FTPUploadDir" class="error_input input_border" name="FTPUploadDir" type="text" />
+                        <span id="FTPUploadDirSpan" class="error_span input_span" size="2"></span>
+                        <span id="FTPUploadDirMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
@@ -106,7 +114,9 @@
                         Логин доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPLogin" class="input_border" name="FTPLogin" type="text" required />
+                        <input id="FTPLogin" class="error_input input_border" name="FTPLogin" type="text" />
+                        <span id="FTPLoginSpan" class="error_span input_span" size="2"></span>
+                        <span id="FTPLoginMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
@@ -115,7 +125,9 @@
                         Пароль доступа к FTP
                     </td>
                     <td>
-                        <input id="FTPPassword" class="input_border" name="FTPPassword" type="text" required />
+                        <input id="FTPPassword" class="error_input input_border" name="FTPPassword" type="text" />
+                        <span id="FTPPasswordSpan" class="error_span input_span" size="2"></span>
+                        <span id="FTPPasswordMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
             </tbody>
@@ -132,34 +144,138 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/jquery.dataTables.min.js"></script>
 <script src="~/js/toastr.min.js"></script>
+<script src="~/js/jquery.maskedinput.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
 
-
+    //использование плагина dataTablest для отрисовки таблицы
 
     $(document).ready(function () {
 
         $("#regTable").DataTable();
-        
-        //$('#regForm').validate({
-        //    rules:{
-        //        RegionCode:{
-        //            required: true,
-        //            digits:true,
-        //            minlength:4,
-        //            maxlength:4
-        //        }
-        //    },
-        //    messages:{
-        //        RegionCode:{
-        //            required: "Обязательное для заполнения поле",
-        //            digits:"Только цифры",
-        //            minlength: "Код региона 4 символа",
-        //            maxlength: "Код региона 4 символа"
-        //        }
-        //    }
-        //});
+    });
+
+    //
+
+    $('#RegionCodeSpan').hover(
+        function(){
+        if($(this).hasClass('validSpanFail'))
+            {
+            $('#RegionCodeMsg').css('display','block');
+            }
+        },
+        function(){
+        if($(this).hasClass('validSpanFail'))
+            {
+            $('#RegionCodeMsg').css('display','none');
+            }
+        });
+    
+    //
+
+    $('#Code2DigitsSpan').hover(
+        function(){
+        if($(this).hasClass('validSpanFail'))
+        {
+            $('#Code2DigitsMsg').css('display','block');
+        }
+        },
+        function(){
+        if($(this).hasClass('validSpanFail'))
+        {
+            $('#Code2DigitsMsg').css('display','none');
+        }
+        });
+
+    //
+
+    $('#RegionNameSpan').hover(
+        function(){
+        if($(this).hasClass('validSpanFail'))
+        {
+            $('#RegionNameMsg').css('display','block');
+        }
+        },
+        function(){
+        if($(this).hasClass('validSpanFail'))
+        {
+        $('#RegionNameMsg').css('display','none');
+        }
+        });
+    
+    //
+
+    $('#FTPIpSpan').hover(
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPIpMsg').css('display','block');
+       }
+       },
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPIpMsg').css('display','none');
+       }
+       });
+    
+   //
+
+   $('#FTPUploadDirSpan').hover(
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPUploadDirMsg').css('display','block');
+       }
+       },
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPUploadDirMsg').css('display','none');
+       }
+       });
+
+
+    //      
+
+   $('#FTPLoginSpan').hover(
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPLoginMsg').css('display','block');
+       }
+       },
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPLoginMsg').css('display','none');
+       }
+       });
+
+     //
+
+   $('#FTPPasswordSpan').hover(
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPPasswordMsg').css('display','block');
+       }
+       },
+       function(){
+       if($(this).hasClass('validSpanFail'))
+       {
+       $('#FTPPasswordMsg').css('display','none');
+       }
+       });
+
+
+    //использование плагина maskedinput для вывода форм с маской
+
+    $(function(){
+        $('#RegionCode').mask('9999');
+        $('#Code2Digits').mask('99');
+        $('#FTPIp').mask('999.999.999.999');
     });
 
     function saveSuccess() {
@@ -171,9 +287,14 @@
         alert("Error occured");
     }
 
+
+    //сброс данных к начальным значениям при нажатии кнопки "Отмена"
+
     function resetRegionButton() {
         getRegion(1);
     }
+
+    //настройка опций плагина toastr для всплывающих уведомлений
 
     function toasterOptions() {
         toastr.options = {
@@ -195,6 +316,8 @@
         };
     };
 
+    //обобщенная функция валидации поля формы
+
     function setInputValidationFail(inputId, spanId, msgSpanId, errorMsg) {
         $('#' + inputId).addClass('validFail');
         $('#' + spanId).addClass('validSpanFail');
@@ -203,7 +326,10 @@
         $('#' + msgSpanId).text(errorMsg);
     }
 
+    //валидация поля код региона (4 знака)
+
     function validateRegionCode(regionCode) {
+
         const msg = "Введите код региона (4 знака)";
         if (!regionCode) {
             setInputValidationFail('RegionCode', 'RegionCodeSpan', 'RegionCodeMsg', msg);
@@ -221,18 +347,125 @@
         return true;
     }
 
+    //валидация поля код региона (2 знака)
+
+    function validateCode2Digits(code2Digits) {
+
+        const msg = "Введите код региона (2 знака)";
+        if(!code2Digits){
+            setInputValidationFail('Code2Digits', 'Code2DigitsSpan', 'Code2DigitsMsg', msg);
+            return false;
+        }
+        if(code2Digits.length != 2){
+            setInputValidationFail('Code2Digits', 'Code2DigitsSpan', 'Code2DigitsMsg', msg);
+            return false;
+        }
+        if(+code2Digits!=code2Digits){
+            setInputValidationFail('Code2Digits', 'Code2DigitsSpan', 'Code2DigitsMsg', msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация поля наименование региона
+
+    function validateRegionName(regionName){
+
+        const msg = "Введите наименование региона";
+        if(!regionName){
+            setInputValidationFail('RegionName','RegionNameSpan','RegionNameMsg',msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация поля IP-адрес FTP-сервера
+
+    function validateFTPIp(ftpIp){
+        const msg="Введите IP-адрес FTP-сервера";
+        if(!ftpIp){
+            setInputValidationFail('FTPIp','FTPIpSpan','FTPIpMsg',msg);
+            return false;
+        }
+        if(!validateIp(ftpIp)){
+            setInputValidationFail('FTPIp','FTPIpSpan','FTPIpMsg',msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация поля каталог FTP-сервера
+
+    function validateFTPUploadDir(ftpUploadDir){
+        const msg="Введите каталог FTP-сервера";
+        if(!ftpUploadDir){
+            setInputValidationFail('FTPUploadDir','FTPUploadDirSpan','FTPUploadDirMsg',msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация поля логин доступа к FTP-серверу
+
+    function validateFTPLogin(ftpLogin){
+        const msg="Введите логин доступа к FTP-серверу";
+        if(!ftpLogin){
+            setInputValidationFail('FTPLogin','FTPLoginSpan','FTPLoginMsg',msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация поля пароль доступа к FTP-серверу
+
+    function validateFTPPassword(ftpPassword){
+        const msg="Введите пароль доступа к FTP-серверу";
+        if(!ftpPassword){
+            setInputValidationFail('FTPPassword','FTPPasswordSpan','FTPPasswordMsg',msg);
+            return false;
+        }
+        return true;
+    }
+
+    //валидация IP-адреса
+
+    function validateIp(ip){
+        let resip=true;
+        let ipmass = ip.split('.');
+        for (let i=0;i<ipmass.length;i++){
+            if(+ipmass[i]!=ipmass[i] || +ipmass[i]>255) resip=false;
+        }
+        return resip;
+    }
+
+    //валидация всех полей формы
+
     function validateRegionForm(jsonData) {
         let retv = true;
-        let res = validateRegionCode(jsonData.RegionCode);
-        if (retv) retv = res;
+        let resrc = validateRegionCode(jsonData.RegionCode);
+        if (retv) retv = resrc;
+        let rescd = validateCode2Digits(jsonData.Code2Digits);
+        if (retv) retv = rescd;
+        let resrn = validateRegionName(jsonData.RegionName);
+        if (retv) retv = resrn;
+        let resfi = validateFTPIp(jsonData.FTPIp);
+        if (retv) retv = resfi;
+        let resfu = validateFTPUploadDir(jsonData.FTPUploadDir);
+        if (retv) retv = resfu;
+        let resfl = validateFTPLogin(jsonData.FTPLogin);
+        if (retv) retv = resfl;
+        let resfp = validateFTPPassword(jsonData.FTPPassword);
+        if (retv) retv = resfp;
         return retv;
     }
 
-    function saveRegionChanges(ev) {
+    //функция сохранения изменений при нажатии на кнопку сохранить
 
+    function saveRegionChanges(ev) {
 
         ev.preventDefault();
 
+        //собираем данные с формы
         let jsonData = {
             Region_Id: $('#Region_Id').val(),
             RegionCode: $('#RegionCode').val(),
@@ -249,8 +482,10 @@
             FTPLogin: $('#FTPLogin').val(),
             FTPPassword: $('#FTPPassword').val()
         };
-        console.log(jsonData.RegionCode);
+        //console.log(jsonData.RegionCode);
+        //console.log(jsonData.FTPIp);
 
+        //проверяем валидацию
         let valResult = validateRegionForm(jsonData);
 
         if (!valResult) {
@@ -259,6 +494,7 @@
             return;
         }
 
+        //вызов api - метода Update
         $.ajax({
             url: '/api/regionapi/update',
             data: JSON.stringify(jsonData),
@@ -266,11 +502,9 @@
             contentType: "application/json",
             success: function () {
                 toasterOptions();
-                //toastr.options.timeOut=3000;
-                //toastr.options.closeButton=true;
-                //toastr.options.positionClass=toast-top-center;
                 toastr.success('Сохранение успешно');
                 $('#saveButton').css("background-color", "#2A9964");
+                resetValidError();
             },
             error: function () {
                 toasterOptions();
@@ -281,10 +515,25 @@
 
     }
 
+    //функция сброса изменений к начальным при нажатии на кнопку отменить
+
     function resetRegionButton() {
         getRegion(1);
+        resetValidError();
         toasterOptions();
         toastr.warning('Данные сброшены');
+    }
+
+    //сброс классов отображения ошибок валидации
+
+    function resetValidError(){
+        $('.error_input').removeClass('validFail');
+        $('.error_input').addClass('input_border');
+        $('.error_span').removeClass('validSpanFail');
+        $('.error_span').addClass('input_span');
+        $('.error_span').text('');
+        $('.error_msg').removeClass('validMsgFail');
+        $('.error_msg').addClass('validMsg');
     }
 
 </script>
