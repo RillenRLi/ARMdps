@@ -25,44 +25,44 @@
                     </th>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         <label for="RegionCode">Код региона РФ (4 знака)</label>
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="RegionCode" class="error_input input_border" name="RegionCode" type="text" maxlength="4" />
                         <span id="RegionCodeSpan" class="error_span input_span" size="2"></span>
                         <span id="RegionCodeMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         <label for="Code2Digits"> Код региона, применяемый на ГРЗ ТС (2 знака)</label>
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="Code2Digits" class="error_input input_border" name="Code2Digits" type="text" maxlength="2" />
                         <span id="Code2DigitsSpan" class="error_span input_span" size="2"></span>
                         <span id="Code2DigitsMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         <label for="RegionName">Наименование региона</label>
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="RegionName" class="error_input input_border" name="RegionName" type="text" />
                         <span id="RegionNameSpan" class="error_span input_span" size="2"></span>
                         <span id="RegionNameMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         Разграничение доступа к данным между администраторами <br /> подразделения и главным региональным администратором
                     </td>
-                    <td>
-                        <input id="UseSuperUser" class="input_border" name="UseSuperUser" type="checkbox" style="box-shadow:none; align-content:flex-start; " />
+                    <td class="region_td_in">
+                        <input id="UseSuperUser" class="checkbox_border" name="UseSuperUser" type="checkbox" style="box-shadow:none; align-content:flex-start; " />
                     </td>
                 </tr>
                 <tr>
@@ -71,60 +71,60 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         Автоматическая выгрузка в ФИС-М
                     </td>
-                    <td>
-                        <input id="FISMIsEnabled" class="input_border" name="FISMIsEnabled" type="checkbox" style="box-shadow:none; align-content:flex-start;" />
+                    <td class="region_td_in">
+                        <input id="FISMIsEnabled" class="checkbox_border" name="FISMIsEnabled" type="checkbox" style="box-shadow:none; align-content:flex-start;" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         Архивировать файл выгрузки
                     </td>
-                    <td>
-                        <input id="ArchiveIsEnabled" class="input_border" name="ArchiveIsEnabled" type="checkbox" style="box-shadow:none; align-content:start;" />
+                    <td class="region_td_in">
+                        <input id="ArchiveIsEnabled" class="checkbox_border" name="ArchiveIsEnabled" type="checkbox" style="box-shadow:none; align-content:start;" />
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         <label for="FTPIp">IP-адрес FTP-сервера</label>
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="FTPIp" class="error_input input_border" name="FTPIp" type="text" />
                         <span id="FTPIpSpan" class="error_span input_span" size="2"></span>
                         <span id="FTPIpMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         Каталог FTP сервера
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="FTPUploadDir" class="error_input input_border" name="FTPUploadDir" type="text" />
                         <span id="FTPUploadDirSpan" class="error_span input_span" size="2"></span>
                         <span id="FTPUploadDirMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         Логин доступа к FTP
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="FTPLogin" class="error_input input_border" name="FTPLogin" type="text" />
                         <span id="FTPLoginSpan" class="error_span input_span" size="2"></span>
                         <span id="FTPLoginMsg" class="error_msg validMsg"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="region_td_let">
                         <span style="color:#FF3E3E;">*</span>
                         Пароль доступа к FTP
                     </td>
-                    <td>
+                    <td class="region_td_in">
                         <input id="FTPPassword" class="error_input input_border" name="FTPPassword" type="text" />
                         <span id="FTPPasswordSpan" class="error_span input_span" size="2"></span>
                         <span id="FTPPasswordMsg" class="error_msg validMsg"></span>
@@ -153,9 +153,22 @@
 
     $(document).ready(function () {
 
-        $("#regTable").DataTable();
+        $("#regTable").DataTable({
+     /*       "autoWidth": false,*/
+            "columnDefs": [
+                { className: "region_td_let", targets:[0] },
+                { className: "region_td_in", targets:[1] }
+            ]
+        });
     });
 
+
+    //$("#regTable").DataTable({
+    //    "columnDefs": [
+    //        { "width": "60%", "targets": 0 },
+    //        { "width": "40%", "targets": 1 }
+    //    ]
+    //});
     //
 
     $('#RegionCodeSpan').hover(
@@ -482,8 +495,6 @@
             FTPLogin: $('#FTPLogin').val(),
             FTPPassword: $('#FTPPassword').val()
         };
-        //console.log(jsonData.RegionCode);
-        //console.log(jsonData.FTPIp);
 
         //проверяем валидацию
         let valResult = validateRegionForm(jsonData);

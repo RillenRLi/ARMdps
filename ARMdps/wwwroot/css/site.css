@@ -114,9 +114,10 @@ button:active{
 
 .main_container {
     display: flex;
+    flex-direction:row;
     margin: 2% 2% 2% 2%;
     padding: 1% 2% 1% 2%;
-    width:95%;
+    width:100%;
 }
 
 /**/
@@ -125,7 +126,13 @@ button:active{
     display: flex;
     width:30%;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content:flex-start;
+    padding: 1% 5% 1% 5%;
+}
+
+.main_view {
+    justify-content: center;
+    width:inherit;
     padding: 1% 5% 1% 5%;
 }
 
@@ -168,16 +175,23 @@ button:active{
 
 /**/
 
-.region_table {
+table .region_table {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
     line-height: 17px;
     color: #044C6A;
-    width:95%;
+    width:100%;
 }
 
+tbody td .region_td_let{
+    width:60%;
+}
+
+tbody td .region_td_in{
+    width:40%;
+}
 /**/
 
 .region_h {
@@ -251,7 +265,7 @@ button:active{
 /**/
 
 .validSpanFail {
-    position: absolute;
+    position:absolute;
     border: 1px solid red;
     border-left: none;
     color: #FF3E3E;

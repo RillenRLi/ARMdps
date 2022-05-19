@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    <div id="example" class="main_container" style="display:flex; flex-direction:row; justify-content:center; margin-top:1%">
+    <div id="example" class="main_view">
     </div>
 </div>
 
@@ -139,9 +139,7 @@
 
     //Вызов формы редактирования учетных данных
     function clickRegionBtn() {
-        //console.log(1);
         sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
-        //console.log(2);
     }
     
     //Скрипт для выпадающего списка(чтобы всегда отображался)
