@@ -2,72 +2,75 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 /*Верхняя часть приложения*/
@@ -79,13 +82,13 @@ body {
     line-height: 14px;
     background-color: #086F99;
     color: #FFFFFF;
-    width:100%;
+    width: 100%;
 }
 
 /**/
 
 .main-button {
-    background-color:#FFFFFF;
+    background-color: #FFFFFF;
     border: 1px groove;
     font-family: 'Roboto';
     font-style: normal;
@@ -102,51 +105,54 @@ body {
     border-radius: 6px;
     margin: 2% 2% 2% 2%;
     padding: 2% 2% 2% 2%;
-    position:inherit;
+    position: inherit;
 }
+
 button:focus,
-button:active{
+button:active {
     background-color: white;
-    border:hidden;
+    border: hidden;
 }
 
 /**/
 
 .main_container {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     margin: 2% 2% 2% 2%;
     padding: 1% 2% 1% 2%;
-    width:100%;
+    width: 100%;
 }
 
 /**/
 
 .main_menus {
     display: flex;
-    width:30%;
+    width: 30%;
     flex-direction: column;
-    justify-content:flex-start;
+    justify-content: flex-start;
     padding: 1% 5% 1% 5%;
 }
 
 .main_view {
     justify-content: center;
-    width:inherit;
+    width: inherit;
     padding: 1% 5% 1% 5%;
 }
 
 /**/
 
-.button_div{
-    width:100%;
-    padding:2% 2% 2% 2%;
+.button_div {
+    width: 100%;
+    padding: 2% 2% 2% 2%;
 }
 
 /**/
 
-.drop_button{
-    width:fit-content;
+.drop_button {
+    width: stretch;
+    height:stretch;
+
     border-radius: 6px;
 }
 
@@ -170,7 +176,7 @@ button:active{
     background: #FFFFFF;
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
-    width:90%;
+    width: 90%;
 }
 
 /**/
@@ -182,16 +188,42 @@ table .region_table {
     font-size: 15px;
     line-height: 17px;
     color: #044C6A;
-    width:100%;
+    width: 100%;
 }
 
-tbody td .region_td_let{
-    width:60%;
+/*    table .region_table td, th {
+        width: 40%;
+    }
+*/
+/*table :first-child {
+    width: 50%;
+}*/
+/*th .region_td_let {
+    width: 60%!important;
 }
 
-tbody td .region_td_in{
-    width:40%;
+th .region_td_in {
+    width: 40%!important;
 }
+
+td .region_td_let{
+    width: 60%!important;
+}
+
+td .region_td_in{
+    width: 40%!important;
+}*/
+
+
+/*table.dataTable tbody th .region_td_let,
+table.dataTable tbody th .region_td_in,
+table.dataTable tbody td .region_td_let,
+table.dataTable tbody td .region_td_in {
+    padding: 8px 10px;
+    width: 40%;
+}*/
+
+
 /**/
 
 .region_h {
@@ -214,25 +246,33 @@ tbody td .region_td_in{
     line-height: 17px;
     color: #FFFFFF;
     border-radius: 6px;
-    border: hidden;
+    border: none;
 }
 
-/**/
+    /**/
+    .form_button:focus,
+    .form_button:active {
+        border: none;
+    }
 
-.button:active {
-    background-color: white;
-    border: hidden;
+.save_button_click {
+    background-color: #2A9964;
+    border: none;
 }
 
+.reset_button_click {
+    border: none;
+}
 /**/
 
 .input_border {
-    border-radius:6px 6px 6px 6px; 
-    border-right:none;
+    background-color: #FFFFFF;
+    border-radius: 6px 6px 6px 6px;
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
     padding: 1px 2px 2px 1px;
-    margin-right:15px;
-    width:85%;
+    margin-right: 15px;
+    min-inline-size: inherit;
+    width: 400px;
 }
 
 /**/
@@ -244,45 +284,68 @@ tbody td .region_td_in{
 
 /**/
 
-.input_span {     
+.bi-exclamation-circle::before {
+    content: "\f333";
+    margin: -40px;
+}
+
+.input_icon::before {
+    color: #FF3E3E;
+    display: none;
+}
+
+i .error_icon_Fail {
+    display: inline-block;
+    margin: -40px;
+}
+
+/*.input_span {
+    background-color: #FFFFFF;
     border-radius: 0px 6px 6px 0px;
-    border-left:none;
-    border-color:black;
+    border-left: none;
+    border-color: black;
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.25);
-    padding: 1px 2px 2px 1px;
-    margin-left:-30px;
+    padding: 1px 0px 3px 1px;
+    margin-left: -23px;
     width: 15px;
+}*/
+
+.reg_label {
+    width: 600px;
 }
 
 /**/
 
 .validFail {
     border: 1px solid #FF3E3E;
-    border-right: none;
     color: #FF3E3E;
+    width: calc(85%-15px);
 }
 
 /**/
 
-.validSpanFail {
-    position:absolute;
-    border: 1px solid red;
+/*.validSpanFail {*/
+/*position: absolute;*/
+/*border: 1px solid red;
     border-left: none;
     color: #FF3E3E;
-}
+    width: 15px;
+}*/
+
+
 
 /**/
 
-.validMsg{
-    position:absolute;
-    display:none;
+.validMsg {
+    position: absolute;
+    display: none;
 }
 
 /**/
 
 .validMsgFail {
     background-color: #FF3E3E;
-    width: inherit;
+    width: 400px;
     padding: 5px;
     border-radius: 6px 6px 6px 6px;
 }

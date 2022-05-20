@@ -17,20 +17,20 @@ namespace ARMdps.Controllers
         {
             return PartialView("_DepartmentTable", _repository.DepartmentsGet());
         }
-        [HttpPost]
-        public IActionResult GetDepartmenEditForm(int id)
-        {
-            return PartialView("_DepartmentEditForm", _repository.DepartmentGet(id));
-        }
-        [HttpPost]
-        /*public IActionResult GetDepartmenAddForm()
-        {
+        //[HttpPost]
+        //public IActionResult GetDepartmenEditForm(int id)
+        //{
+        //    return PartialView("_DepartmentEditForm", _repository.DepartmentGet(id));
+        //}
+        //[HttpPost]
+        //public IActionResult GetDepartmenAddForm()
+        //{
 
-        }*/
-        [HttpPost]
-        public void UpdateDepartment(DepartmentModel department)
-        {
-            _repository.DepartmentUpdate(department);
-        }         
+        //}
+        //[HttpPost]
+        //public void UpdateDepartment(DepartmentModel department)
+        //{
+        //    _repository.DepartmentUpdate(department);
+        //}
     }
 }

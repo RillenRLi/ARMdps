@@ -105,8 +105,9 @@
     $('#example').html(formHtml);
     }
 
-    function tableSuccess(data) {
+    function tableDepartmentSuccess(data) {
     updateTable(data);
+    getDepartaments();
     }
 
     function tableError() {
@@ -120,7 +121,7 @@
     //Подразделения
     function clickDepartmentTableBtn() {
 
-        sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
+        sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
     }
     //Пользователи
     function clickARMUsersTableBtn() {
