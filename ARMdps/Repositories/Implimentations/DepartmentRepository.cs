@@ -9,20 +9,28 @@ namespace ARMdps.Repositories.Implimentations
 {
     public class DepartmentRepository:IDepartmentRepository
     {
-        public List<DepartmentModel> DepartmentsGet()
+        public string DepartmentsGet()
         {
             string path = "wwwroot/JSON/department.json";
-            var departmentJsonFile=File.ReadAllText(path);
+            var departmentJsonFile = File.ReadAllText(path);
             var depts = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
-            return depts;
+            return departmentJsonFile;
         }
-        public DepartmentModel DepartmentGet(int id)
+
+        //public string DepartmentsGet()
+        //{
+        //    string path = "wwwroot/JSON/department.json";
+        //    string departmentJsonFile=File.ReadAllText(path);
+        //    return departmentJsonFile;
+        //}
+        public string DepartmentGet(int id)
         {
             string path = "wwwroot/JSON/department.json";
             var departmentJsonFile = File.ReadAllText(path);
             var dep = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
             DepartmentModel department = dep.FirstOrDefault(d => d.Id == id);
-            return department;
+            string depres = JsonSerializer.Serialize(department);
+            return depres;
         }
         public void DepartmentUpdate(DepartmentModel department)
         {

@@ -1,6 +1,4 @@
-﻿const { data } = require("jquery");
-
-//Функция вызова форм редактирования
+﻿//Функция вызова форм редактирования
 function sendAjaxData(data, url, onsucess, onerror, type = "POST") {
     $.ajax({
         data: data,
@@ -39,12 +37,14 @@ function getRegion(regionId) {
     const response = fetch("/api/regionapi/" + regionId, {
         method: "GET",
         headers: { "Accept": "application/json" }
-    }).then(response => response.json())
+        }).then(response => response.json())
         .then(data => getRegionRes(data));
+    //console.log(response);
 }
 
 function getRegionRes(resp) {
     let response = resp;
+    /*console.log(response);*/
     try {
         $('#Region_Id').val(response.region_Id);
         $('#RegionCode').val(response.regionCode);
@@ -67,18 +67,20 @@ function getRegionRes(resp) {
 }
 
 function getDepartaments() {
-    const response = fetch("/api/departmentapi", {
+    const response = fetch("/api/departmentapi/", {
         method: "GET",
         headers: { "Accept": "application/json" }
     }).then(response => response.json())
         .then(data => getDepartamentsRes(data));
+    //console.log(response);
+    return response;
 }
 
 function getDepartamentsRes(resp) {
-    let response = []
+    let response = [];
     response = resp;
-    console.log(response);
     for (let i = 0; i < response.length; i++) {
-
+        console.log(response[i].shortName);
     }
+    return response;
 }

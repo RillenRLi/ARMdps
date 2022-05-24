@@ -16,9 +16,19 @@ namespace ARMdps.Controllers.API
             _departmentRepository = departmentRepository;
         }
         [HttpGet]
-        public List<DepartmentModel> GetDepartments()
+        public string GetDepartments()
         {
             return _departmentRepository.DepartmentsGet();
         }
+
+        public string GetDepartment(int id)
+        {
+            return _departmentRepository.DepartmentGet(id);
+        }
+        //[HttpGet]
+        //public DepartmentModel GetDepartment(int id)
+        //{
+        //    return _departmentRepository.DepartmentGet(id);
+        //}
     }
 }

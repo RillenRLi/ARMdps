@@ -38,8 +38,8 @@
                     Шаблоны печатных форм
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" onclick="clickDepartmentTableBtn()">Подразделения</button>
-                    <button class="dropdown-item" onclick="clickARMUsersTableBtn()">Пользователи</button>
+                    <button class="dropdown-item" href="#">Подразделения</button>
+                    <button class="dropdown-item" href="#">Пользователи</button>
                     <button class="dropdown-item" href="#">Рабочие места</button>
                     <button class="dropdown-item" href="#">Номера материалов</button>
                     <button class="dropdown-item" href="#">Лицензии и сопровождение</button>
@@ -52,8 +52,8 @@
                     Настройки доступа
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" onclick="clickDepartmentTableBtn()">Подразделения</button>
-                    <button class="dropdown-item" onclick="clickARMUsersTableBtn()">Пользователи</button>
+                    <button class="dropdown-item" onclick="clickDepartmentTableBtn()">Управление подразделениями</button>
+                    <button class="dropdown-item" onclick="clickARMUsersTableBtn()">Управление пользователями</button>
                     <button class="dropdown-item" href="#">Рабочие места</button>
                     <button class="dropdown-item" href="#">Номера материалов</button>
                     <button class="dropdown-item" href="#">Лицензии и сопровождение</button>
@@ -107,7 +107,7 @@
 
     function tableDepartmentSuccess(data) {
     updateTable(data);
-    getDepartaments();
+    //getDepartaments();
     }
 
     function tableError() {

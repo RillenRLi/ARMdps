@@ -1,25 +1,38 @@
 ﻿@model List<ARMdps.Models.DepartmentModel>
-@{
-}
+@{}
+
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/DataTables/datatables.min.css" />
+    <link rel="stylecheet" href="~/DataTables/DataTables-1.12.1/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Select-1.4.0/css/select.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Buttons-2.2.3/css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/DateTime-1.1.2/css/dataTables.dateTime.min.css"/>
     <link rel="stylesheet" href="~/ru.json" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" />    
 </head>
 
-<div>
-    <button class="blue-button" onclick="clickDepartmentAddBtn()">Новое подразделение</button>
-</div>
-<table id="dTable" class="cell-border" style="width:100%">
-    <thead style="background-color:#75BCFF;">
+@*<div>
+    <button class="form_button" onclick="clickDepartmentAddBtn()"  data-toggle="modal" data-target="#depModal" style="background-color:#75BCFF; color:#FFFFFF; margin-bottom:10px">Новое подразделение</button>    
+</div>*@
+<table id="dTable" class="display cell-border region_table">
+    <thead style="background-color:#C4C4C4; border-radius: 6px 6px 0px 0px;">
         <tr>
+            <th class="del_icon"><i class="bi bi-trash" onclick="clickDepartmentDel()"></i></th>
             <th>Код подразделения</th>
             <th>Название подразделения</th>
+            <th>Полное наименование подразделения</th>
         </tr>
     </thead>
     <tbody>
-        @for (int i=0; i<Model.Count; i++)
+        @*<tr>
+            <td>Id</td>
+            <td>DepartmentCode</td>
+            <td>ShortName</td>
+            <td>DepartmentName</td>
+        </tr>*@
+        @*@for (int i=0; i<Model.Count; i++)
         {
         <tr ondblclick="clickDepartmentEditBtn(@Model[i].Id)" data-toggle="modal" data-target="#depModal">
             @Html.HiddenFor(e => Model[i].Id)
@@ -28,7 +41,7 @@
             </td>
             <td>@Model[i].DepartmentName</td>
         </tr>
-        }
+        }*@
     </tbody>
 </table>
 <div id="modalDialog" class="modal fade">
@@ -36,11 +49,88 @@
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/DataTables/datatables.min.js"></script>
+<script src="~/DataTables/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="~/Select-1.4.0/js/dataTables.select.min.js"></script>
+<script src="~/Buttons-2.2.3/js/dataTables.buttons.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
+    $(document).ready(function () {        
+    $('#dTable').DataTable({
+        ajax:{
+            url:'/api/departmentapi/',
+            data:"JSON",
+            method:"GET",
+            dataSrc:""
+        },
+        dom:'Bfrtp<"center">',
+        buttons:[
+            {
+            text:'<i class="bi bi-plus-circle"></i> Новое подразделение',
+            //before:'<i class="bi bi-plus-circle"></i>',
+            className:'btn-primary',
+            onclick:'clickDepartmentAddBtn()',  
+            data-modal:
+        },
+        ],
+        className:'dataTable',
+        order:[[1, 'asc']],
+        columnDefs:[
+        {            
+            targets: 0,
+            data: null,
+            defaultContent: '',
+            orderable: false,
+            className: 'select-checkbox'
+        },
+            {data:'DepartmentCode',name:'DepartmentCode', targets:1},
+            {data:'ShortName', name:'ShortName', targets:2},
+            {data:'DepartmentName', name:'DepartmentName',targets:3}
+        ],
         
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        //order: [[ 1, 'asc' ]],
+        scrollY:'500px',
+        scrollCollapse:true,
+        pageLength:20,
+        "language":{
+            "paginate":{
+                "previous":"<",
+                "next":">"
+            }
+        }
+    });       
+    });    
+         
+    //Замена слова search на значок поиска
+
+    $(function() {
+    $input = $(".dataTables_filter").find("[type='search']");
+
+    $input.parent().contents().filter(function() {
+     return this.nodeType == 3 // here means return all node type text (textNode)
+    }).each(function() {
+    this.textContent = this.textContent.replace('Search:', '');
+    });  
+    $input.before($("<i class='bi bi-search table_search'></i>"));
+    })
+
+
+    $(function() {
+    $a = $(".paginate_button").find("[class='previous']");
+
+    $a.parent().contents().filter(function() {
+     return this.nodeType == 3 // here means return all node type text (textNode)
+    }).each(function() {
+    this.textContent = this.textContent.replace('Previous', '<');
+    });    
+    })
+
+
     function editSuccess(data) {
              $("#dialogContent").html(data);
              $("#modalDialog").modal("show");
@@ -50,6 +140,12 @@
              alert('Error occured');
             }
     
+    function clickDepartmentAddBtn(){
+        
+            sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
+        
+    }
+
     function clickDepartmentEditBtn(departmentId) {
         if (departmentId)
         {
@@ -61,7 +157,5 @@
     }
 
    
-    $(document).ready(function () {
-    $('#dTable').DataTable();
-    })
+    
 </script>

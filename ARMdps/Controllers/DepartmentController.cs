@@ -15,13 +15,13 @@ namespace ARMdps.Controllers
         [HttpPost]
         public IActionResult GetDepartmentTable()
         {
-            return PartialView("_DepartmentTable", _repository.DepartmentsGet());
+            return PartialView("_DepartmentTable");
         }
-        //[HttpPost]
-        //public IActionResult GetDepartmenEditForm(int id)
-        //{
-        //    return PartialView("_DepartmentEditForm", _repository.DepartmentGet(id));
-        //}
+        [HttpPost]
+        public IActionResult GetDepartmenEditForm()
+        {
+            return PartialView("_DepartmentEditForm");
+        }
         //[HttpPost]
         //public IActionResult GetDepartmenAddForm()
         //{

@@ -1,6 +1,4 @@
-﻿const { data } = require("jquery");
-
-@model ARMdps.Models.DepartmentModel
+﻿@model ARMdps.Models.DepartmentModel
 @{
 }
 <head>
@@ -18,47 +16,64 @@
         <form id="departmentForm">
             <table>
                 <tr>
-                    <td>@Html.HiddenFor(m=>Model.Id)Код подразделения:</td>
-                    <td><input name="@Html.NameFor(m=>Model.DepartmentCode)" type="text" value="@Model.DepartmentCode" /></td>
+                    <td>
+                        <input type="hidden" id="Id" />
+                        <label for="DepartmentCode">
+                            Код подразделения
+                        </label>
+                    </td>
+                    <td>
+                        <input id="DepartmentCode" name="DepartmentCode" type="text"/>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        Краткое наименование:
+                        <label for="ShortName">
+                            Краткое наименование:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.ShortName)" type="text" value="@Model.ShortName" />
+                        <input id="ShortName" name="ShortName" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="DepartmentName">
                         Полное наименование:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.DepartmentName)" type="text" value="@Model.DepartmentName" />
+                        <input id = "DepartmentName" name="DepartmentName" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="Phones">
                         Телефон:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.Phones)" type="text" value="@Model.Phones" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Адрес электронной почтыЖ
-                    </td>
-                    <td>
-                        <input name="@Html.NameFor(m=>Model.EmailAddress)" type="text" value="@Model.EmailAddress" />
+                        <input id = "Phones" name="Phones" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="EmailAddress">
+                        Адрес электронной почты:
+                        </label>
+                    </td>
+                    <td>
+                        <input id = "EmailAddres" name="EmailAddres" type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Address">
                         Адрес:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.Address)" type="text" value="@Model.Address" />
+                        <input id="Address" name="Address" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -68,74 +83,92 @@
                 </tr>
                 <tr>
                     <td>
+                        <label for="KPP">
                         КПП:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.KPP)" type="text" value="@Model.KPP" />
+                        <input id="KPP" name="KPP" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="INN">
                         ИНН:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.INN)" type="text" value="@Model.INN" />
+                        <input id="INN" name="INN" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="OKTMO">
                         ОКТМО:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.OKTMO)" type="text" value="@Model.OKTMO" />
+                        <input id="OKTMO" name="OKTMO" type="text" />
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="BankName">
                         Наименование банка получателя:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.BankName)" type="text" value="@Model.BankName" />
+                        <input id="BankName" name="BankName" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="PaymentName">
                         Наименование получателя:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.PaymentName)" type="text" value="@Model.PaymentName"/>
+                        <input id="PaymentName" name="PaymentName" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="BIK">
                         БИК:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.BIK)" type="text" value="@Model.BIK"/>
+                        <input id="BIK" name="BIK" type="text">
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="KBK">
                         КБК:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.KBK)" type="text" value="@Model.KBK"/>
+                        <input id="KBK" name="KBK" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="RReceipt">
                         Расчетный счет:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.RReceipt)" type="text" value="@Model.RReceipt"/>
+                        <input id="RReceipt" name="RReceipt" type="text"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
+                        <label for="KReceipt">
                         Кор. счет:
+                        </label>
                     </td>
                     <td>
-                        <input name="@Html.NameFor(m=>Model.KReceipt)" type="text" value="@Model.KReceipt"/>
+                        <input id="KReceipt" name="KReceipt" type="text"/>
                     </td>
                 </tr>
             </table>
