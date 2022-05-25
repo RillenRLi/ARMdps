@@ -28,7 +28,7 @@ namespace ARMdps.Repositories.Implimentations
             string path = "wwwroot/JSON/department.json";
             var departmentJsonFile = File.ReadAllText(path);
             var dep = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
-            DepartmentModel department = dep.FirstOrDefault(d => d.Id == id);
+            DepartmentModel department = dep.FirstOrDefault(d => d.Department_Id == id);
             string depres = JsonSerializer.Serialize(department);
             return depres;
         }
@@ -37,14 +37,22 @@ namespace ARMdps.Repositories.Implimentations
             string path = "wwwroot/JSON/department.json";
             var departmentJsonFile = File.ReadAllText(path);
             var depts = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
-            var dept=depts.SingleOrDefault(d=>d.Id == department.Id);
-            if (dept != null)
+            if (department.Department_Id != 0)
             {
-                int index = depts.IndexOf(dept);
-                depts.RemoveAt(index);
-                depts.Insert(index, department);
+                var dept = depts.SingleOrDefault(d => d.Department_Id == department.Department_Id);
+                if (dept != null)
+                {
+                    int index = depts.IndexOf(dept);
+                    depts.RemoveAt(index);
+                    depts.Insert(index, department);
+                }
+                else depts.Add(department);
             }
-            else depts.Add(department);
+            else
+            {
+                department.Department_Id = depts.Count() + 1;
+                depts.Add(department);
+            }
             var res=JsonSerializer.Serialize(depts);
             File.WriteAllText(path, res);
         }

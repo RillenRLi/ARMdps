@@ -85,7 +85,211 @@
         </div>
     </div>
     <div id="example" class="main_view">
+        <div class="department_table">
+            <table id="dTable" class="display cell-border editform_table">
+                <thead style="background-color:#C4C4C4; border-radius: 6px 6px 0px 0px;">
+                    <tr>
+                        <th class="del_icon"><i class="bi bi-trash" onclick="clickDepartmentDel()"></i></th>
+                        <th>Код подразделения</th>
+                        <th>Название подразделения</th>
+                        <th>Полное наименование подразделения</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="department_form">
+            <div class="editform_div">
+                <form id="departmentForm">
+                    <div class="editform_head">
+                        <span style="margin: 0px 0px 0px 0px">
+                            Данные о подразделении
+                        </span>
+                        <button type="button" style="text-align:right">x</button>
+                    </div>
+                    <table id="depeditTable" class="editform_table">
+                        <thead>
+                            <tr>
+                                <th class="editform_h" style="border-bottom: 1px solid #75BCFF;">
+                                    <input type="hidden" id="Department_Id" name="Department_Id" />
+                                    Заполните параметры подразделения
+                                    <span style="color:#FF3E3E; font-size:10px;">*</span>
+                                    <span style="color:#A3B1C6; font-size:12px;"> - Обязательное для заполнения поле</span>
+                                </th>
+                                <th class="editform_h">
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="DepartmentCode">
+                                        Код подразделения
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="DepartmentCode" class="error_input input_border" name="DepartmentCode" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="ShortName">
+                                        Краткое наименование:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="ShortName" class="error_input input_border" name="ShortName" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="DepartmentName">
+                                        Полное наименование:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="DepartmentName" class="error_input input_border" name="DepartmentName" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Phones">
+                                        Телефон:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="Phones" class="error_input input_border" name="Phones" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="EmailAddress">
+                                        Адрес электронной почты:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="EmailAddres" class="error_input input_border" name="EmailAddres" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Address">
+                                        Адрес:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="Address" class="error_input input_border" name="Address" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="editform_h">
+                                    БАНКОВСКИЕ РЕКВИЗИТЫ
+                                </th>
+                                <th class="editform_h">
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="KPP">
+                                        КПП:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="KPP" class="error_input input_border" name="KPP" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="INN">
+                                        ИНН:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="INN" class="error_input input_border" name="INN" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="OKTMO">
+                                        ОКТМО:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="OKTMO" class="error_input input_border" name="OKTMO" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="BankName">
+                                        Наименование банка получателя:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="BankName" class="error_input input_border" name="BankName" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="PaymentName">
+                                        Наименование получателя:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="PaymentName" class="error_input input_border" name="PaymentName" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="BIK">
+                                        БИК:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="BIK" class="error_input input_border" name="BIK" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="KBK">
+                                        КБК:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="KBK" class="error_input input_border" name="KBK" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="RReceipt">
+                                        Расчетный счет:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="RReceipt" class="error_input input_border" name="RReceipt" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="KReceipt">
+                                        Кор. счет:
+                                    </label>
+                                </td>
+                                <td>
+                                    <input id="KReceipt" class="error_input input_border" name="KReceipt" type="text" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px);">
+                        <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetDepartmentButton()">Отменить</button>
+                        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveDepartmentChanges(event)">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
 </div>
 
 
@@ -107,7 +311,6 @@
 
     function tableDepartmentSuccess(data) {
     updateTable(data);
-    //getDepartaments();
     }
 
     function tableError() {
@@ -118,31 +321,60 @@
     function clickUpdateTableBtn(){
         sendAjaxNotData('@Url.Action("GetUpdateTable", "Update")',tableSuccess, tableError,"POST");
     }
-    //Подразделения
-    function clickDepartmentTableBtn() {
 
-        sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
-    }
+    //Подразделения
+    @*function clickDepartmentTableBtn() {
+
+                sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
+            }*@
+
+
+
+    function editSuccess(data) {
+             updateForm(data);
+    };
+
+    function editError() {
+             alert('Error occured');
+    };
+
+
+    function clickDepartmentEditBtn(){
+            sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError);
+    };
+
+    function clickDepartmentEditBtn(departmentId) {
+        if (departmentId)
+        {
+        sendAjaxData(({id:departmentId}), '@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
+        }
+        else {
+        sendAjaxNotData('@Url.Action("GetDepartmenAddForm", "Department")', editSuccess, editError, "POST");
+        }
+    };
+
+
     //Пользователи
     function clickARMUsersTableBtn() {
         sendAjaxNotData('@Url.Action("GetARMUserTable", "ARMUser")', tableSuccess, tableError, "POST")
-    }
+    };
 
 
     function formSuccess(data) {
         updateForm(data);
         getRegion(1);
-    }
+    };
 
     function formError() {
     alert("Error occured");
-    }
+    };
 
     //Вызов формы редактирования учетных данных
     function clickRegionBtn() {
+        $()
         sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
-    }
-    
+    };
+
     //Скрипт для выпадающего списка(чтобы всегда отображался)
     $(document).ready(function () {
     $(".dropdown-toggle").dropdown();

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Text.Json;
 using ARMdps.Repositories.Interfaces;
 using ARMdps.Models;
 
@@ -25,10 +26,10 @@ namespace ARMdps.Controllers.API
         {
             return _departmentRepository.DepartmentGet(id);
         }
-        //[HttpGet]
-        //public DepartmentModel GetDepartment(int id)
-        //{
-        //    return _departmentRepository.DepartmentGet(id);
-        //}
+        [HttpPost("Update")]
+        public void UpdateDepartment([FromBody] DepartmentModel department)
+        {
+            _departmentRepository.DepartmentUpdate(department);
+        }
     }
 }

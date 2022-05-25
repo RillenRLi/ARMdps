@@ -6,9 +6,15 @@
     <title>@ViewData["Title"] - ARMdps</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.min.css"/>
-    <link rel="stylesheet" href="~/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="~/DataTables/datatables.min.css" />
+    <link rel="stylecheet" href="~/DataTables/DataTables-1.12.1/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Select-1.4.0/css/select.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Buttons-2.2.3/css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/DateTime-1.1.2/css/dataTables.dateTime.min.css"/>
+    <link rel="stylesheet" href="~/css/Modal.css"/>
     <link rel="stylesheet" href="~/css/toastr.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -54,12 +60,16 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" ></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/DataTables/datatables.min.js"></script>
-    <script src="~/js/jquery.maskedinput.min.js"></script>
+    <script src="~/DataTables/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="~/Select-1.4.0/js/dataTables.select.min.js"></script>
+    <script src="~/Buttons-2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/Modal.js"></script>
     <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/jquery.maskedinput.min.js"></script>    
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -2,7 +2,7 @@
 {
     public class DepartmentModel
     {
-        public int Id { get; set; }
+        public int Department_Id { get; set; }
         public string DepartmentCode { get; set; }
         public string ShortName { get; set; }
         public string DepartmentName { get; set; }

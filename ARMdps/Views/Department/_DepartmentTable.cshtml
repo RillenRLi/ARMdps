@@ -1,13 +1,11 @@
-﻿@model List<ARMdps.Models.DepartmentModel>
-@{}
-
-<head>
+﻿<head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/DataTables/datatables.min.css" />
     <link rel="stylecheet" href="~/DataTables/DataTables-1.12.1/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="~/Select-1.4.0/css/select.dataTables.min.css"/>
     <link rel="stylesheet" href="~/Buttons-2.2.3/css/buttons.dataTables.min.css"/>
     <link rel="stylesheet" href="~/DateTime-1.1.2/css/dataTables.dateTime.min.css"/>
+    <link rel="stylesheet" href="~/css/Modal.css"/>
     <link rel="stylesheet" href="~/ru.json" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" />    
@@ -44,117 +42,113 @@
         }*@
     </tbody>
 </table>
-<div id="modalDialog" class="modal fade">
+
+@*<div id="modalDialog" class="modal fade" role="dialog">
     <div id="dialogContent" class="modal-dialog"></div>
-</div>
+</div>*@
+
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/DataTables/datatables.min.js"></script>
 <script src="~/DataTables/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="~/Select-1.4.0/js/dataTables.select.min.js"></script>
 <script src="~/Buttons-2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="~/js/Modal.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
 
-    $(document).ready(function () {        
-    $('#dTable').DataTable({
-        ajax:{
-            url:'/api/departmentapi/',
-            data:"JSON",
-            method:"GET",
-            dataSrc:""
-        },
-        dom:'Bfrtp<"center">',
-        buttons:[
-            {
-            text:'<i class="bi bi-plus-circle"></i> Новое подразделение',
-            //before:'<i class="bi bi-plus-circle"></i>',
-            className:'btn-primary',
-            onclick:'clickDepartmentAddBtn()',  
-            data-modal:
-        },
-        ],
-        className:'dataTable',
-        order:[[1, 'asc']],
-        columnDefs:[
-        {            
-            targets: 0,
-            data: null,
-            defaultContent: '',
-            orderable: false,
-            className: 'select-checkbox'
-        },
-            {data:'DepartmentCode',name:'DepartmentCode', targets:1},
-            {data:'ShortName', name:'ShortName', targets:2},
-            {data:'DepartmentName', name:'DepartmentName',targets:3}
-        ],
+
+//отрисовка таблицы DataTables
+
+    //$(document).ready(function () {        
+    //$('#dTable').DataTable({
+    //    ajax:{
+    //        url:'/api/departmentapi/',
+    //        data:"JSON",
+    //        method:"GET",
+    //        dataSrc:""
+    //    },
+    //    dom:'Bfrtp<"center">',
+    //    buttons:[
+    //        {
+    //        text:'<i class="bi bi-plus-circle"></i> Новое подразделение',            
+    //        className:'btn-primary addDepartment',
+    //        id:'departmentAddBtn',
+    //        action:function(e, dt, node, config){
+    //           sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError);
+    //        }
+    //        },
+    //    ],
+    //    className:'dataTable',
+    //    order:[[1, 'asc']],
+    //    columnDefs:[
+    //    {            
+    //        targets: 0,
+    //        data: null,
+    //        defaultContent: '',
+    //        orderable: false,
+    //        className: 'select-checkbox'
+    //    },
+    //        {data:'DepartmentCode',name:'DepartmentCode', targets:1},
+    //        {data:'ShortName', name:'ShortName', targets:2},
+    //        {data:'DepartmentName', name:'DepartmentName',targets:3}
+    //    ],
         
-        select: {
-            style:    'multi',
-            selector: 'td:first-child'
-        },
-        //order: [[ 1, 'asc' ]],
-        scrollY:'500px',
-        scrollCollapse:true,
-        pageLength:20,
-        "language":{
-            "paginate":{
-                "previous":"<",
-                "next":">"
-            }
-        }
-    });       
-    });    
+    //    select: {
+    //        style:    'multi',
+    //        selector: 'td:first-child'
+    //    },
+    //    //order: [[ 1, 'asc' ]],
+    //    scrollY:'520px',
+    //    scrollCollapse:true,
+    //    pageLength:20,
+    //    "language":{
+    //        "paginate":{
+    //            "previous":"<",
+    //            "next":">"
+    //        },
+    //        "zeroRecords":"Не найдены подразделения, соответствующие строке поиска.</br> Измените строку поиска."
+    //    }         
+    //});       
+    //});      
          
-    //Замена слова search на значок поиска
+    ////Замена слова search на значок поиска
 
-    $(function() {
-    $input = $(".dataTables_filter").find("[type='search']");
+    //$(function() {
+    //$input = $(".dataTables_filter").find("[type='search']");
 
-    $input.parent().contents().filter(function() {
-     return this.nodeType == 3 // here means return all node type text (textNode)
-    }).each(function() {
-    this.textContent = this.textContent.replace('Search:', '');
-    });  
-    $input.before($("<i class='bi bi-search table_search'></i>"));
-    })
+    //$input.parent().contents().filter(function() {
+    // return this.nodeType == 3;
+    //}).each(function() {
+    //this.textContent = this.textContent.replace('Search:', '');
+    //});  
+    //$input.before($("<i class='bi bi-search table_search'></i>"));
+    //})
+       
 
+    //function editSuccess(data) {
+    //         updateForm(data);
+    //}
 
-    $(function() {
-    $a = $(".paginate_button").find("[class='previous']");
-
-    $a.parent().contents().filter(function() {
-     return this.nodeType == 3 // here means return all node type text (textNode)
-    }).each(function() {
-    this.textContent = this.textContent.replace('Previous', '<');
-    });    
-    })
+    //function editError() {
+    //         alert('Error occured');
+    //};  
 
 
-    function editSuccess(data) {
-             $("#dialogContent").html(data);
-             $("#modalDialog").modal("show");
-            }
+    //function clickDepartmentEditBtn(){        
+    //        sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError);        
+    //};
 
-    function editError() {
-             alert('Error occured');
-            }
-    
-    function clickDepartmentAddBtn(){
-        
-            sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
-        
-    }
-
-    function clickDepartmentEditBtn(departmentId) {
-        if (departmentId)
-        {
-        sendAjaxData(({id:departmentId}), '@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
-        }
-        else {
-        sendAjaxNotData('@Url.Action("GetDepartmenAddForm", "Department")', editSuccess, editError, "POST");
-        }
-    }
+    //function clickDepartmentEditBtn(departmentId) {
+    //    if (departmentId)
+    //    {
+    //    sendAjaxData(({id:departmentId}), '@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
+    //    }
+    //    else {
+    //    sendAjaxNotData('@Url.Action("GetDepartmenAddForm", "Department")', editSuccess, editError, "POST");
+    //    }
+    //};
 
    
     

@@ -1,29 +1,46 @@
-﻿@model ARMdps.Models.DepartmentModel
-@{
-}
-<head>
+﻿<head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/DataTables/datatables.min.css" />
+    <link rel="stylecheet" href="~/DataTables/DataTables-1.12.1/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Select-1.4.0/css/select.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/Buttons-2.2.3/css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" href="~/DateTime-1.1.2/css/dataTables.dateTime.min.css"/>
+    <link rel="stylesheet" href="~/css/Modal.css"/>
     <link rel="stylesheet" href="~/ru.json" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/site.css" />   
 </head>
-<div id="depModal" class="modal-content">
-    <div class="modal-header blue-header">
-        <h5 style="margin: 2% 2% 2% 2%;">Редактирование подразделения</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-    </div>
-    <div class="modal-body">
-        <form id="departmentForm">
-            <table>
+
+<div class="editform_div">
+    <form id="departmentForm">
+        <div class="editform_head">
+            <span style="margin: 0px 0px 0px 0px">
+                Данные о подразделении
+            </span>
+            <button type="button" style="text-align:right">x</button>
+        </div>
+        <table id="depeditTable" class="editform_table">
+              <thead>
                 <tr>
-                    <td>
-                        <input type="hidden" id="Id" />
+                    <th class="editform_h" style="border-bottom: 1px solid #75BCFF;">
+                        <input type="hidden" id="Department_Id" name="Department_Id" />
+                        Заполните параметры подразделения
+                        <span style="color:#FF3E3E; font-size:10px;">*</span>
+                        <span style="color:#A3B1C6; font-size:12px;"> - Обязательное для заполнения поле</span>
+                    </th>
+                    <th class="editform_h">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td>                        
                         <label for="DepartmentCode">
                             Код подразделения
                         </label>
                     </td>
                     <td>
-                        <input id="DepartmentCode" name="DepartmentCode" type="text"/>
+                        <input id="DepartmentCode" class="error_input input_border" name="DepartmentCode" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -33,7 +50,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="ShortName" name="ShortName" type="text"/>
+                        <input id="ShortName" class="error_input input_border" name="ShortName" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -43,7 +60,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id = "DepartmentName" name="DepartmentName" type="text"/>
+                        <input id = "DepartmentName" class="error_input input_border" name="DepartmentName" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -53,7 +70,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id = "Phones" name="Phones" type="text"/>
+                        <input id = "Phones" class="error_input input_border" name="Phones" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -63,7 +80,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id = "EmailAddres" name="EmailAddres" type="text"/>
+                        <input id = "EmailAddres" class="error_input input_border" name="EmailAddres" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -73,13 +90,15 @@
                         </label>
                     </td>
                     <td>
-                        <input id="Address" name="Address" type="text"/>
+                        <input id="Address" class="error_input input_border" name="Address" type="text"/>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <th class="editform_h">
                         БАНКОВСКИЕ РЕКВИЗИТЫ
-                    </td>
+                    </th>
+                    <th class="editform_h">
+                    </th>
                 </tr>
                 <tr>
                     <td>
@@ -88,7 +107,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="KPP" name="KPP" type="text"/>
+                        <input id="KPP" class="error_input input_border" name="KPP" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -98,7 +117,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="INN" name="INN" type="text"/>
+                        <input id="INN" class="error_input input_border" name="INN" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -108,7 +127,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="OKTMO" name="OKTMO" type="text" />
+                        <input id="OKTMO" class="error_input input_border" name="OKTMO" type="text" />
                     </td>
                 </tr>
                 <tr>
@@ -118,7 +137,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="BankName" name="BankName" type="text"/>
+                        <input id="BankName" class="error_input input_border" name="BankName" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -128,7 +147,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="PaymentName" name="PaymentName" type="text"/>
+                        <input id="PaymentName" class="error_input input_border" name="PaymentName" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -138,7 +157,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="BIK" name="BIK" type="text">
+                        <input id="BIK" class="error_input input_border" name="BIK" type="text">
                     </td>
                 </tr>
                 <tr>
@@ -148,7 +167,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="KBK" name="KBK" type="text"/>
+                        <input id="KBK" class="error_input input_border" name="KBK" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -158,7 +177,7 @@
                         </label>
                     </td>
                     <td>
-                        <input id="RReceipt" name="RReceipt" type="text"/>
+                        <input id="RReceipt" class="error_input input_border" name="RReceipt" type="text"/>
                     </td>
                 </tr>
                 <tr>
@@ -168,37 +187,86 @@
                         </label>
                     </td>
                     <td>
-                        <input id="KReceipt" name="KReceipt" type="text"/>
+                        <input id="KReceipt" class="error_input input_border" name="KReceipt" type="text"/>
                     </td>
                 </tr>
+                </tbody>
             </table>
-            <button type="button" onclick="saveDepartmentChanges()">Сохранить</button>
+            <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px);">
+                <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetDepartmentButton()">Отменить</button>
+                <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveDepartmentChanges(event)">Сохранить</button>
+            </div>
         </form>
     </div>
-</div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/DataTables/datatables.min.js"></script>
+<script src="~/DataTables/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="~/Select-1.4.0/js/dataTables.select.min.js"></script>
+<script src="~/Buttons-2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="~/js/Modal.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script type="text/javascript">
     
-    function updateTable(tableHtml) {
-        $('#example').html(tableHtml);
-    }
+    //$(document).ready(function(){
+//        $('depdeditTable').DataTable();
+//    });
     
-    function saveSuccess(){
-        $('#modalDialog').modal('hide');
-        sendAjaxTable('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");
-    }
+//    //function updateTable(tableHtml) {
+//    //    $('#example').html(tableHtml);
+//    //}
+    
+//    //function saveSuccess(){
+//    //    $('#modalDialog').modal('hide');
+//        @*sendAjaxTable('@Url.Action("GetDepartmentTable", "Department")',tableSuccess, tableError, "POST");*@
+//    //}
 
-    function saveError(){
-        alert("Error occured");
-    }
+//    //function saveError(){
+//    //    alert("Error occured");
+//    //}
 
-    function saveDepartmentChanges(){
-        let jDepartmentModel=$("#departmentForm").serialize();
-        saveAjaxChanges(jDepartmentModel,'@Url.Action("UpdateDepartment","Department")',saveSuccess,saveError,"POST");
-    }
+//    function saveDepartmentChanges(ev){
 
+//        ev.preventDefault();
+
+//        let jsonDepartment = {
+//            //Department_Id:$('#Department_Id').val(),
+//            DepartmentCode:$('#DepartmentCode').val(),
+//            ShortName:$('#ShortName').val(),
+//            DepartmentName:$('#DepartmentName').val(),
+//            Phones:$('#Phones').val,
+//            EmailAddress:$('#EmailAddress').val(),
+//            Address:$('#Address').val(),
+//            KPP:$('#KPP').val(),
+//            INN:$('#INN').val(),
+//            OKTMO:$('#OKTMO').val(),
+//            BankName:$('#BankName').val(),
+//            PaymentName:$('#PaymentName').val(),
+//            KBK:$('#KBK').val(),
+//            RReceipt:$('#RReceipt').val(),
+//            KReceipt:$('#KReceipt').val()
+//        };
+        
+//        let jd=JSON.stringify(jsonDepartment);
+//        console.log(jsonDepartment);
+//        console.log(jd);
+
+//        $.ajax({
+//            url:'/api/departmentapi/update',
+//            data: JSON.stringify(jsonDepartment),
+//            type: 'POST',
+//            contentType: "application/json",
+//            success: function(){
+//                console.log(JSON.stringify(jsonDepartment));
+//                clickDepartmentTableBtn();
+//            },
+//            error: function(){
+//                console.log('2');
+//            }
+//        });
+//    }
+//function resetDepartmentButton(){
+//    clickDepartmentTableBtn();
+//}
     
 </script>
