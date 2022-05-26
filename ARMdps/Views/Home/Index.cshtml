@@ -85,6 +85,143 @@
         </div>
     </div>
     <div id="example" class="main_view">
+        <div class="region_form hide_table">
+            <div class="editform_div">
+                <form id="regForm">
+                    <div class="editform_head">
+                        <span style="margin: 0px 0px 0px 0px">
+                            Данные о регионе
+                        </span>
+                    </div>
+                    <table id="regTable" class="nowrap editform_table">
+                        <thead>
+                            <tr>
+                                <th class="editform_h">
+                                    <input type="hidden" id="Region_Id" name="Region_Id" />
+                                    Заполните параметры региона
+                                    <span style="color:#FF3E3E; font-size:10px;">*</span>
+                                    <span style="color:#A3B1C6; font-size:12px;"> - Обязательное для заполнения поле</span>
+                                </th>
+                                <th class="editform_h"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    <label for="RegionCode">Код региона РФ (4 знака)</label>
+                                </td>
+                                <td>
+                                    <input id="RegionCode" class="error_input input_border" name="RegionCode" type="text" maxlength="4" />
+                                    <i id="RegionCodeIcon" class="error_icon input_icon"></i>
+                                    <span id="RegionCodeMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    <label for="Code2Digits"> Код региона, применяемый на ГРЗ ТС (2 знака)</label>
+                                </td>
+                                <td>
+                                    <input id="Code2Digits" class="error_input input_border" name="Code2Digits" type="text" maxlength="2" />
+                                    <i id="Code2DigitsIcon" class="error_icon input_icon"></i>
+                                    <span id="Code2DigitsMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    <label for="RegionName">Наименование региона</label>
+                                </td>
+                                <td>
+                                    <input id="RegionName" class="error_input input_border" name="RegionName" type="text" />
+                                    <i id="RegionNameIcon" class="error_icon input_icon"></i>
+                                    <span id="RegionNameMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Разграничение доступа к данным между администраторами <br /> подразделения и главным региональным администратором
+                                </td>
+                                <td>
+                                    <input id="UseSuperUser" class="checkbox_border" name="UseSuperUser" type="checkbox" style="box-shadow:none; align-content:flex-start; " />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="editform_h">
+                                    <span style="color:#A3B1C6; font-size:12px;">Заполните параметры выгрузки материалов в ФИС-М</span>
+                                </th>
+                                <th class="editform_h"></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Автоматическая выгрузка в ФИС-М
+                                </td>
+                                <td>
+                                    <input id="FISMIsEnabled" class="checkbox_border" name="FISMIsEnabled" type="checkbox" style="box-shadow:none; align-content:flex-start;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Архивировать файл выгрузки
+                                </td>
+                                <td>
+                                    <input id="ArchiveIsEnabled" class="checkbox_border" name="ArchiveIsEnabled" type="checkbox" style="box-shadow:none; align-content:start;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    <label for="FTPIp">IP-адрес FTP-сервера</label>
+                                </td>
+                                <td>
+                                    <input id="FTPIp" class="error_input input_border" name="FTPIp" type="text" />
+                                    <i id="FTPIpIcon" class="error_icon input_icon"></i>
+                                    <span id="FTPIpMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    Каталог FTP сервера
+                                </td>
+                                <td>
+                                    <input id="FTPUploadDir" class="error_input input_border" name="FTPUploadDir" type="text" />
+                                    <i id="FTPUploadDirIcon" class="error_icon input_icon"></i>
+                                    <span id="FTPUploadDirMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>                                
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    Логин доступа к FTP
+                                </td>
+                                <td>
+                                    <input id="FTPLogin" class="error_input input_border" name="FTPLogin" type="text" />
+                                    <i id="FTPLoginIcon" class="error_icon input_icon"></i>
+                                    <span id="FTPLoginMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="color:#FF3E3E;">*</span>
+                                    Пароль доступа к FTP
+                                </td>
+                                <td>
+                                    <input id="FTPPassword" class="error_input input_border" name="FTPPassword" type="text" />
+                                    <i id="FTPPasswordIcon" class="error_icon input_icon"></i>
+                                    <span id="FTPPasswordMsg" class="error_msg validMsg"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px);">
+                        <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetRegionButton()">Отменить</button>
+                        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveRegionChanges(event)">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="department_table">
             <table id="dTable" class="display cell-border editform_table">
                 <thead style="background-color:#C4C4C4; border-radius: 6px 6px 0px 0px;">
@@ -102,38 +239,41 @@
         <div class="department_form">
             <div class="editform_div">
                 <form id="departmentForm">
-                    <div class="editform_head">
-                        <span style="margin: 0px 0px 0px 0px">
+                    <div class="editform_head"  style="display: flex;justify-content: space-between;">
+                        <label style="margin: 0px 0px 0px 0px">
                             Данные о подразделении
-                        </span>
-                        <button type="button" style="text-align:right">x</button>
+                        </label>
+                        <label class="close_button">
+                            <i class="bi bi-x-square" onclick="resetDepartmentButton()"></i>
+                        </label>
                     </div>
-                    <table id="depeditTable" class="editform_table">
+                    <table id="depeditTable" class="nowrap editform_table">
                         <thead>
                             <tr>
-                                <th class="editform_h" style="border-bottom: 1px solid #75BCFF;">
+                                <th class="editform_h">
                                     <input type="hidden" id="Department_Id" name="Department_Id" />
                                     Заполните параметры подразделения
                                     <span style="color:#FF3E3E; font-size:10px;">*</span>
                                     <span style="color:#A3B1C6; font-size:12px;"> - Обязательное для заполнения поле</span>
                                 </th>
-                                <th class="editform_h">
-                                </th>
+                                <th class="editform_h"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-                                    <label for="DepartmentCode">
-                                        Код подразделения
-                                    </label>
+                                    <span style="color:#FF3E3E;">*</span>                                    
+                                    <label for="DepartmentCode">Код подразделения</label>
                                 </td>
                                 <td>
                                     <input id="DepartmentCode" class="error_input input_border" name="DepartmentCode" type="text" />
+                                    <i id="DepartmentCodeIcon" class="error_icon input_icon"></i>
+                                    <span id="DepartmentCodeMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="ShortName">
                                         Краткое наименование:
                                     </label>
@@ -144,6 +284,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="DepartmentName">
                                         Полное наименование:
                                     </label>
@@ -154,6 +295,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="Phones">
                                         Телефон:
                                     </label>
@@ -164,6 +306,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="EmailAddress">
                                         Адрес электронной почты:
                                     </label>
@@ -174,6 +317,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="Address">
                                         Адрес:
                                     </label>
@@ -184,13 +328,14 @@
                             </tr>
                             <tr>
                                 <th class="editform_h">
-                                    БАНКОВСКИЕ РЕКВИЗИТЫ
+                                    Заполните банковские реквизиты
                                 </th>
                                 <th class="editform_h">
                                 </th>
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="KPP">
                                         КПП:
                                     </label>
@@ -201,6 +346,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="INN">
                                         ИНН:
                                     </label>
@@ -211,6 +357,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="OKTMO">
                                         ОКТМО:
                                     </label>
@@ -221,6 +368,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="BankName">
                                         Наименование банка получателя:
                                     </label>
@@ -231,6 +379,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="PaymentName">
                                         Наименование получателя:
                                     </label>
@@ -241,6 +390,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="BIK">
                                         БИК:
                                     </label>
@@ -251,6 +401,7 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="KBK">
                                         КБК:
                                     </label>
@@ -261,8 +412,9 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="RReceipt">
-                                        Расчетный счет:
+                                        Расчетный счёт:
                                     </label>
                                 </td>
                                 <td>
@@ -271,8 +423,9 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <span style="color:#FF3E3E;">*</span> 
                                     <label for="KReceipt">
-                                        Кор. счет:
+                                        Корреспондирующий счёт:
                                     </label>
                                 </td>
                                 <td>
@@ -281,7 +434,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px);">
+                    <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px); padding-top: 5px;">
                         <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetDepartmentButton()">Отменить</button>
                         <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveDepartmentChanges(event)">Сохранить</button>
                     </div>
@@ -301,13 +454,13 @@
 
     //Таблицы
 
-    function updateTable(tableHtml) {
-    $('#example').html(tableHtml);
-    }
+    //function updateTable(tableHtml) {
+    //$('#example').html(tableHtml);
+    //}
 
-    function updateForm(formHtml) {
-    $('#example').html(formHtml);
-    }
+    //function updateForm(formHtml) {
+    //$('#example').html(formHtml);
+    //}
 
     function tableDepartmentSuccess(data) {
     updateTable(data);
@@ -325,8 +478,8 @@
     //Подразделения
     @*function clickDepartmentTableBtn() {
 
-                sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
-            }*@
+                    sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
+                }*@
 
 
 
@@ -338,20 +491,6 @@
              alert('Error occured');
     };
 
-
-    function clickDepartmentEditBtn(){
-            sendAjaxNotData('@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError);
-    };
-
-    function clickDepartmentEditBtn(departmentId) {
-        if (departmentId)
-        {
-        sendAjaxData(({id:departmentId}), '@Url.Action("GetDepartmenEditForm", "Department")', editSuccess, editError, "POST");
-        }
-        else {
-        sendAjaxNotData('@Url.Action("GetDepartmenAddForm", "Department")', editSuccess, editError, "POST");
-        }
-    };
 
 
     //Пользователи
@@ -369,11 +508,9 @@
     alert("Error occured");
     };
 
-    //Вызов формы редактирования учетных данных
-    function clickRegionBtn() {
-        $()
-        sendAjaxNotData('@Url.Action("GetRegionForm","Region")', formSuccess, formError);
-    };
+
+
+
 
     //Скрипт для выпадающего списка(чтобы всегда отображался)
     $(document).ready(function () {
