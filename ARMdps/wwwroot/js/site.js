@@ -65,3 +65,9 @@ function setInputValidationFail(inputId, iconId, msgSpanId, errorMsg) {
     $('#' + msgSpanId).addClass('validMsgFail');
     $('#' + msgSpanId).text(errorMsg);
 }
+
+function deactivateCurrentTable(activeTable) {
+    if (activeTable) {
+        activeTable.destroy();
+    }
+}

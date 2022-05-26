@@ -188,6 +188,8 @@ table .editform_table {
     line-height: 17px !important;
     color: #044C6A !important;
     width: 100% !important;
+    padding:0px !important;
+    border:none !important
 }
 
 /*    table .region_table td, th {
@@ -397,7 +399,7 @@ i .table_search {
     color: #FFFFFF !important;
 }
 
-.dataTables_scrollHead {
+.dataTables_scrollHead  {
     border: 1px solid !important;
     border-radius: 6px 6px 0px 0px !important;
     padding-right: 0px !important;
@@ -441,6 +443,7 @@ table.dataTable thead th{
     color: #044C6A !important;
 }
 
+
 /*выбрать чекбокс*/
 
 table.dataTable tr.selected td.select-checkbox::after {
@@ -479,8 +482,11 @@ table.dataTable tr.selected td.select-checkbox::after {
 
 }
 
-/*Иконки*/
+div.dataTables_scrollHead{
+    padding:0px !important;
+}
 
+/*Иконки*/
 .bi-trash::before {
     content: "\f5de";
     justify-content: center;

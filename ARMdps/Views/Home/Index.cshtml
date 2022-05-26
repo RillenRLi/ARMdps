@@ -239,16 +239,25 @@
         <div class="department_form">
             <div class="editform_div">
                 <form id="departmentForm">
-                    <div class="editform_head"  style="display: flex;justify-content: space-between;">
-                        <label style="margin: 0px 0px 0px 0px">
-                            Данные о подразделении
-                        </label>
-                        <label class="close_button">
-                            <i class="bi bi-x-square" onclick="resetDepartmentButton()"></i>
-                        </label>
+                    <div   style="display: flex;justify-content: space-between;">
+                        
                     </div>
                     <table id="depeditTable" class="nowrap editform_table">
-                        <thead>
+                        <thead class="editform_head">
+                            <tr>
+                                <th>
+                                <label style="text-align:left; margin: 0px 0px 0px 0px">
+                                    Данные о подразделении
+                                </label>
+                                </th>
+                                <th>
+                                    <label class="close_button" style="text-align:right">
+                                        <i class="bi bi-x-square" onclick="resetDepartmentButton()"></i>
+                                    </label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <th class="editform_h">
                                     <input type="hidden" id="Department_Id" name="Department_Id" />
@@ -258,11 +267,9 @@
                                 </th>
                                 <th class="editform_h"></th>
                             </tr>
-                        </thead>
-                        <tbody>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span>                                    
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="DepartmentCode">Код подразделения</label>
                                 </td>
                                 <td>
@@ -273,18 +280,20 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="ShortName">
                                         Краткое наименование:
                                     </label>
                                 </td>
                                 <td>
                                     <input id="ShortName" class="error_input input_border" name="ShortName" type="text" />
+                                    <i id="ShortNameIcon" class="error_icon input_icon"></i>
+                                    <span id="ShortNameMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="DepartmentName">
                                         Полное наименование:
                                     </label>
@@ -295,7 +304,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="Phones">
                                         Телефон:
                                     </label>
@@ -306,7 +315,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="EmailAddress">
                                         Адрес электронной почты:
                                     </label>
@@ -317,7 +326,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="Address">
                                         Адрес:
                                     </label>
@@ -335,7 +344,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="KPP">
                                         КПП:
                                     </label>
@@ -346,7 +355,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="INN">
                                         ИНН:
                                     </label>
@@ -357,7 +366,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="OKTMO">
                                         ОКТМО:
                                     </label>
@@ -368,7 +377,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="BankName">
                                         Наименование банка получателя:
                                     </label>
@@ -379,7 +388,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="PaymentName">
                                         Наименование получателя:
                                     </label>
@@ -390,7 +399,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="BIK">
                                         БИК:
                                     </label>
@@ -401,7 +410,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="KBK">
                                         КБК:
                                     </label>
@@ -412,7 +421,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="RReceipt">
                                         Расчетный счёт:
                                     </label>
@@ -423,7 +432,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span style="color:#FF3E3E;">*</span> 
+                                    <span style="color:#FF3E3E;">*</span>
                                     <label for="KReceipt">
                                         Корреспондирующий счёт:
                                     </label>

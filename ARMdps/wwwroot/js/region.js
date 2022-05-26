@@ -58,14 +58,7 @@ $(document).ready(function () {
     });
 });
 
-//var dtoptions={
-//    autoWidth:false,
-//    tabIndex:2,
-//    column:[
-//        {width:'60%', targets: 0},
-//        {width:'40%', targets: 1}
-//    ]
-//}
+
 
 //всплывающее окно валидации для поля код региона (4 знака)
 
