@@ -71,3 +71,7 @@ function deactivateCurrentTable(activeTable) {
         activeTable.destroy();
     }
 }
+
+function modalHide() {
+    modal.hide();
+}

@@ -58,8 +58,6 @@ $(document).ready(function () {
     });
 });
 
-
-
 //всплывающее окно валидации для поля код региона (4 знака)
 
 $('#RegionCodeIcon').hover(
@@ -130,7 +128,6 @@ $('#FTPUploadDirIcon').hover(
         }
     });
 
-
 //      
 
 $('#FTPLoginIcon').hover(
@@ -159,7 +156,6 @@ $('#FTPPasswordIcon').hover(
         }
     });
 
-
 //использоание плагина maskedinput для вывода форм с маской
 
 $(function () {
@@ -176,7 +172,6 @@ function saveSuccess() {
 function saveError() {
     alert("Error occured");
 }
-
 
 //сброс данных к начальным значениям при нажатии кнопки "Отмена"
 

@@ -21,15 +21,23 @@ namespace ARMdps.Controllers.API
         {
             return _departmentRepository.DepartmentsGet();
         }
-
-        public string GetDepartment(int id)
+        [HttpGet("{id}")]
+        public DepartmentModel GetDepartment(int id)
         {
+            //DepartmentModel department = _departmentRepository.DepartmentGet(id);
+            //string dept = JsonSerializer.Serialize(department);
             return _departmentRepository.DepartmentGet(id);
         }
         [HttpPost("Update")]
         public void UpdateDepartment([FromBody] DepartmentModel department)
         {
             _departmentRepository.DepartmentUpdate(department);
+        }
+
+        [HttpDelete("Delete{id}")]
+        public void DeleteDepartment(int id)
+        {
+            _departmentRepository.DepartmentDelete(id);
         }
     }
 }

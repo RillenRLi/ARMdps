@@ -7,7 +7,8 @@ namespace ARMdps.Repositories.Interfaces
     {
         //string DepartmentsGet();
         string DepartmentsGet();
-        string DepartmentGet(int id);
+        DepartmentModel DepartmentGet(int id);
         void DepartmentUpdate(DepartmentModel department);
+        void DepartmentDelete(int id);
     }
 }

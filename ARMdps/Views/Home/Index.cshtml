@@ -300,6 +300,8 @@
                                 </td>
                                 <td>
                                     <input id="DepartmentName" class="error_input input_border" name="DepartmentName" type="text" />
+                                    <i id="DepartmentNameIcon" class="error_icon input_icon"></i>
+                                    <span id="DepartmentNameMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -311,6 +313,8 @@
                                 </td>
                                 <td>
                                     <input id="Phones" class="error_input input_border" name="Phones" type="text" />
+                                    <i id="PhonesIcon" class="error_icon input_icon"></i>
+                                    <span id="PhonesMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -321,7 +325,9 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <input id="EmailAddres" class="error_input input_border" name="EmailAddres" type="text" />
+                                    <input id="EmailAddress" class="error_input input_border" name="EmailAddress" type="text" />
+                                    <i id="EmailAddressIcon" class="error_icon input_icon"></i>
+                                    <span id="EmailAddressMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -333,6 +339,8 @@
                                 </td>
                                 <td>
                                     <input id="Address" class="error_input input_border" name="Address" type="text" />
+                                    <i id="AddressIcon" class="error_icon input_icon"></i>
+                                    <span id="AddressMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -351,6 +359,8 @@
                                 </td>
                                 <td>
                                     <input id="KPP" class="error_input input_border" name="KPP" type="text" />
+                                    <i id="KPPIcon" class="error_icon input_icon"></i>
+                                    <span id="KPPMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -362,6 +372,8 @@
                                 </td>
                                 <td>
                                     <input id="INN" class="error_input input_border" name="INN" type="text" />
+                                    <i id="INNIcon" class="error_icon input_icon"></i>
+                                    <span id="INNMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -373,6 +385,8 @@
                                 </td>
                                 <td>
                                     <input id="OKTMO" class="error_input input_border" name="OKTMO" type="text" />
+                                    <i id="OKTMOIcon" class="error_icon input_icon"></i>
+                                    <span id="OKTMOMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -384,6 +398,8 @@
                                 </td>
                                 <td>
                                     <input id="BankName" class="error_input input_border" name="BankName" type="text" />
+                                    <i id="BankNameIcon" class="error_icon input_icon"></i>
+                                    <span id="BankNameMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -395,6 +411,8 @@
                                 </td>
                                 <td>
                                     <input id="PaymentName" class="error_input input_border" name="PaymentName" type="text" />
+                                    <i id="PaymentNameIcon" class="error_icon input_icon"></i>
+                                    <span id="PaymentNameMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -406,6 +424,8 @@
                                 </td>
                                 <td>
                                     <input id="BIK" class="error_input input_border" name="BIK" type="text">
+                                    <i id="BIKIcon" class="error_icon input_icon"></i>
+                                    <span id="BIKMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -417,6 +437,8 @@
                                 </td>
                                 <td>
                                     <input id="KBK" class="error_input input_border" name="KBK" type="text" />
+                                    <i id="KBKIcon" class="error_icon input_icon"></i>
+                                    <span id="KBKMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -428,6 +450,8 @@
                                 </td>
                                 <td>
                                     <input id="RReceipt" class="error_input input_border" name="RReceipt" type="text" />
+                                    <i id="RReceiptIcon" class="error_icon input_icon"></i>
+                                    <span id="RReceiptMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                             <tr>
@@ -439,6 +463,8 @@
                                 </td>
                                 <td>
                                     <input id="KReceipt" class="error_input input_border" name="KReceipt" type="text" />
+                                    <i id="KReceiptIcon" class="error_icon input_icon"></i>
+                                    <span id="KReceiptMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -450,10 +476,25 @@
                 </form>
             </div>
         </div>
-    </div>
-
+    </div>    
 </div>
-
+<div class="modal fade" id="modalDepartmentDel" tabindex="-1">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" onclick="modalHide()"><i class="bi bi-x-square"></i></button>
+      </div>
+      <div class="modal-body" style="text-align:center;">
+       Удалить выбранные элементы?
+      </div>
+      <div class="modal-footer" style="text-align:center;">
+        <button type="button" class="form_button" onclick="deleteDepartments()" style="background-color:#FF3E3E;">Удалить</button>
+        <button type="button" class="form_button" onclick="modalHide()" style="background-color:#75BCFF;">Отменить</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

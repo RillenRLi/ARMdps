@@ -23,14 +23,14 @@ namespace ARMdps.Repositories.Implimentations
         //    string departmentJsonFile=File.ReadAllText(path);
         //    return departmentJsonFile;
         //}
-        public string DepartmentGet(int id)
+        public DepartmentModel DepartmentGet(int id)
         {
             string path = "wwwroot/JSON/department.json";
             var departmentJsonFile = File.ReadAllText(path);
             var dep = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
             DepartmentModel department = dep.FirstOrDefault(d => d.Department_Id == id);
             string depres = JsonSerializer.Serialize(department);
-            return depres;
+            return department;
         }
         public void DepartmentUpdate(DepartmentModel department)
         {
@@ -46,7 +46,12 @@ namespace ARMdps.Repositories.Implimentations
                     depts.RemoveAt(index);
                     depts.Insert(index, department);
                 }
-                else depts.Add(department);
+
+                else
+                {
+                    department.Department_Id = depts.Count() + 1;
+                    depts.Add(department);                    
+                }
             }
             else
             {
@@ -54,6 +59,21 @@ namespace ARMdps.Repositories.Implimentations
                 depts.Add(department);
             }
             var res=JsonSerializer.Serialize(depts);
+            File.WriteAllText(path, res);
+        }
+
+        public void DepartmentDelete(int id)
+        {
+            string path = "wwwroot/JSON/department.json";
+            var departmentJsonFile = File.ReadAllText(path);
+            var depts = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
+            var department = depts.SingleOrDefault(d => d.Department_Id == id);
+            if (department != null)
+            {
+                int index = depts.IndexOf(department);
+                depts.RemoveAt(index);
+            }
+            var res = JsonSerializer.Serialize(depts);
             File.WriteAllText(path, res);
         }
     }
