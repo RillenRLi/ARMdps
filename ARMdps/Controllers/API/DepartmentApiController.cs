@@ -19,7 +19,8 @@ namespace ARMdps.Controllers.API
         [HttpGet]
         public string GetDepartments()
         {
-            return _departmentRepository.DepartmentsGet();
+            var getres = JsonSerializer.Serialize(_departmentRepository.DepartmentsGet());
+            return getres;
         }
         [HttpGet("{id}")]
         public DepartmentModel GetDepartment(int id)

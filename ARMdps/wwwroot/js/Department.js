@@ -1,40 +1,203 @@
-﻿//валидация поля код подразделения
+﻿//Возвращает набор данных для отображения в таблице
 
-function validateDepartmentCode(departmentCode) {
-
-    const msg = "Введите код подразделения";
-    if (!departmentCode) {
-        setInputValidationFail('DepartmentCode', 'DepartmentCodeIcon', 'DepartmentCodeMsg', msg);
-        return false;
-    }    
-    return true;
+function getDepartaments() {
+    const response = fetch("/api/departmentapi/", {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+    }).then(response => response.json())
+        .then(data => getDepartamentsRes(data));
+    return response;
 }
+
+//Возвращает выбранное подразделение в форму редактирования
+
+function getDepartament(departmentId) {
+    const response = fetch("/api/departmentapi/" + departmentId, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+    }).then(response => response.json())
+        .then(data => getDepartamentRes(data));
+}
+
+function getDepartamentRes(resp) {
+    let response = resp;
+    
+    try {
+        $('#Department_Id').val(response.department_Id);
+        $('#DepartmentCode').val(response.departmentCode);
+        $('#ShortName').val(response.shortName);
+        $('#DepartmentName').val(response.departmentName);
+        $('#Phones').val(response.phones);
+        $('#EmailAddress').val(response.emailAddress);
+        $('#Address').val(response.address);
+        $('#KPP').val(response.kpp);
+        $('#INN').val(response.inn);
+        $('#OKTMO').val(response.oktmo);
+        $('#BankName').val(response.bankName);
+        $('#PaymentName').val(response.paymentName);
+        $('#BIK').val(response.bik);
+        $('#KBK').val(response.kbk);
+        $('#RReceipt').val(response.rReceipt);
+        $('#KReceipt').val(response.kReceipt);
+    }
+    catch {
+        toasterOptions();
+        toastr.error('Ошибка загрузки данных');       
+    }
+}
+
+let depTable;
+let deditTable;
+
+
+
+//Функция вызова и заполнения тоблицы подразделений
+
+function clickDepartmentTableBtn() {
+    $('.department_form').removeClass('show_table');
+    $('.department_form').addClass('hide_table');
+    $('.region_form').removeClass('show_table');
+    $('.region_form').addClass('hide_table');
+    $('.department_table').removeClass('hide_table');
+    $('.department_table').addClass('show_table');
+    if (!depTable) deptsTableOpen();
+};
+
+//Таблица подразделений
+
+function deptsTableOpen() {    
+    depTable = $('#dTable').DataTable
+        ({
+            ajax: {
+                url: '/api/departmentapi/',
+                data: "JSON",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer t-7614f875-8423-4f20-a674-d7cf3096290e');
+                },
+                method: "GET",
+                dataSrc: ""
+            },
+            destroy: true,
+            rowId: 'Department_Id',
+            dom: 'Bfrtp<"center">',
+            buttons: [
+                {
+                    text: '<i class="bi bi-plus-circle"></i> Новое подразделение',
+                    className: 'btn-primary addDepartment',
+                    id: 'departmentAddBtn',
+                    action: function (e, dt, node, config) {
+                        $('.department_table').removeClass('show_table');
+                        $('.department_table').addClass('hide_table');
+                        $('.region_form').removeClass('show_table');
+                        $('.region_form').addClass('hide_table');
+                        $('.department_form').removeClass('hide_table');
+                        $('.department_form').addClass('show_table');
+                        $('#departmentAddBtn').css('background-color', '#359DFF');
+                        if (!deditTable) depEditOpen();
+                    }
+                },
+            ],
+            className: 'dataTable',
+            order: [[1, 'asc']],
+            columnDefs: [
+                {
+                    targets: 0,
+                    data: null,
+                    defaultContent: '',
+                    orderable: false,
+                    className: 'select-checkbox',
+                    name: 'DepCheck',
+                },
+                { data: 'DepartmentCode', name: 'DepartmentCode', targets: 1 },
+                { data: 'ShortName', name: 'ShortName', targets: 2 },
+                { data: 'DepartmentName', name: 'DepartmentName', targets: 3 },
+                { data: 'Department_Id', name: 'Department_Id', targets: 4, visible: false }
+            ],
+
+            select: {
+                style: 'multi',
+                selector: 'td:first-child'
+            },
+            scrollY: '520px',
+            scrollCollapse: true,
+            pageLength: 20,
+            "language": {
+                "paginate": {
+                    "previous": "<",
+                    "next": ">"
+                },
+                "zeroRecords": "Не найдены подразделения, соответствующие строке поиска.</br> Измените строку поиска.",
+                "searchPlaceholder": "Поиск"
+            }
+        });
+}
+
+//Замена слова search на значок поиска
+
+$(function () {
+    $input = $(".dataTables_filter").find("[type='search']");
+
+    $input.parent().contents().filter(function () {
+        return this.nodeType == 3;
+    }).each(function () {
+        this.textContent = this.textContent.replace('Search:', '');
+    });
+    $input.before($("<i class='bi bi-search'></i>"));
+});
+
+//Форма редактирования
+
+function depEditOpen() {    
+    resetValidError();
+    deditTable = $('#depeditTable').DataTable({        
+        retrieve: true,
+        scrollY: "520px",
+        scrollCollapse: true,
+        searching: false,
+        info: false,
+        paging: false,
+        ordering: false,
+        fixedHeader: {
+            "header": false,
+            "footer": false
+        },
+        columnDefs: [
+            { targets: 0, name: 'Labels', className: 'tdFormLabel' },
+            { targets: 1, name: 'Values', className: 'tdFormInput' }
+        ]
+    });
+}
+
+//Редактирование подразделения по двойному нажатию на строку
+
+$('#dTable').on('dblclick', 'tbody tr', function () {
+    var departmentRowId = depTable.row(this).id();
+    let departmentJs = depTable.row(this).data();
+
+    let idjs = departmentJs.Department_Id;
+    getDepartament(idjs);    
+    depEditOpen();
+    $('.department_table').removeClass('show_table');
+    $('.department_table').addClass('hide_table');
+    $('.region_form').removeClass('show_table');
+    $('.region_form').addClass('hide_table');
+    $('.department_form').removeClass('hide_table');
+    $('.department_form').addClass('show_table');   
+})
 
 //всплывающее окно валидации для поля код подразделения
 
 $('#DepartmentCodeIcon').hover(
     function () {
-        if ($(this).hasClass('error_icon_Fail')) {
-            $('#DepartmentCodeMsg').css('display', 'block');
+        if ($(this).hasClass('error_icon_Fail')) {            
+            $('#DepartmentCodeMsg').css({ 'display': 'block'});
         }
     },
     function () {
-        if ($(this).hasClass('error_icon_Fail')) {
-            $('#DepartmentCodeMsg').css('display', 'none');
+        if ($(this).hasClass('error_icon_Fail')) {           
+            $('#DepartmentCodeMsg').css({'display': 'none'});
         }
     });
-
-//валидация поля краткое наименование
-
-function validateShortName(shortName) {
-
-    const msg = "Введите краткое наименование";
-    if (!shortName) {
-        setInputValidationFail('ShortName', 'ShortNameIcon', 'ShortNameMsg', msg);
-        return false;
-    }
-    return true;
-}
 
 //всплывающее окно валидации для поля краткое наименование
 
@@ -49,6 +212,30 @@ $('#ShortNameIcon').hover(
             $('#ShortNameMsg').css('display', 'none');
         }
     });
+//валидация поля код подразделения
+
+function validateDepartmentCode(departmentCode) {
+
+    const msg = "Введите код подразделения";
+    if (!departmentCode) {
+        setInputValidationFail('DepartmentCode', 'DepartmentCodeIcon', 'DepartmentCodeMsg', msg);
+        return false;
+    }    
+    return true;
+}
+
+//валидация поля краткое наименование
+
+function validateShortName(shortName) {
+
+    const msg = "Введите краткое наименование";
+    if (!shortName) {
+        setInputValidationFail('ShortName', 'ShortNameIcon', 'ShortNameMsg', msg);
+        return false;
+    }
+    return true;
+}
+
 
 //валидация поля полное наименование
 
@@ -108,6 +295,11 @@ function validateEmailAddress(emailAddress) {
 
     const msg = "Введите адрес электронной почты";
     if (!emailAddress) {
+        setInputValidationFail('EmailAddress', 'EmailAddressIcon', 'EmailAddressMsg', msg);
+        return false;
+    }
+    const isMail = (emailAddress) => /^(.+)@(.+)\.(.+)ru$/.test(emailAddress);
+    if (!isMail) {
         setInputValidationFail('EmailAddress', 'EmailAddressIcon', 'EmailAddressMsg', msg);
         return false;
     }
@@ -425,185 +617,20 @@ function validateDepartmentForm(jsonDepartment) {
     return retd;
 }
 
-function getDepartaments() {
-    const response = fetch("/api/departmentapi/", {
-        method: "GET",
-        headers: { "Accept": "application/json" }
-    }).then(response => response.json())
-        .then(data => getDepartamentsRes(data));    
-    return response;
-}
 
-//Возвращает выбранное подразделение в форму редактирования
 
-function getDepartament(departmentId) {
-    const response = fetch("/api/departmentapi/" + departmentId, {
-        method: "GET",       
-        headers: { "Accept": "application/json" }
-    }).then(response => response.json())
-        .then(data => getDepartamentRes(data));    
-}
 
-function getDepartamentRes(resp) {
-    let response = resp;
-    //console.log(response);
-    try {
-        $('#Department_Id').val(response.department_Id);
-        $('#DepartmentCode').val(response.departmentCode);
-        $('#ShortName').val(response.shortName);
-        $('#DepartmentName').val(response.departmentName);
-        $('#Phones').val(response.phones);
-        $('#EmailAddress').val(response.emailAddress);
-        $('#Address').val(response.address);
-        $('#KPP').val(response.kpp);
-        $('#INN').val(response.inn);
-        $('#OKTMO').val(response.oktmo);
-        $('#BankName').val(response.bankName);
-        $('#PaymentName').val(response.paymentName);
-        $('#BIK').val(response.bik);
-        $('#KBK').val(response.kbk);
-        $('#RReceipt').val(response.rReceipt);
-        $('#KReceipt').val(response.kReceipt);
-    }
-    catch {
-        alert('Ошибка загрузки данных');
-    }
-}
-
-//Функция вызова и заполнения тоблицы подразделений
-
-function clickDepartmentTableBtn() {
-    deptsTableOpen();
-    $('.department_form').removeClass('show_table');
-    $('.department_form').addClass('hide_table');
-    $('.region_form').removeClass('show_table');
-    $('.region_form').addClass('hide_table');
-    $('.department_table').removeClass('hide_table');
-    $('.department_table').addClass('show_table');
-};
-
-let depTable;
-let deditTable;
-
-//Таблица подразделений
-
-function deptsTableOpen() {
-    deactivateCurrentTable(depTable);
-    depTable = $('#dTable').DataTable
-        ({
-            ajax: {
-                url: '/api/departmentapi/',
-                data: "JSON",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer t-7614f875-8423-4f20-a674-d7cf3096290e');
-                },
-                method: "GET",
-                dataSrc: ""
-            },
-            rowId:'Department_Id',
-            dom: 'Bfrtp<"center">',
-            buttons: [
-                {
-                    text: '<i class="bi bi-plus-circle"></i> Новое подразделение',
-                    className: 'btn-primary addDepartment',
-                    id: 'departmentAddBtn',
-                    action: function (e, dt, node, config) {
-                        $('.department_table').removeClass('show_table');
-                        $('.department_table').addClass('hide_table');
-                        $('.region_form').removeClass('show_table');
-                        $('.region_form').addClass('hide_table');
-                        $('.department_form').removeClass('hide_table');
-                        $('.department_form').addClass('show_table');
-                        deactivateCurrentTable(deditTable);
-                        depEditOpen();
-                    }
-                },
-            ],
-            className: 'dataTable',
-            order: [[1, 'asc']],
-            columnDefs: [
-                {
-                    targets: 0,
-                    data: null,
-                    defaultContent: '',
-                    orderable: false,
-                    className: 'select-checkbox',
-                    name: 'DepCheck',
-                },
-                { data: 'DepartmentCode', name: 'DepartmentCode', targets: 1 },
-                { data: 'ShortName', name: 'ShortName', targets: 2 },
-                { data: 'DepartmentName', name: 'DepartmentName', targets: 3 },
-                { data: 'Department_Id', name: 'Department_Id', targets: 4, visible: false }
-            ],
-
-            select: {
-                style: 'multi',
-                selector: 'td:first-child'
-            },
-            scrollY: '520px',
-            scrollCollapse: true,
-            pageLength: 20,
-            "language": {
-                "paginate": {
-                    "previous": "<",
-                    "next": ">"
-                },
-                "zeroRecords": "Не найдены подразделения, соответствующие строке поиска.</br> Измените строку поиска."
-            }
-        });    
-}
-
-//Форма редактирования
-
-function depEditOpen() {
-    deditTable = $('#depeditTable').DataTable({
-        retrieve: true,
-        scrollY: "400px",
-        scrollCollapse: true,
-        searching: false,
-        info: false,
-        paging: false,
-        ordering: false,
-        fixedHeader: {
-            "header": false,
-            "footer": false
-        },
-        columnDefs: [
-            { targets: 0, name: 'Labels' },
-            { targets: 1, name: 'Values', data: '' }
-        ]
-    });
-}
-
-//Редактирование подразделения по двойному нажатию на строку
-
-$('#dTable').on('dblclick', 'tbody tr', function () {
-    var departmentRowId = depTable.row(this).id();
-    let departmentJs = depTable.row(this).data();
-    
-    let idjs = departmentJs.Department_Id;
-    getDepartament(idjs);
-    deactivateCurrentTable(deditTable);
-    depEditOpen();    
-    $('.department_table').removeClass('show_table');
-    $('.department_table').addClass('hide_table');
-    $('.region_form').removeClass('show_table');
-    $('.region_form').addClass('hide_table');
-    $('.department_form').removeClass('hide_table');
-    $('.department_form').addClass('show_table');
-    console.log(idjs);
-    console.log(departmentRowId);
-})
 
 //Сохраниение данных подразделения
 
 function saveDepartmentChanges(ev) {
 
     ev.preventDefault();
+    resetValidError();
     let idval = $('#Department_Id').val();
       
     let jsonDepartment = {
-        Department_Id: (!idval)? 0 : $('#Department_Id').val(),
+        Department_Id: (!idval) ? 0 : $('#Department_Id').val(),
         DepartmentCode: $('#DepartmentCode').val(),
         ShortName: $('#ShortName').val(),
         DepartmentName: $('#DepartmentName').val(),
@@ -622,9 +649,10 @@ function saveDepartmentChanges(ev) {
     };
     
     let valResult = validateDepartmentForm(jsonDepartment);
+
     if (!valResult) {
         toasterOptions();
-        toastr.error('Ошибка валидации');
+        toastr.error('Ошибка! Заполните поля ввода');
         return;
     }
     
@@ -633,7 +661,8 @@ function saveDepartmentChanges(ev) {
         data: JSON.stringify(jsonDepartment),
         type: 'POST',
         contentType: "application/json",
-        success: function () {            
+        success: function () {
+            resetValidError();
             $('.department_form').removeClass('show_table');
             $('.department_form').addClass('hide_table');
             $('.department_table').removeClass('hide_table');
@@ -648,6 +677,7 @@ function saveDepartmentChanges(ev) {
                     'DepartmentName': jsonDepartment.DepartmentName,
                     'Department_Id': jsonDepartment.Department_Id
                 }).draw();
+                depTable.ajax.reload();
             }
             else depTable.ajax.reload();
         },
@@ -661,25 +691,14 @@ function saveDepartmentChanges(ev) {
 //Нажатие на кнопк отмена скрывает форму редактирования и показывает таблицу
 
 function resetDepartmentButton() {
+    resetValidError();
     $('.department_form').removeClass('show_table');
     $('.department_form').addClass('hide_table');
     $('.department_table').removeClass('hide_table');
     $('.department_table').addClass('show_table');
+    toasterOptions();
+    toastr.warning('Изменения отменены');
 }
-
-
-//Замена слова search на значок поиска
-
-$(function () {
-    $input = $(".dataTables_filter").find("[type='search']");
-
-    $input.parent().contents().filter(function () {
-        return this.nodeType == 3;
-    }).each(function () {
-        this.textContent = this.textContent.replace('Search:', '');
-    });
-    $input.before($("<i class='bi bi-search table_search'></i>"));
-});
 
 const depModal = document.querySelector('#modalDepartmentDel');
 let modal;
@@ -690,25 +709,29 @@ function clickDepartmentDel() {
 }
 
 function deleteDepartments() {
-    let selectRows = depTable.rows({ selected: true }).data();
-    let mass = JSON.stringify(selectRows);
-    for (let i = 0; i < mass.length; i++) {
-        console.log(i + " " + mass[i]);
-        var d = depTable.row(mass[i]).data();
-        console.log(d);
+    let selectRows = depTable.rows({ selected: true }).data();    
+    
+    for (let i = 0; i < selectRows.length; i++) {
+        
+        let d = selectRows[i];
+        
         let id = d.Department_Id;
+       
         $.ajax({
             url: '/api/departmentapi/delete' + id,
             type: 'DELETE',
+            async: false,
             contentType: "application/json",
             success: function () {
-                console.log('del');
+                toasterOptions();
+                toastr.success('Элемент удален');
                 depTable.ajax.reload();
             },
             error: function () {
-                console.log('err');
+                toasterOptions();
+                toastr.success('Ошибка удаления');
             }
-        })
+        });
     }
     modal.hide();
 }

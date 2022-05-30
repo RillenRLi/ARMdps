@@ -19,11 +19,7 @@ namespace ARMdps.Controllers.API
         {
             _regionRepository = regionRepository;
         }
-        //[HttpGet("{id}")]
-        //public JsonResult GetRegion(int id)
-        //{
-        //    return new JsonResult(_regionRepository.JSRegionGet(id));
-        //}
+        
         [HttpGet("{id}")]
         public RegionModel GetRegion(int id)
         {

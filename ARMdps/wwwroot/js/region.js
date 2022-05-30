@@ -5,13 +5,11 @@ function getRegion(regionId) {
         method: "GET",
         headers: { "Accept": "application/json" }
     }).then(response => response.json())
-        .then(data => getRegionRes(data));
-    //console.log(response);
+        .then(data => getRegionRes(data));    
 }
 
 function getRegionRes(resp) {
-    let response = resp;
-    /*console.log(response);*/
+    let response = resp;    
     try {
         $('#Region_Id').val(response.region_Id);
         $('#RegionCode').val(response.regionCode);
@@ -42,27 +40,32 @@ function clickRegionBtn() {
     $('.department_table').addClass('hide_table');
     $('.region_form').removeClass('hide_table');
     $('.region_form').addClass('show_table');
+    if (!regTable) regionTableOpen();
     getRegion(1);
 };
 
-$(document).ready(function () {
+let regTable;
 
-    var regTable = $("#regTable").DataTable({
+function regionTableOpen() {    
+    regTable = $("#regTable").DataTable({
         dom: '',
-        scrollY: '500px',
+        scrollY: '520px',
         scrollCollapse: true,
         paging: false,
         searching: false,
         ordering: false,
-
+        columnDefs: [
+            { targets: 0, className: 'tdFormLabel' },
+            { targets: 1, className: 'tdFormInput' }
+        ]
     });
-});
+};
 
 //всплывающее окно валидации для поля код региона (4 знака)
 
 $('#RegionCodeIcon').hover(
     function () {
-        if ($(this).hasClass('error_icon_Fail')) {
+        if ($(this).hasClass('error_icon_Fail')) {            
             $('#RegionCodeMsg').css('display', 'block');
         }
     },
@@ -72,7 +75,7 @@ $('#RegionCodeIcon').hover(
         }
     });
 
-//
+//всплывающее окно валидации для поля код региона (2 знака)
 
 $('#Code2DigitsIcon').hover(
     function () {
@@ -86,7 +89,7 @@ $('#Code2DigitsIcon').hover(
         }
     });
 
-//
+//всплывающее окно валидации для поля наименование региона
 
 $('#RegionNameIcon').hover(
     function () {
@@ -100,7 +103,7 @@ $('#RegionNameIcon').hover(
         }
     });
 
-//
+//всплывающее окно валидации для поля IP-адрес FTP-сервера
 
 $('#FTPIpIcon').hover(
     function () {
@@ -114,7 +117,7 @@ $('#FTPIpIcon').hover(
         }
     });
 
-//
+//всплывающее окно валидации для поля каталог FTP-сервера
 
 $('#FTPUploadDirIcon').hover(
     function () {
@@ -128,7 +131,7 @@ $('#FTPUploadDirIcon').hover(
         }
     });
 
-//      
+//всплывающее окно валидации для поля логин доступа к FTP-серверу
 
 $('#FTPLoginIcon').hover(
     function () {
@@ -142,7 +145,7 @@ $('#FTPLoginIcon').hover(
         }
     });
 
-//
+//всплывающее окно валидации для поля пароль доступа к FTP-серверу
 
 $('#FTPPasswordIcon').hover(
     function () {
@@ -183,7 +186,7 @@ function resetRegionButton() {
 
 function validateRegionCode(regionCode) {
 
-    const msg = "Введите код региона (4 знака)";
+    const msg = "Введите код региона, 4 знака, Таблица 8 Приказа №1144 МВД РФ";
     if (!regionCode) {
         setInputValidationFail('RegionCode', 'RegionCodeIcon', 'RegionCodeMsg', msg);
         return false;
@@ -203,7 +206,7 @@ function validateRegionCode(regionCode) {
 
 function validateCode2Digits(code2Digits) {
 
-    const msg = "Введите код региона (2 знака)";
+    const msg = "Введите код региона применяемый для ГРЗ ТС. Приказ № 282 МВД РФ";
     if (!code2Digits) {
         setInputValidationFail('Code2Digits', 'Code2DigitsIcon', 'Code2DigitsMsg', msg);
         return false;
@@ -240,6 +243,7 @@ function validateFTPIp(ftpIp) {
         return false;
     }
     if (!validateIp(ftpIp)) {
+        msg = msg + "IP-адрес должен иметь формат XXX.XXX.XXX.XXX, где XXX — число от 0 до 255";
         setInputValidationFail('FTPIp', 'FTPIpIcon', 'FTPIpMsg', msg);
         return false;
     }
@@ -335,7 +339,7 @@ function saveRegionChanges(ev) {
         FTPLogin: $('#FTPLogin').val(),
         FTPPassword: $('#FTPPassword').val()
     };
-    console.log(jsonData);
+   
     //проверяем валидацию
     let valResult = validateRegionForm(jsonData);
 
@@ -373,16 +377,6 @@ function resetRegionButton() {
     getRegion(1);
     resetValidError();
     toasterOptions();
-    toastr.warning('Данные сброшены');
+    toastr.warning('Изменения отменены');
 }
 
-//сброс классов отображения ошибок валидации
-
-function resetValidError() {
-    $('.error_input').removeClass('validFail');
-    $('.error_input').addClass('input_border');
-    $('.error_icon').removeClass('bi-exclamation-circle error_icon_Fail');
-    $('.error_icon').addClass('input_icon');
-    $('.error_msg').removeClass('validMsgFail');
-    $('.error_msg').addClass('validMsg');
-}

@@ -191,7 +191,7 @@
                                     <span id="FTPUploadDirMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
-                            <tr>                                
+                            <tr>
                                 <td>
                                     <span style="color:#FF3E3E;">*</span>
                                     Логин доступа к FTP
@@ -223,13 +223,13 @@
             </div>
         </div>
         <div class="department_table">
-            <table id="dTable" class="display cell-border editform_table">
+            <table id="dTable" class="display cell-border editform_table" style="padding:0px">
                 <thead style="background-color:#C4C4C4; border-radius: 6px 6px 0px 0px;">
                     <tr>
                         <th class="del_icon"><i class="bi bi-trash" onclick="clickDepartmentDel()"></i></th>
-                        <th>Код подразделения</th>
-                        <th>Название подразделения</th>
-                        <th>Полное наименование подразделения</th>
+                        <th style="text-align:left">Код подразделения</th>
+                        <th style="text-align:left">Название подразделения</th>
+                        <th style="text-align:left">Полное наименование подразделения</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -239,18 +239,17 @@
         <div class="department_form">
             <div class="editform_div">
                 <form id="departmentForm">
-                    <div   style="display: flex;justify-content: space-between;">
-                        
+                    <div style="display: flex;justify-content: space-between;">
                     </div>
-                    <table id="depeditTable" class="nowrap editform_table">
+                    <table id="depeditTable" class="nowrap editform_table" style="padding:0px !important">
                         <thead class="editform_head">
                             <tr>
-                                <th>
-                                <label style="text-align:left; margin: 0px 0px 0px 0px">
-                                    Данные о подразделении
-                                </label>
+                                <th style="text-align:left; margin: 0px 0px 0px 0px">
+                                    <label style="text-align:left; margin: 0px 0px 0px 0px">
+                                        Данные о подразделении
+                                    </label>
                                 </th>
-                                <th>
+                                <th style="text-align:right; margin: 0px 0px 0px 0px">
                                     <label class="close_button" style="text-align:right">
                                         <i class="bi bi-x-square" onclick="resetDepartmentButton()"></i>
                                     </label>
@@ -325,7 +324,7 @@
                                     </label>
                                 </td>
                                 <td>
-                                    <input id="EmailAddress" class="error_input input_border" name="EmailAddress" type="text" />
+                                    <input id="EmailAddress" class="error_input input_border" name="EmailAddress" type="email" />
                                     <i id="EmailAddressIcon" class="error_icon input_icon"></i>
                                     <span id="EmailAddressMsg" class="error_msg validMsg"></span>
                                 </td>
@@ -467,33 +466,37 @@
                                     <span id="KReceiptMsg" class="error_msg validMsg"></span>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="text-align:right;">
+                                    <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetDepartmentButton()">Отменить</button>
+                                </td>
+                                <td>
+                                    <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveDepartmentChanges(event)">Сохранить</button>
+                                </td>
+                            </tr>
                         </tbody>
-                    </table>
-                    <div style="height: 40px; align-content: center; padding-left: calc(50% - 100px); padding-top: 5px;">
-                        <button type="reset" id="resetButton" class="form_button" style="background-color:#75BCFF;" onclick="resetDepartmentButton()">Отменить</button>
-                        <button type="submit" id="saveButton" class="form_button" style="background-color:#5FD664" onclick="saveDepartmentChanges(event)">Сохранить</button>
-                    </div>
+                    </table>                    
                 </form>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 <div class="modal fade" id="modalDepartmentDel" tabindex="-1">
-   <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="btn-close" onclick="modalHide()"><i class="bi bi-x-square"></i></button>
-      </div>
-      <div class="modal-body" style="text-align:center;">
-       Удалить выбранные элементы?
-      </div>
-      <div class="modal-footer" style="text-align:center;">
-        <button type="button" class="form_button" onclick="deleteDepartments()" style="background-color:#FF3E3E;">Удалить</button>
-        <button type="button" class="form_button" onclick="modalHide()" style="background-color:#75BCFF;">Отменить</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" onclick="modalHide()"><i class="bi bi-x-square"></i></button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                Удалить выбранные элементы?
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="form_button" onclick="deleteDepartments()" style="background-color:#FF3E3E;">Удалить</button>
+                <button type="button" class="form_button" onclick="modalHide()" style="background-color:#75BCFF;">Отменить</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
@@ -512,13 +515,13 @@
     //$('#example').html(formHtml);
     //}
 
-    function tableDepartmentSuccess(data) {
-    updateTable(data);
-    }
+    //function tableDepartmentSuccess(data) {
+    //updateTable(data);
+    //}
 
-    function tableError() {
-    alert("Error occured");
-    }
+    //function tableError() {
+    //alert("Error occured");
+    //}
 
     //Версии ПО
     function clickUpdateTableBtn(){
@@ -528,8 +531,8 @@
     //Подразделения
     @*function clickDepartmentTableBtn() {
 
-                    sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
-                }*@
+                        sendAjaxNotData('@Url.Action("GetDepartmentTable", "Department")',tableDepartmentSuccess, tableError);
+                    }*@
 
 
 

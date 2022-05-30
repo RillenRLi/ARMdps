@@ -16,11 +16,6 @@ namespace ARMdps.Controllers.API
             jsonStraem.Read(BMas, 0, BMas.Length);
             string jsonStr = Encoding.UTF8.GetString(BMas);
             return Ok();
-        }
-        /*public IActionResult GetValues(int id)
-        {
-            
-            return Json(json);
-        }*/
+        }       
     }
 }

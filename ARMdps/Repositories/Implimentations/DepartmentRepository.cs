@@ -9,20 +9,16 @@ namespace ARMdps.Repositories.Implimentations
 {
     public class DepartmentRepository:IDepartmentRepository
     {
-        public string DepartmentsGet()
+        //Вызов списка подразделений из файла
+        public List<DepartmentModel> DepartmentsGet()
         {
             string path = "wwwroot/JSON/department.json";
             var departmentJsonFile = File.ReadAllText(path);
             var depts = JsonSerializer.Deserialize<List<DepartmentModel>>(departmentJsonFile);
-            return departmentJsonFile;
+            return depts;
         }
 
-        //public string DepartmentsGet()
-        //{
-        //    string path = "wwwroot/JSON/department.json";
-        //    string departmentJsonFile=File.ReadAllText(path);
-        //    return departmentJsonFile;
-        //}
+        //Вызов подразделения из файла по ID
         public DepartmentModel DepartmentGet(int id)
         {
             string path = "wwwroot/JSON/department.json";
@@ -32,6 +28,8 @@ namespace ARMdps.Repositories.Implimentations
             string depres = JsonSerializer.Serialize(department);
             return department;
         }
+
+        //Обновление информации о подразделении или добавление нового в файл
         public void DepartmentUpdate(DepartmentModel department)
         {
             string path = "wwwroot/JSON/department.json";
@@ -49,19 +47,22 @@ namespace ARMdps.Repositories.Implimentations
 
                 else
                 {
-                    department.Department_Id = depts.Count() + 1;
+                    int d=depts.Max(d => d.Department_Id);
+                    department.Department_Id = d + 1;
                     depts.Add(department);                    
                 }
             }
             else
             {
-                department.Department_Id = depts.Count() + 1;
+                int d = depts.Max(d => d.Department_Id);
+                department.Department_Id = d + 1;
                 depts.Add(department);
             }
             var res=JsonSerializer.Serialize(depts);
             File.WriteAllText(path, res);
         }
 
+        //Удаление подразделения из файла
         public void DepartmentDelete(int id)
         {
             string path = "wwwroot/JSON/department.json";

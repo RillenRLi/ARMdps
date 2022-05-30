@@ -41,7 +41,7 @@ function toasterOptions() {
         "debug": false,
         "newestOnTop": false,
         "progressBar": true,
-        "positionClass": "toast-top-center",
+        "positionClass": "toast-top-right",
         "preventDuplicates": true,
         "onclick": null,
         "showDuration": "100",
@@ -58,20 +58,32 @@ function toasterOptions() {
 //обобщенная функция валидации поля формы
 
 function setInputValidationFail(inputId, iconId, msgSpanId, errorMsg) {
-    $('#' + inputId).addClass('validFail');
-    //$('#' + spanId).addClass('validSpanFail');
-    //$('#' + spanId).text('!');
-    $('#' + iconId).addClass('bi-exclamation-circle error_icon_Fail');
+    $('#' + inputId).addClass('validFail');    
+    $('#' + iconId).addClass('bi-exclamation-circle error_icon_Fail');    
     $('#' + msgSpanId).addClass('validMsgFail');
     $('#' + msgSpanId).text(errorMsg);
 }
 
+//сброс классов отображения ошибок валидации
+
+function resetValidError() {
+    $('.error_input').removeClass('validFail');
+    $('.error_input').addClass('input_border');
+    $('.error_icon').removeClass('bi-exclamation-circle error_icon_Fail');
+    $('.error_icon').addClass('input_icon');
+    $('.error_msg').removeClass('validMsgFail');
+    $('.error_msg').addClass('validMsg');
+}
+
+
+
 function deactivateCurrentTable(activeTable) {
     if (activeTable) {
-        activeTable.destroy();
+        activeTable.ajax.reload();
     }
 }
 
 function modalHide() {
     modal.hide();
 }
+

@@ -250,6 +250,8 @@ table.dataTable tbody td .region_td_in {
     border-radius: 6px;
     border: none;
     background-color: #E5E5E5;
+    width:100px;
+    height:25px;
 }
 
     /**/
@@ -275,7 +277,7 @@ table.dataTable tbody td .region_td_in {
     padding: 1px 2px 2px 1px;
     margin-right: 15px;
     min-inline-size: inherit;
-    width: 400px;
+    width: 90%;
 }
 
 /**/
@@ -331,7 +333,7 @@ i .error_icon_Fail {
 
 .validMsgFail {
     background-color: #FF3E3E;
-    width: 400px;
+    width: 450px;
     padding: 5px;
     border-radius: 6px 6px 6px 6px;
 }
@@ -459,16 +461,18 @@ table.dataTable tr.selected td.select-checkbox::after {
 }
 
 .show_table {
-    display: block;
+    display: block !important;
 }
 .hide_table{
-    display:none;
+    display:none !important;
 }
 
 /*Переопределение хедера таблиц Datatables*/
 
 .dataTables_scrollHeadInner {
     width: 100% !important;
+    padding: 0px !important;
+
 }
 
 .sorting sorting_asc,
@@ -502,4 +506,38 @@ bi-search:before {
 bi-x-square::before {
     justify-content: center !important;
     background-color: #044C6A !important;
+}
+
+.tdFormLabel{
+    width:45%;
+}
+.tdFormInput{
+    width:50%;
+}
+
+.btn-close {
+    border: none;
+    padding: 0px;
+    color: #044C6A;
+}
+
+.model-body {
+    padding: 5px;
+    margin: 5px;
+    color: #044C6A;
+}
+.modal-header {
+    border: none;
+    padding: 5px;
+    margin: 5px;
+}
+.modal-footer{
+    border:none;
+    justify-content:center;
+}
+
+.odd selected,
+.even selected{
+    box-shadow: none !important;
+    color: #FF3E3E !important;
 }
