@@ -415,6 +415,7 @@ i .table_search {
     border-radius:6px !important;
     border: 1px solid !important;
     color: #0465D0 !important;
+    margin-left:-25px !important;
 }
 
 .dataTables_wrapper .dataTables_filter input :active {

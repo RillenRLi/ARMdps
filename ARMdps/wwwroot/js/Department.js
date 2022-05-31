@@ -77,8 +77,7 @@ function deptsTableOpen() {
                 method: "GET",
                 dataSrc: ""
             },
-            destroy: true,
-            rowId: 'Department_Id',
+            destroy: true,            
             dom: 'Bfrtp<"center">',
             buttons: [
                 {
@@ -106,7 +105,7 @@ function deptsTableOpen() {
                     defaultContent: '',
                     orderable: false,
                     className: 'select-checkbox',
-                    name: 'DepCheck',
+                    name: 'DepCheck',                   
                 },
                 { data: 'DepartmentCode', name: 'DepartmentCode', targets: 1 },
                 { data: 'ShortName', name: 'ShortName', targets: 2 },
@@ -118,8 +117,8 @@ function deptsTableOpen() {
                 style: 'multi',
                 selector: 'td:first-child'
             },
-            scrollY: '520px',
-            scrollCollapse: true,
+            scrollY: '520px',            
+            scrollCollapse: true,            
             pageLength: 20,
             "language": {
                 "paginate": {
@@ -127,10 +126,15 @@ function deptsTableOpen() {
                     "next": ">"
                 },
                 "zeroRecords": "Не найдены подразделения, соответствующие строке поиска.</br> Измените строку поиска.",
-                "searchPlaceholder": "Поиск"
+                "search": "<i class='bi bi-search' style='color:#0465D0'></i>"
             }
         });
 }
+
+$('.dataTables_filter').focusin(function () {
+    console.log('z');
+    $('.bi-search').css('display', 'none');
+});
 
 //Замена слова search на значок поиска
 
@@ -212,6 +216,7 @@ $('#ShortNameIcon').hover(
             $('#ShortNameMsg').css('display', 'none');
         }
     });
+
 //валидация поля код подразделения
 
 function validateDepartmentCode(departmentCode) {
@@ -293,15 +298,19 @@ $('#PhonesIcon').hover(
 
 function validateEmailAddress(emailAddress) {
 
-    const msg = "Введите адрес электронной почты";
+    let msg = "Введите адрес электронной почты.";
     if (!emailAddress) {
         setInputValidationFail('EmailAddress', 'EmailAddressIcon', 'EmailAddressMsg', msg);
         return false;
     }
-    const isMail = (emailAddress) => /^(.+)@(.+)\.(.+)ru$/.test(emailAddress);
-    if (!isMail) {
-        setInputValidationFail('EmailAddress', 'EmailAddressIcon', 'EmailAddressMsg', msg);
-        return false;
+    else {
+        const isMail = /\w{2,}@[a-z]{2,}.[a-z]{2,}/;
+        let valMail = isMail.test(emailAddress);
+        if (!valMail) {
+            msg = "Введенное значение должно заканчиваться доменом, пример: .ru";
+            setInputValidationFail('EmailAddress', 'EmailAddressIcon', 'EmailAddressMsg', msg);
+            return false;
+        }
     }
     return true;
 }
@@ -709,7 +718,7 @@ function clickDepartmentDel() {
 }
 
 function deleteDepartments() {
-    let selectRows = depTable.rows({ selected: true }).data();    
+    let selectRows = depTable.rows({ selected: true }).data();
     
     for (let i = 0; i < selectRows.length; i++) {
         
